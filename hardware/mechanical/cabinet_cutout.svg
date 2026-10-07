@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="150mm" height="200mm" viewBox="0 0 150 200">
+  <title>CNC cutout  cabinet front (85 x 135 mm)</title>
+  <!-- Panel outer reference 100x150 centered in view -->
+  <rect x="25" y="25" width="100" height="150" fill="none" stroke="#999" stroke-width="0.3" stroke-dasharray="2,2"/>
+  <text x="25" y="20" font-size="3" font-family="sans-serif">Bo m¡ch 100x150 mm (tham chi¿u, không c¯t)</text>
+  <!-- Cutout 85x135 centered on board: offset (7.5, 7.5) from board origin at (25,25) -->
+  <rect x="32.5" y="32.5" width="85" height="135" fill="none" stroke="#c00" stroke-width="0.5"/>
+  <text x="32.5" y="31" font-size="3" font-family="sans-serif" fill="#c00">C®T CNC: 85 x 135 mm</text>
+  <!-- M3 holes board corners -->
+  <circle cx="30" cy="30" r="1.6" fill="none" stroke="#333" stroke-width="0.3"/>
+  <circle cx="120" cy="30" r="1.6" fill="none" stroke="#333" stroke-width="0.3"/>
+  <circle cx="30" cy="170" r="1.6" fill="none" stroke="#333" stroke-width="0.3"/>
+  <circle cx="120" cy="170" r="1.6" fill="none" stroke="#333" stroke-width="0.3"/>
+  <text x="30" y="185" font-size="2.5" font-family="sans-serif">L× M3 tâm cách mép bo 5 mm (vít cÑ Ënh bo vào vách trong)</text>
+</svg>

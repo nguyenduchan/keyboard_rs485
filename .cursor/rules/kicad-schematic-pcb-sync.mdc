@@ -1,0 +1,37 @@
+---
+description: Luôn đồng bộ thay đổi vào sơ đồ nguyên lý và PCB panel-keyboard
+globs: hardware/kicad/**/*
+alwaysApply: true
+---
+
+# KiCad — schematic + PCB luôn cùng bước
+
+Khi user yêu cầu thay đổi phần cứng, EMC, layout, linh kiện, hoặc net mới trên **panel keyboard**:
+
+## Bắt buộc
+
+1. **Sơ đồ nguyên lý** — cập nhật `hardware/kicad/panel-keyboard/tools/build_schematic.py` (nguồn sự thật), rồi chạy:
+   ```text
+   python hardware/kicad/panel-keyboard/tools/build_schematic.py
+   ```
+   Không chỉ sửa tay `panel-keyboard.kicad_sch` trừ khi user yêu cầu; generator phải phản ánh thay đổi.
+
+2. **PCB** — sau schematic, chạy (đóng KiCad trước):
+   ```text
+   python hardware/kicad/panel-keyboard/tools/update_pcb_all.py
+   ```
+   Hoặc tối thiểu: `assign_nets.py` + `fix_front_layout.py` nếu chỉ đổi vị trí.
+
+3. **Tài liệu** — cập nhật netlist/ý nghĩa trong `docs/SO_DO_NGUYEN_LY.md`, layout trong `docs/PCB_LAYOUT.md`, `hardware/bom.csv` khi đổi ref/value/footprint.
+
+4. **Vị trí footprint** — tọa độ B.Cu / F.Cu trong `tools/zone_layout.py` (3 vùng 24V / buck / MCU); front THT trong `FRONT_POS`.
+
+## Quy ước dự án
+
+- **F.Cu (Top):** chỉ THT — phím, LED 3 mm, 7-seg.
+- **B.Cu (Bottom):** SMD một mặt stencil; nguồn theo `PWR_24V_PROTECT_BUCK_GUIDE.txt` (fiberboard).
+- Thay đổi nguồn/EMC/phím: xem `docs/PWR_24V_PROTECT_BUCK.md`, `docs/CHONG_PHIM_MA.md`.
+
+## Kết thúc task
+
+Báo user đã regenerate sch + đã chạy (hoặc không chạy được) sync PCB; nhắc **Reload/Revert** PCB trong KiCad nếu file đang mở.

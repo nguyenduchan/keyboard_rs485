@@ -1,0 +1,25 @@
+# KiCad local state, locks, backups
+*.lck
+~*.lck
+*.kicad_prl
+fp-info-cache
+*-backups/
+*.kicad_pcb-bak
+*.kicad_sch-bak
+_autosave-*
+*.tmp
+
+# Plot / preview exports
+hardware/kicad/panel-keyboard/tools/_preview/
+
+# One-off scan scripts
+hardware/kicad/panel-keyboard/tools/_scan_nets.py
+hardware/kicad/panel-keyboard/tools/_dump_u1_pins.py
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor
+.vs/
+*.swp

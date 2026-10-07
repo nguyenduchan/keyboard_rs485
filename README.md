@@ -29,19 +29,19 @@ python hardware/kicad/panel-keyboard/tools/verify_front_layout.py
 
 KiCad vẽ trang với **Y tăng xuống dưới** (đỉnh hình = Y nhỏ). Từ trên xuống: **7-seg → keypad → mạch**. LED trạng thái cột phải, bắt đầu sát cạnh trên.
 
-| Y | 26 | 42 | 58 | 74 | | 89.5 |
+| Y | 23 | 39 | 55 | 71 | | 86.5 |
 |---:|:---:|:---:|:---:|:---:|:---|:---:|
-| 16 | | | | | | D10 |
-| 18 | DS1 | DS2 | DS3 | DS4 | | |
-| 24 | | | | | | D11 |
-| 32 | | | | | | D12 |
-| 40 | DS5 | DS6 | DS7 | DS8 | | D13 |
-| 48 | | | | | | D14 |
-| 56 | SW13 | SW14 | SW15 | SW16 | | D15 |
-| 64 | | | | | | D16 |
-| 72 | SW9 | SW10 | SW11 | SW12 | | D17 |
-| 88 | SW5 | SW6 | SW7 | SW8 | | |
-| 104 | SW1 | SW2 | SW3 | SW4 | | |
+| 12 | | | | | | D10 |
+| 14 | DS1 | DS2 | DS3 | DS4 | | |
+| 20 | | | | | | D11 |
+| 28 | | | | | | D12 |
+| 36 | DS5 | DS6 | DS7 | DS8 | | D13 |
+| 44 | | | | | | D14 |
+| 52 | SW13 | SW14 | SW15 | SW16 | | D15 |
+| 60 | | | | | | D16 |
+| 68 | SW9 | SW10 | SW11 | SW12 | | D17 |
+| 84 | SW5 | SW6 | SW7 | SW8 | | |
+| 100 | SW1 | SW2 | SW3 | SW4 | | |
 
 ### Kiểm tra layout
 
@@ -62,14 +62,14 @@ Chuẩn hóa footprint trên PCB: `tools/fix_front_layout.py` (sau `update_pcb_a
 
 ## Layout mặt sau (Bottom) — đáy trang KiCad (Y lớn)
 
-SMD **Y = 116–130**. Sát cạnh dưới (**Y = 146**): **J_PWR** (trái) và **J485** (phải). Dải **Y = 132–140** trên B.SilkS để chữ «Nguồn 24V / +24V / 0V» và «RS485 / A / B / 0V».
+Khối bảo vệ và buck **Y = 108–131** (cao 23 mm, có khe đi dây). Khối MCU là cột phải **X = 78–97**, **Y = 74–131** (dưới LED trạng thái). Sát cạnh dưới (**Y = 146**): **J_PWR** (trái) và **J485** (phải). Dải **Y = 133–140** trên B.SilkS để chữ «Nguồn 24V / +24V / 0V» và «RS485 / A / B / 0V».
 
 | Vùng | X (mm) | Y (mm) | Nội dung |
 |------|--------|--------|----------|
-| **24V_PROTECT** | 6–34 | 116–130 | F1, L2, MOV, TVS, Q12, C4, NT1 |
-| **BUCK_5V** | 36–64 | 116–130 | U4 XL1509, L1, D8, C2, FB2, C22 |
-| **MCU_LOGIC** | 66–96 | 116–130 | U1 STM32, U2, U5, U3 |
-| **Giắc** | 22 và 78 | **146** | J_PWR, J485 — chữ silk ngay phía trên |
+| **24V_PROTECT** | 4–40 | 108–131 | F1, L2, MOV, TVS, Q12, C4, NT1 |
+| **BUCK_5V** | 42–76 | 108–131 | U4 XL1509, L1, D8, C2, FB2, C22 |
+| **MCU_LOGIC** | 78–97 | 74–131 | U1 STM32, U2, U5, U3, lọc phím |
+| **Giắc** | 22 và 86 | **146** | J_PWR, J485 — chữ silk ngay phía trên |
 
 Chi tiết: `docs/PCB_LAYOUT.md`, `tools/zone_layout.py`.
 

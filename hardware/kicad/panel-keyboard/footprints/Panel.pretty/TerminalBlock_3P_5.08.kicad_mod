@@ -1,0 +1,12 @@
+(footprint "TerminalBlock_3P_5.08"
+  (version 20241229)
+  (generator "panel-keyboard")
+  (descr "3P 5.08 mm RS485 terminal")
+  (tags "terminal 5.08 rs485")
+  (attr through_hole)
+  (fp_text reference "J485" (at 0 -4 0) (layer "B.SilkS") (effects (font (size 1 1) (thickness 0.15))))
+  (fp_text value "2EDGVC-03P" (at 0 4 0) (layer "B.Fab") (effects (font (size 1 1) (thickness 0.15)) hide))
+  (pad "1" thru_hole rect (at -5.08 0) (size 2.2 2.2) (drill 1.2) (layers "*.Cu" "*.Mask"))
+  (pad "2" thru_hole rect (at 0 0) (size 2.2 2.2) (drill 1.2) (layers "*.Cu" "*.Mask"))
+  (pad "3" thru_hole rect (at 5.08 0) (size 2.2 2.2) (drill 1.2) (layers "*.Cu" "*.Mask"))
+)

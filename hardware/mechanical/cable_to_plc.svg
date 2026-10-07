@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="180mm" height="80mm" viewBox="0 0 180 80">
+  <title>Hai cáp c¯m rút tÛi PLC</title>
+  <rect x="5" y="10" width="35" height="25" fill="#eee" stroke="#333"/>
+  <text x="7" y="18" font-size="3" font-family="sans-serif">Panel PCB</text>
+  <text x="7" y="24" font-size="2.5">J_PWR 2P 5.08</text>
+  <text x="7" y="30" font-size="2.5">J485 2EDG-5.08-03P</text>
+  <path d="M 40 18 H 70" stroke="#c00" stroke-width="0.8"/>
+  <text x="72" y="19" font-size="2.8" fill="#c00">Cáp 1: 2x0.5mm² Ï/en ’ PLC +24V/0V</text>
+  <path d="M 40 28 H 70" stroke="#080" stroke-width="0.8"/>
+  <text x="72" y="29" font-size="2.8" fill="#080">Cáp 2: Belden9841 Xanh/Tr¯ng A/B + drain’SG</text>
+  <rect x="120" y="35" width="50" height="30" fill="#ddd" stroke="#333"/>
+  <text x="122" y="45" font-size="3">PLC / Terminal</text>
+  <text x="122" y="52" font-size="2.5">Cos 0.5mm² vít</text>
+  <text x="122" y="58" font-size="2.5">A B SG / 24V 0V</text>
+</svg>

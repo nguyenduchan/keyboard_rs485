@@ -1,0 +1,6694 @@
+(export
+	(version "E")
+	(design
+		(source "d:\\Project\\embedded\\keyboard\\hardware\\kicad\\panel-keyboard\\panel-keyboard.kicad_sch")
+		(date "2026-10-07T13:12:15")
+		(tool "Eeschema 10.0.5")
+		(sheet
+			(number "1")
+			(name "/")
+			(tstamps "/")
+			(title_block
+				(title "Panel Keyboard All-in-One 100x150")
+				(company "Embedded Keyboard Project")
+				(rev "B")
+				(date "2026-10-07")
+				(source "panel-keyboard.kicad_sch")
+				(comment
+					(number "1")
+					(value "Full schematic — SO_DO_NGUYEN_LY.md")
+				)
+				(comment
+					(number "2")
+					(value "J_PWR + J485 bottom edge, spaced")
+				)
+				(comment
+					(number "3")
+					(value "Regenerate: python tools/build_schematic.py")
+				)
+				(comment
+					(number "4")
+					(value "")
+				)
+				(comment
+					(number "5")
+					(value "")
+				)
+				(comment
+					(number "6")
+					(value "")
+				)
+				(comment
+					(number "7")
+					(value "")
+				)
+				(comment
+					(number "8")
+					(value "")
+				)
+				(comment
+					(number "9")
+					(value "")
+				)
+			)
+		)
+	)
+	(components)
+	(groups)
+	(variants)
+	(libparts)
+	(libraries)
+	(nets
+		(net
+			(code "1")
+			(name "+3V3")
+			(class "Default")
+			(node
+				(ref "D1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D10")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D10")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D10")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D10")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D11")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D11")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D11")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D11")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D12")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D12")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D12")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D12")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D13")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D13")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D13")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D13")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D14")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D14")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D14")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D14")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D15")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D15")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D15")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D15")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "0")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "A")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "A1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "A2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "B")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "C1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "C2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "D")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "E")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "E1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "E2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "G")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "S")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "S1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L485")
+				(pin "S2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED4")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED5")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED6")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED7")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED8")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "27")
+			(name "Net-(C3V1-Pad??)")
+			(class "Default")
+			(node
+				(ref "C3V1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V1")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "28")
+			(name "Net-(C3V2-Pad??)")
+			(class "Default")
+			(node
+				(ref "C3V2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C3V2")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "29")
+			(name "Net-(C5V1-Pad??)")
+			(class "Default")
+			(node
+				(ref "C5V1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V1")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "30")
+			(name "Net-(C5V2-Pad??)")
+			(class "Default")
+			(node
+				(ref "C5V2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "C5V2")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "31")
+			(name "Net-(CIN_H-Pad??)")
+			(class "Default")
+			(node
+				(ref "CIN_H")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_H")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_H")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_H")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_H")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_H")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_H")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_H")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_H")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "32")
+			(name "Net-(CIN_L-Pad??)")
+			(class "Default")
+			(node
+				(ref "CIN_L")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_L")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_L")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_L")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_L")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_L")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_L")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_L")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CIN_L")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "33")
+			(name "Net-(CM3-Pad??)")
+			(class "Default")
+			(node
+				(ref "CM3")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CM3")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CM3")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CM3")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CM3")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CM3")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CM3")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CM3")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CM3")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "34")
+			(name "Net-(CNRST-Pad??)")
+			(class "Default")
+			(node
+				(ref "CNRST")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CNRST")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CNRST")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CNRST")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CNRST")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CNRST")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CNRST")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CNRST")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CNRST")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "35")
+			(name "Net-(COUT_H-Pad??)")
+			(class "Default")
+			(node
+				(ref "COUT_H")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "COUT_H")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "COUT_H")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "COUT_H")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "COUT_H")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "COUT_H")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "COUT_H")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "COUT_H")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "COUT_H")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "36")
+			(name "Net-(CTM1-Pad??)")
+			(class "Default")
+			(node
+				(ref "CTM1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM1")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "37")
+			(name "Net-(CTM2-Pad??)")
+			(class "Default")
+			(node
+				(ref "CTM2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CTM2")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "38")
+			(name "Net-(CVDD1-Pad??)")
+			(class "Default")
+			(node
+				(ref "CVDD1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDD1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDD1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDD1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDD1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDD1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDD1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDD1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDD1")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "39")
+			(name "Net-(CVDDA-Pad??)")
+			(class "Default")
+			(node
+				(ref "CVDDA")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDDA")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDDA")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDDA")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDDA")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDDA")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDDA")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDDA")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "CVDDA")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "40")
+			(name "Net-(D16-Pad??)")
+			(class "Default")
+			(node
+				(ref "D16")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D16")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D16")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D16")
+				(pin "4")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "41")
+			(name "Net-(D17-Pad??)")
+			(class "Default")
+			(node
+				(ref "D17")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D17")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D17")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "D17")
+				(pin "4")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "42")
+			(name "Net-(DISP1-Pad??)")
+			(class "Default")
+			(node
+				(ref "DISP1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "28")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "29")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "30")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP1")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "43")
+			(name "Net-(DISP2-Pad??)")
+			(class "Default")
+			(node
+				(ref "DISP2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "28")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "29")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "30")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "DISP2")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "44")
+			(name "Net-(F1-Pad??)")
+			(class "Default")
+			(node
+				(ref "F1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "F1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "F1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "F1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "45")
+			(name "Net-(FB5V-Pad??)")
+			(class "Default")
+			(node
+				(ref "FB5V")
+				(pin "0")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "A")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "A1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "A2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "B")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "C1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "C2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "D")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "E")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "E1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "E2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "G")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "S")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "S1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB5V")
+				(pin "S2")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "46")
+			(name "Net-(FB24-Pad??)")
+			(class "Default")
+			(node
+				(ref "FB24")
+				(pin "0")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "A")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "A1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "A2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "B")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "C1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "C2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "D")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "E")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "E1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "E2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "G")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "S")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "S1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB24")
+				(pin "S2")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "47")
+			(name "Net-(FB33-Pad??)")
+			(class "Default")
+			(node
+				(ref "FB33")
+				(pin "0")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "A")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "A1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "A2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "B")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "C1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "C2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "D")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "E")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "E1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "E2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "G")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "S")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "S1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "FB33")
+				(pin "S2")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "48")
+			(name "Net-(J2-Pad??)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "28")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J2")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "49")
+			(name "Net-(J485-Pad??)")
+			(class "Default")
+			(node
+				(ref "J485")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J485")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "50")
+			(name "Net-(JTERM-Pad??)")
+			(class "Default")
+			(node
+				(ref "JTERM")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "JTERM")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "JTERM")
+				(pin "3")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "51")
+			(name "Net-(J_PWR-Pad??)")
+			(class "Default")
+			(node
+				(ref "J_PWR")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "J_PWR")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "52")
+			(name "Net-(L1-Pad??)")
+			(class "Default")
+			(node
+				(ref "L1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "L1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "53")
+			(name "Net-(R33A-Pad??)")
+			(class "Default")
+			(node
+				(ref "R33A")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33A")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "54")
+			(name "Net-(R33B-Pad??)")
+			(class "Default")
+			(node
+				(ref "R33B")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33B")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "55")
+			(name "Net-(R33C-Pad??)")
+			(class "Default")
+			(node
+				(ref "R33C")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R33C")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "56")
+			(name "Net-(R47A-Pad??)")
+			(class "Default")
+			(node
+				(ref "R47A")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47A")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "57")
+			(name "Net-(R47B-Pad??)")
+			(class "Default")
+			(node
+				(ref "R47B")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "R47B")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "58")
+			(name "Net-(RBIAS_A-Pad??)")
+			(class "Default")
+			(node
+				(ref "RBIAS_A")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_A")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "59")
+			(name "Net-(RBIAS_B-Pad??)")
+			(class "Default")
+			(node
+				(ref "RBIAS_B")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBIAS_B")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "60")
+			(name "Net-(RBOT0-Pad??)")
+			(class "Default")
+			(node
+				(ref "RBOT0")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RBOT0")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "61")
+			(name "Net-(RDE-Pad??)")
+			(class "Default")
+			(node
+				(ref "RDE")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RDE")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "62")
+			(name "Net-(RLED1-Pad??)")
+			(class "Default")
+			(node
+				(ref "RLED1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED1")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "63")
+			(name "Net-(RLED2-Pad??)")
+			(class "Default")
+			(node
+				(ref "RLED2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED2")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "64")
+			(name "Net-(RLED3-Pad??)")
+			(class "Default")
+			(node
+				(ref "RLED3")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RLED3")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "65")
+			(name "Net-(RNST-Pad??)")
+			(class "Default")
+			(node
+				(ref "RNST")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RNST")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "66")
+			(name "Net-(RPU-Pad??)")
+			(class "Default")
+			(node
+				(ref "RPU")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RPU")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "67")
+			(name "Net-(RTERM-Pad??)")
+			(class "Default")
+			(node
+				(ref "RTERM")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "RTERM")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "68")
+			(name "Net-(SW1-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW1")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "69")
+			(name "Net-(SW2-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW2")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "70")
+			(name "Net-(SW3-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW3")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW3")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "71")
+			(name "Net-(SW4-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW4")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW4")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "72")
+			(name "Net-(SW5-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW5")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW5")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "73")
+			(name "Net-(SW6-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW6")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW6")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "74")
+			(name "Net-(SW7-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW7")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW7")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "75")
+			(name "Net-(SW8-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW8")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW8")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "76")
+			(name "Net-(SW9-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW9")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW9")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "77")
+			(name "Net-(SW10-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW10")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW10")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "78")
+			(name "Net-(SW11-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW11")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW11")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "79")
+			(name "Net-(SW12-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW12")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW12")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "80")
+			(name "Net-(SW13-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW13")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW13")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "81")
+			(name "Net-(SW14-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW14")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW14")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "82")
+			(name "Net-(SW15-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW15")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW15")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "83")
+			(name "Net-(SW16-Pad??)")
+			(class "Default")
+			(node
+				(ref "SW16")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "C")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "MP")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "SW16")
+				(pin "SH")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "84")
+			(name "Net-(TVS1-Pad??)")
+			(class "Default")
+			(node
+				(ref "TVS1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "TVS1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "85")
+			(name "Net-(U1-Pad??)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "28")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "29")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "30")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "31")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "32")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "33")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "34")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "35")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "36")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "37")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "38")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "39")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "40")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "41")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "42")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "43")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "44")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "45")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "46")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "47")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "48")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "49")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U1")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "86")
+			(name "Net-(U2-Pad??)")
+			(class "Default")
+			(node
+				(ref "U2")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "28")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U2")
+				(pin "GND")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "87")
+			(name "Net-(U3-Pad??)")
+			(class "Default")
+			(node
+				(ref "U3")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "28")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "29")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "30")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "31")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "32")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "33")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "34")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "35")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "36")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "37")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "38")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "39")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "40")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "41")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "42")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "43")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "44")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "45")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "46")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "47")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "48")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "49")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U3")
+				(pin "9")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "88")
+			(name "Net-(U4-Pad??)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "26")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "27")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "28")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "29")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "30")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "31")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "32")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "33")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "34")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "35")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "36")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "37")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "38")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "39")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "40")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "41")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "42")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "43")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "44")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "45")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "46")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "47")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "48")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "49")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "50")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "52")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "53")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "A1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "A2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "B1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "B2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "C1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "C2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "1")
+				(pinfunction "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "12")
+				(pinfunction "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "2")
+				(pinfunction "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "11")
+				(pinfunction "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "3")
+				(pinfunction "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U4")
+				(pin "10")
+				(pinfunction "10")
+				(pintype "unspecified")
+			)
+		)
+		(net
+			(code "89")
+			(name "Net-(U5-Pad??)")
+			(class "Default")
+			(node
+				(ref "U5")
+				(pin "1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "10")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "11")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "12")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "13")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "14")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "15")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "16")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "17")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "18")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "19")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "20")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "21")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "22")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "23")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "24")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "25")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "3")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "4")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "5")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "6")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "7")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "8")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "9")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "A1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "A2")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "B1")
+				(pintype "unspecified")
+			)
+			(node
+				(ref "U5")
+				(pin "B2")
+				(pintype "unspecified")
+			)
+		)
+	)
+)

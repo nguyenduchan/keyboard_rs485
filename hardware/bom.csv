@@ -1,0 +1,66 @@
+Qty,RefDes,Value,Footprint,Layer,Manufacturer,MPN,Notes
+1,U1,STM32F030F4P6,TSSOP-20,Bottom,ST,STM32F030F4P6,MCU Cortex-M0 16KB; phổ biến giá rẻ; 100nF per VDD
+1,U2,TM1638,SOP-28,Bottom,Titan Micro,TM1638,Feed from +5V_LED after FB5V
+1,U3,MAX485 or SP3485EN,SOIC-8,Bottom,Maxim/TI,MAX485CSA+,3.3V IO compatible; 100nF on VCC
+1,U4,XL1509-5.0,TO-263-5 TabPin3,Bottom,XLSEMI,XL1509-5.0,PWR_BUCK per fiberboard PWR_24V_PROTECT_BUCK_GUIDE
+1,U5,AMS1117-3.3,SOT-223,Bottom,AMS,AMS1117-3.3,LDO 5V→3.3V after FB1
+1,L2,ACM2012-201-2P,ACM2012 CM,Bottom,TDK/Bourns,ACM2012-201,CM on V+ and GND after F1
+1,RV1,Panasonic VF MOV,VF 6x8mm SMD,Bottom,Panasonic,Varistor_Panasonic_VF,MOV at VIN_PROTECT
+1,Q12,AO4407A,SOT-23,Bottom,,,P-FET anti-reverse at VIN_PROTECT
+1,D8,SS34,SOD-123,Bottom,,,Buck freewheel K=SW A=GND_PWR
+1,F1,MF-MSMF350,PPTC 2920,Bottom,Bourns,MF-MSMF350/24,Input OCP
+1,R17,100k,0805,Bottom,,,Q12 gate
+1,R36,3k,0805,Bottom,,,Buck FB (XL1509)
+1,R37,1k,0805,Bottom,,,Buck FB → GND_PWR
+1,R38,10k,0805,Bottom,,,EN pull-up → +24V
+1,C4,1000uF 25V,10x12.5 elec,Bottom,,,Bulk 24V level-1 (470uF min if no space)
+1,C14,100nF,0805,Bottom,,,HF after FET
+1,C15,100nF,0805,Bottom,,,HF at VIN_PROTECT
+1,C19,10uF 25V,0805,Bottom,,,Bulk small at VIN_PROTECT
+1,C16,10uF,0805,Bottom,,,Buck Vin
+1,C17,100nF,0805,Bottom,,,Buck Vin HF
+1,C2,220uF 6.3V,CP_Elec 6.3x5.4,Bottom,,,Bulk +5V_RAW at L1
+1,C5,100nF,0805,Bottom,,,HF +5V_RAW
+1,C22,220uF 6.3V,CP_Elec 6.3x5.4,Bottom,,,Bulk +5V (MAX485/TM1638 branch)
+1,C7,10uF,0805,Bottom,,,AMS1117 in
+1,C3,22uF,0805,Bottom,,,+3V3_LDO
+1,C18,100nF,0805,Bottom,,,+3V3_LDO HF
+1,C21,100nF,0805,Bottom,,,After FB1 on +3V3
+1,NT1,NetTie GND_STAR,SMD 2-pad,Bottom,,,GND_PWR ↔ GND at C4−
+1,TVS1,SMAJ28A,SMA,Bottom,Littelfuse,SMAJ28A,TVS D7 in guide
+1,FB2,BLM21PG121,0805,Bottom,Murata,BLM21PG121,+5V_RAW → +5V
+1,FB1,BLM21PG121,0805,Bottom,Murata,BLM21PG121,+3V3_LDO → +3V3
+1,TVS2,SM712,SOT-23-3,Bottom,Semtech,SM712,RS485 A/B ESD to GND
+1,L485,Common-mode choke 90-120 ohm CM,4-pin 0805/1210,Bottom,Bourns/Murata,ACM2012 or DLW21SN,Between U3 and J485
+1,FB5V,BLM21PG121,0805,Bottom,Murata,BLM21PG121,+5V → +5V_LED (display)
+8,DS1-DS8,7-seg 0.56in CC single digit,THT 10-pin,Top,,,5611-class; DS1-4 Target DS5-8 Actual
+16,,B3F-4055 cap,,Mechanical,,,Key caps
+8,D10-D17,LED 3mm THT,,Top,,,Status column; RLED on Bottom
+16,SW1-SW16,Tact 12mm THT,,Top,,,Panel:SW_Tactile_12mm_THT
+8,RK1-RK4,100,0805,Bottom,,,Series KEY row @ TM1638
+8,CK1-CK4 CC1-CC4,100nF,0805,Bottom,,,RC filter matrix @ TM1638
+8,RC1-RC4,100,0805,Bottom,,,Series KEY col @ TM1638
+8,RLED,1k,0805,Bottom,,,Status LED limit
+3,R33,33,0805,Bottom,,,Series CLK STB DIO to TM1638
+1,RPU,4.7k,0805,Bottom,,,DIO pull-up to 3V3
+2,R47,47,0805,Bottom,,,UART series to DI/RO (not 470R)
+1,RDE,10k,0805,Bottom,,,DE/~RE pulldown default RX
+2,RBIAS,560,0805,Bottom,,,A pull-up 5V; B pull-down GND
+1,RTERM,120,0805,Bottom,,,Across A-B via JTERM jumper
+1,JTERM,Solder jumper 2-pin,,Bottom,,,Enable termination at bus end
+1,RNST,10k,0805,Bottom,,,NRST pull-up
+1,CBOT0,10k,0805,Bottom,,,BOOT0 pull-down
+1,CNRST,100n,0805,Bottom,,,NRST filter
+1,CVDDA1,1u,0805,Bottom,,,VDDA after ferrite
+~30,C100n,100n,0805,Bottom,,,Decoupling all ICs
+~6,C10u,10u,0805,Bottom,,,Local bulk 5V/3V3/buck
+1,CM485,100n,0805,Bottom,,,Optional only: MAX485 VCC (required)
+1,CM3,100n,0805,Bottom,,,MAX485 VCC decap at pin
+1,J_PWR,Terminal plug 2P 5.08mm,2EDGVC-5.08-02P Vertical,Bottom,Degson/Phoenix,MC 1.5/2-G-5.08,Socket +24V GND
+1,J485,2EDG-5.08 socket 3P,2EDGVC-5.08-03P Vertical,Bottom,Degson,2EDGVC-5.08-03P,RS485 A B SG on PCB
+1,,2EDG-5.08 plug 3P,cable assy,,Degson,2EDGK-5.08-03P,Prefab RS485 cable to PLC
+1,,2EDG-5.08 plug cover,,,Degson,2EDGY-5.08 or series,Optional strain relief cap
+2,CBL,,,Assembly,,,Prefabricated: 2P power cable + 3P Belden9841 RS485 cable see CAP_VA_GIAC.md
+1,J2,SWD 1.27mm 4pin,Pin header,Bottom,,,Debug
+1,L1,Inductor 47uH,1210,Bottom,,,Buck inductor (fiberboard)
+0-8,RSEG,220-470,0805,Bottom,,,Per module datasheet if needed
