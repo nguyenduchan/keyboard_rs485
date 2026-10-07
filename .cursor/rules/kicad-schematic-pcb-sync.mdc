@@ -24,12 +24,12 @@ Khi user yêu cầu thay đổi phần cứng, EMC, layout, linh kiện, hoặc 
 
 3. **Tài liệu** — cập nhật netlist/ý nghĩa trong `docs/SO_DO_NGUYEN_LY.md`, layout trong `docs/PCB_LAYOUT.md`, `hardware/bom.csv` khi đổi ref/value/footprint.
 
-4. **Vị trí footprint** — tọa độ B.Cu / F.Cu trong `tools/zone_layout.py` (3 vùng 24V / buck / MCU); front THT trong `FRONT_POS`.
+4. **Vị trí footprint** — tọa độ trong `tools/zone_layout.py` (`BOTTOM_POS` = chip và SMD mặt trên; `FRONT_POS` = phím và LED mặt dưới).
 
 ## Quy ước dự án
 
-- **F.Cu (Top):** chỉ THT — phím, LED 3 mm, 7-seg.
-- **B.Cu (Bottom):** SMD một mặt stencil; nguồn theo `PWR_24V_PROTECT_BUCK_GUIDE.txt` (fiberboard).
+- **F.Cu (mặt trên):** toàn bộ chip và SMD (STM32, HT16K33A, nguồn, RS485, R/C, giắc). Stencil một mặt.
+- **B.Cu (mặt dưới):** chỉ phím, LED 3 mm và 7-seg. Nguồn theo `PWR_24V_PROTECT_BUCK_GUIDE.txt` (fiberboard).
 - Thay đổi nguồn/EMC/phím: xem `docs/PWR_24V_PROTECT_BUCK.md`, `docs/CHONG_PHIM_MA.md`.
 
 ## Kết thúc task

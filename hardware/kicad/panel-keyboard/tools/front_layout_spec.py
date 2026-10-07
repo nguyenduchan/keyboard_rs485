@@ -8,8 +8,8 @@ from __future__ import annotations
 
 PANEL_WIDTH_MM = 100.0
 PANEL_HEIGHT_MM = 150.0
-# Lệch 3 mm sang trái so với tâm bo để cột phải đủ rộng cho khối MCU (đi dây).
-MAIN_AXIS_X = 47.0
+# Tâm keypad/7-seg. Cột phải của bo 120 mm dành cho nguồn và MCU.
+MAIN_AXIS_X = 40.0
 
 KEY_COLS = 4
 KEY_ROWS = 4
@@ -18,19 +18,27 @@ DIGIT_ROWS = 2
 STATUS_COUNT = 8
 
 KEY_PITCH = 16.0
-DIGIT_ROW_PITCH_Y = 22.0
+# Kingbright SC56 / 5611: thân 12,70 × 19,05 mm, dung sai ±0,25.
+# Khe danh định 1 mm → khe xấu nhất khoảng 0,5 mm, vẫn lắp được.
+DIGIT_BODY_W_MM = 12.70
+DIGIT_BODY_H_MM = 19.05
+DIGIT_GAP_MM = 1.0
+DIGIT_PITCH_TOP = DIGIT_BODY_W_MM + DIGIT_GAP_MM  # cả hai hàng
+DIGIT_ROW_PITCH_Y = DIGIT_BODY_H_MM + DIGIT_GAP_MM + 0.05  # 20,1
 SWITCH_HALF_MM = 6.0
-DIGIT_HALF_H_MM = 10.0  # thân 7-seg chủ yếu về phía −Y local
+DIGIT_HALF_H_MM = DIGIT_BODY_H_MM / 2
 
 STATUS_PITCH_Y = 8.0
 STATUS_LED_HALF_MM = 1.5
 STATUS_GAP_MM = 8.0
+# Khe giữa thân 7-seg và thân phím, đủ cho lưỡi CNC ~3 mm và gân mặt máy.
 MIN_GAP_KEYPAD_TO_DIGIT_MM = 8.0
 
-# 7-seg sát cạnh trên (Y nhỏ). SW1 (KEY_ROW0) thấp hơn SW13 trên màn hình.
-DIGIT_ROW_TOP_Y = 14.0  # DS1–DS4
-DIGIT_ROW_BOT_Y = 36.0  # DS5–DS8
-KEY_ROW0_Y = 100.0      # SW1; SW13 = 52 (gần 7-seg). Mép dưới phím = 106.
+# Cả hai hàng sát nhau, tâm hàng = tâm keypad.
+# SW13 tại Y=59, mép thân phím Y=53. Mép dưới thân 7-seg = 45.
+DIGIT_ROW_BOT_Y = 35.475
+DIGIT_ROW_TOP_Y = round(DIGIT_ROW_BOT_Y - DIGIT_ROW_PITCH_Y, 3)  # 15.375
+KEY_ROW0_Y = 107.0      # SW1; SW13 = 59. Mép dưới thân phím = 113.
 
 
 def _grid_x(col: int, n_cols: int, pitch: float, axis: float = MAIN_AXIS_X) -> float:
@@ -55,9 +63,10 @@ STATUS_X = status_column_x_mm()
 
 
 def digit_centers() -> dict[str, tuple[float, float]]:
+    """Cả DS1–DS4 và DS5–DS8 sát nhau, tâm mỗi hàng = tâm keypad."""
     out: dict[str, tuple[float, float]] = {}
     for i in range(DIGIT_COLS):
-        x = _grid_x(i, DIGIT_COLS, KEY_PITCH)
+        x = round(_grid_x(i, DIGIT_COLS, DIGIT_PITCH_TOP), 2)
         out[f"DS{i + 1}"] = (x, DIGIT_ROW_TOP_Y)
         if DIGIT_ROWS >= 2:
             out[f"DS{i + 1 + DIGIT_COLS}"] = (x, DIGIT_ROW_BOT_Y)
@@ -89,8 +98,8 @@ def keypad_top_y_mm() -> float:
 
 
 def digit_bottom_row_y_mm() -> float:
-    """Mép 7-seg phía keypad (thân chủ yếu về −Y, mép +Y ≈ +2 mm)."""
-    return DIGIT_ROW_BOT_Y + 2.0
+    """Mép dưới thân hàng 7-seg dưới (thân 19,05 mm, tâm tại anchor)."""
+    return DIGIT_ROW_BOT_Y + DIGIT_HALF_H_MM
 
 
 def keypad_center_x_mm() -> float:
@@ -98,4 +107,6 @@ def keypad_center_x_mm() -> float:
 
 
 def digit_block_center_x_mm() -> float:
-    return MAIN_AXIS_X
+    """Tâm hàng 7-seg trên (DS1–DS4)."""
+    xs = [digit_centers()[f"DS{i + 1}"][0] for i in range(DIGIT_COLS)]
+    return (xs[0] + xs[-1]) / 2

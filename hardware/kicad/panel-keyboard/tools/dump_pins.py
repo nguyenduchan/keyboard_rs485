@@ -4,8 +4,8 @@ from pathlib import Path
 text = Path(
     r"C:\Users\duchan.nguyen\AppData\Local\Programs\KiCad\10.0\share\kicad\symbols\MCU_ST_STM32F0.kicad_sym"
 ).read_text(encoding="utf-8")
-idx = text.find('(symbol "STM32F030F4Px_1_1"')
-end = text.find('(symbol "STM32F030F4Px_2_1"', idx)
+idx = text.find('(symbol "STM32G030F6Px_1_1"')
+end = text.find('(symbol "STM32G030F6Px_2_1"', idx)
 chunk = text[idx:end]
 for block in re.findall(r"\(pin\b", chunk):
     pass

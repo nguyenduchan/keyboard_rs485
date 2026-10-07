@@ -2,14 +2,14 @@
 
 Thiết kế dùng **terminal dạng cắm rút 5,08 mm** (chuẩn tủ điện, trùng bước với nhiều module PLC I/O). **Tách 2 giắc**: nguồn và RS485 — dễ làm cáp, giảm nhầm 24 V lên bus Modbus.
 
-## 1. Trên PCB (mặt sau bo, cạnh trên trong tủ)
+## 1. Trên PCB (mặt trên bo, trong tủ)
 
 | Ref | Loại | Footprint KiCad (gợi ý) | Ghi chú silk |
 |-----|------|-------------------------|--------------|
 | **J_PWR** | Socket **2P**, pitch **5,08 mm**, cắm rút | `TerminalBlock_Phoenix:PhoenixContact_MC_1,5_2-G-5.08_1x02_P5.08mm_Vertical` hoặc Degson **2EDGVC-5.08-02P** | `+24V` / `GND` |
 | **J485** | **Degson 2EDG-5.08**, socket **3P** cắm rút (chuẩn dự án) | PCB: **2EDGVC-5.08-03P** (Vertical); KiCad: footprint `2EDGVC-5.08-03P` / Degson lib | `A` / `B` / `SG` |
 
-**Hướng lắp:** socket hàn **Bottom**, miệng cắm hướng **vào trong tủ** (cạnh trên bo Y ≈ 138–145 mm). Thợ cắm **phích rút** từ phía sau bo, không cần tháo ốc panel khi bảo trì.
+**Hướng lắp:** socket hàn **mặt trên (F.Cu)**, cùng phía với chip, miệng cắm hướng vào trong tủ. Thợ cắm phích từ phía chip, không cần tháo ốc panel.
 
 **Màu phích (khuyến nghị mua sẵn):**
 
@@ -22,7 +22,7 @@ Thiết kế dùng **terminal dạng cắm rút 5,08 mm** (chuẩn tủ điện,
 
 | Pin | Net | Nối tới |
 |-----|-----|---------|
-| 1 | +24V_IN | F1 → L2 CM → VIN_PROTECT (MOV/TVS/Q12) → C4 → buck (`PWR_24V_PROTECT_BUCK_GUIDE.txt`) |
+| 1 | +24V_IN | F1 → L2 CM → VIN_PROTECT (MOV/TVS/Q17) → C4 → buck (`PWR_24V_PROTECT_BUCK_GUIDE.txt`) |
 | 2 | GND | **STAR GND** (mọi return về đây trước) |
 
 ### J485 (3P)
@@ -53,7 +53,7 @@ Hai **dây cáp riêng**, mỗi đầu panel gắn **phích 5,08 mm**; đầu PL
 | Hạng mục | Thông số |
 |----------|----------|
 | Họ giắc | **Degson 2EDG-5.08** (pitch 5,08 mm), **3 pin** |
-| Socket trên PCB | **2EDGVC-5.08-03P** (hàn Bottom, miệng cắm vào tủ) |
+| Socket trên PCB | **2EDGVC-5.08-03P** (hàn mặt trên, miệng cắm vào tủ) |
 | Phích trên cáp | **2EDGK-5.08-03P** (+ nắp **2EDGY-5.08** / đuôi đặt ốc tùy bộ) |
 | Cáp | **Belden 9841** hoặc tương đương: **1 pair xoắn + shield**, 24 AWG (0,5 mm²) |
 | Ghép màu (gợi ý) | Pin1 Xanh → **A**; Pin2 Trắng → **B**; Pin3 Drain bọc → **SG** |
@@ -116,4 +116,4 @@ Bạn hay thấy DB9 vì **USB–RS232**, **HMI cũ**, **máy CNC**, **cân đi�
 
 ## 7. Tọa độ PCB
 
-Xem `docs/PCB_LAYOUT.md` — **J_PWR** (82, 142), **J485** (82, 132) mm, cạnh trên bo.
+Xem `docs/PCB_LAYOUT.md` — **J_PWR** (115, 16) và **J485** (115, 102) mm, cạnh phải bo.

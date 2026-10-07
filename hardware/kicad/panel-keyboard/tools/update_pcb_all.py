@@ -27,6 +27,14 @@ OBSOLETE = (
     "D1",
     "DISP1",
     "DISP2",
+    "RBOT0",
+    "U2",
+    "R33A",
+    "R33B",
+    "R33C",
+    "RPU",
+    "CTM1",
+    "CTM2",
 )
 
 

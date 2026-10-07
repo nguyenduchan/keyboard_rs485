@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="100mm" height="150mm" viewBox="0 0 100 150">
-  <title>Decal overlay 100x150 mm (PCB origin bottom-left)</title>
-  <rect width="100" height="150" fill="#2a2a2a"/>
-  <rect x="10" y="37" width="58" height="25" fill="#111" stroke="#666" stroke-width="0.2"/>
-  <rect x="10" y="7" width="58" height="25" fill="#111" stroke="#666" stroke-width="0.2"/>
-  <text x="10" y="34" font-size="2.5" fill="#ccc" font-family="sans-serif">7-seg windows (above keypad)</text>
-  <!-- Status LED: PCB Y 77.5..14.5 -> SVG cy = 150 - Y -->
+<svg xmlns="http://www.w3.org/2000/svg" width="120mm" height="120mm" viewBox="0 0 120 120">
+  <title>Decal 120x120 mm, Y xuong duoi giong KiCad</title>
+  <rect width="120" height="120" fill="#2a2a2a"/>
+  <!-- 7-seg bodies 12.70 x 19.05, two rows, pitch 13.7 x / 20.1 y -->
+  <rect x="13.1" y="5.85" width="53.8" height="19.05" fill="#111" stroke="#666" stroke-width="0.2"/>
+  <rect x="13.1" y="25.95" width="53.8" height="19.05" fill="#111" stroke="#666" stroke-width="0.2"/>
+  <!-- 8 mm rib between digit body bottom Y=45 and key body top Y=53 -->
+  <rect x="10" y="45" width="60" height="8" fill="none" stroke="#c90" stroke-width="0.25" stroke-dasharray="1,0.6"/>
+  <text x="14" y="50" font-size="2.4" fill="#c90" font-family="sans-serif">khe CNC 8 mm</text>
+  <!-- 4x4 keys, body diameter 12 mm -->
+  <g fill="#1a1a1a" stroke="#888" stroke-width="0.15">
+    <circle cx="16" cy="59" r="6"/>
+    <circle cx="32" cy="59" r="6"/>
+    <circle cx="48" cy="59" r="6"/>
+    <circle cx="64" cy="59" r="6"/>
+    <circle cx="16" cy="75" r="6"/>
+    <circle cx="32" cy="75" r="6"/>
+    <circle cx="48" cy="75" r="6"/>
+    <circle cx="64" cy="75" r="6"/>
+    <circle cx="16" cy="91" r="6"/>
+    <circle cx="32" cy="91" r="6"/>
+    <circle cx="48" cy="91" r="6"/>
+    <circle cx="64" cy="91" r="6"/>
+    <circle cx="16" cy="107" r="6"/>
+    <circle cx="32" cy="107" r="6"/>
+    <circle cx="48" cy="107" r="6"/>
+    <circle cx="64" cy="107" r="6"/>
+  </g>
   <g fill="#333" stroke="#888" stroke-width="0.15">
-    <circle cx="88" cy="72.5" r="2"/>
-    <circle cx="88" cy="81.5" r="2"/>
-    <circle cx="88" cy="90.5" r="2"/>
-    <circle cx="88" cy="99.5" r="2"/>
-    <circle cx="88" cy="108.5" r="2"/>
-    <circle cx="88" cy="117.5" r="2"/>
-    <circle cx="88" cy="126.5" r="2"/>
-    <circle cx="88" cy="135.5" r="2"/>
+    <circle cx="79.5" cy="12" r="1.5"/>
+    <circle cx="79.5" cy="20" r="1.5"/>
+    <circle cx="79.5" cy="28" r="1.5"/>
+    <circle cx="79.5" cy="36" r="1.5"/>
+    <circle cx="79.5" cy="44" r="1.5"/>
+    <circle cx="79.5" cy="52" r="1.5"/>
+    <circle cx="79.5" cy="60" r="1.5"/>
+    <circle cx="79.5" cy="68" r="1.5"/>
   </g>
-  <g font-size="2.8" fill="#eee" font-family="sans-serif">
-    <text x="92" y="73.5">RUN</text>
-    <text x="92" y="82.5">STOP</text>
-    <text x="92" y="91.5">FAULT</text>
-    <text x="92" y="100.5">AUTO</text>
-    <text x="92" y="109.5">MAN</text>
-    <text x="92" y="118.5">RDY</text>
-    <text x="92" y="127.5">COMM</text>
-    <text x="92" y="136.5">ALM</text>
+  <g font-size="2.6" fill="#eee" font-family="sans-serif">
+    <text x="84" y="13">RUN</text>
+    <text x="84" y="21">STOP</text>
+    <text x="84" y="29">FAULT</text>
+    <text x="84" y="37">AUTO</text>
+    <text x="84" y="45">MAN</text>
+    <text x="84" y="53">RDY</text>
+    <text x="84" y="61">COMM</text>
+    <text x="84" y="69">ALM</text>
   </g>
-  <!-- Keypad PCB y 14.5-85.5 approx center 46: rect y=150-85.5=64.5 h~58 -->
-  <rect x="12" y="64" width="64" height="58" fill="#1a1a1a" stroke="#444" stroke-width="0.2"/>
-  <text x="14" y="62" font-size="2.5" fill="#888">4x4 phim — LED cot phai can giua keypad</text>
-  <line x1="44" y1="64" x2="44" y2="122" stroke="#555" stroke-width="0.1" stroke-dasharray="1,1"/>
-  <line x1="76" y1="93" x2="86" y2="93" stroke="#555" stroke-width="0.1" stroke-dasharray="1,1"/>
 </svg>

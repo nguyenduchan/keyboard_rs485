@@ -80,12 +80,12 @@
     "net": "GND_PWR"
   },
   {
-    "ref": "Q12",
+    "ref": "Q17",
     "pin": "2",
     "net": "VIN_PROTECT"
   },
   {
-    "ref": "Q12",
+    "ref": "Q17",
     "pin": "1",
     "net": "FET_G"
   },
@@ -100,7 +100,7 @@
     "net": "GND_PWR"
   },
   {
-    "ref": "Q12",
+    "ref": "Q17",
     "pin": "3",
     "net": "+24V"
   },
@@ -111,16 +111,6 @@
   },
   {
     "ref": "C4",
-    "pin": "2",
-    "net": "GND_PWR"
-  },
-  {
-    "ref": "C14",
-    "pin": "1",
-    "net": "+24V"
-  },
-  {
-    "ref": "C14",
     "pin": "2",
     "net": "GND_PWR"
   },
@@ -335,34 +325,9 @@
     "net": "+3V3"
   },
   {
-    "ref": "C21",
-    "pin": "1",
-    "net": "+3V3"
-  },
-  {
-    "ref": "C21",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "CVDDA",
-    "pin": "1",
-    "net": "+3V3"
-  },
-  {
-    "ref": "CVDDA",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U1",
-    "pin": "1",
-    "net": "BOOT0"
-  },
-  {
     "ref": "U1",
     "pin": "4",
-    "net": "NRST"
+    "net": "+3V3"
   },
   {
     "ref": "U1",
@@ -371,52 +336,42 @@
   },
   {
     "ref": "U1",
-    "pin": "16",
+    "pin": "6",
     "net": "+3V3"
   },
   {
     "ref": "U1",
-    "pin": "15",
+    "pin": "7",
     "net": "GND"
   },
   {
     "ref": "U1",
-    "pin": "7",
-    "net": "RS485_DE"
-  },
-  {
-    "ref": "U1",
-    "pin": "8",
-    "net": "UART_TX"
-  },
-  {
-    "ref": "U1",
-    "pin": "9",
-    "net": "UART_RX"
-  },
-  {
-    "ref": "U1",
     "pin": "10",
-    "net": "TM_CLK"
-  },
-  {
-    "ref": "U1",
-    "pin": "11",
-    "net": "TM_STB"
+    "net": "NRST"
   },
   {
     "ref": "U1",
     "pin": "12",
-    "net": "TM_DIO"
+    "net": "RS485_DE"
   },
   {
     "ref": "U1",
-    "pin": "19",
+    "pin": "13",
+    "net": "UART_TX"
+  },
+  {
+    "ref": "U1",
+    "pin": "14",
+    "net": "UART_RX"
+  },
+  {
+    "ref": "U1",
+    "pin": "35",
     "net": "SWDIO"
   },
   {
     "ref": "U1",
-    "pin": "20",
+    "pin": "36",
     "net": "SWCLK"
   },
   {
@@ -448,16 +403,6 @@
     "ref": "CNRST",
     "pin": "2",
     "net": "GND"
-  },
-  {
-    "ref": "RBOT0",
-    "pin": "1",
-    "net": "GND"
-  },
-  {
-    "ref": "RBOT0",
-    "pin": "2",
-    "net": "BOOT0"
   },
   {
     "ref": "J2",
@@ -660,839 +605,789 @@
     "net": "GND"
   },
   {
-    "ref": "R33A",
+    "ref": "U6",
     "pin": "1",
-    "net": "TM_CLK"
+    "net": "GND"
   },
   {
-    "ref": "R33A",
-    "pin": "2",
-    "net": "TM1638_CLK"
+    "ref": "U6",
+    "pin": "28",
+    "net": "+5V_LED"
   },
   {
-    "ref": "R33B",
+    "ref": "CLED",
     "pin": "1",
-    "net": "TM_STB"
+    "net": "+5V_LED"
   },
   {
-    "ref": "R33B",
+    "ref": "CLED",
     "pin": "2",
-    "net": "TM1638_STB"
+    "net": "GND"
   },
   {
-    "ref": "R33C",
+    "ref": "U6",
+    "pin": "26",
+    "net": "SCL"
+  },
+  {
+    "ref": "U6",
+    "pin": "27",
+    "net": "SDA"
+  },
+  {
+    "ref": "U1",
+    "pin": "29",
+    "net": "SCL"
+  },
+  {
+    "ref": "U1",
+    "pin": "32",
+    "net": "SDA"
+  },
+  {
+    "ref": "RSCL",
     "pin": "1",
-    "net": "TM_DIO"
+    "net": "SCL"
   },
   {
-    "ref": "R33C",
+    "ref": "RSCL",
     "pin": "2",
-    "net": "TM1638_DIO"
+    "net": "+5V_LED"
   },
   {
-    "ref": "RPU",
+    "ref": "RSDA",
+    "pin": "1",
+    "net": "SDA"
+  },
+  {
+    "ref": "RSDA",
+    "pin": "2",
+    "net": "+5V_LED"
+  },
+  {
+    "ref": "U6",
+    "pin": "2",
+    "net": "GRID_1"
+  },
+  {
+    "ref": "U6",
+    "pin": "3",
+    "net": "GRID_2"
+  },
+  {
+    "ref": "U6",
+    "pin": "4",
+    "net": "GRID_3"
+  },
+  {
+    "ref": "U6",
+    "pin": "5",
+    "net": "GRID_4"
+  },
+  {
+    "ref": "U6",
+    "pin": "6",
+    "net": "GRID_5"
+  },
+  {
+    "ref": "U6",
+    "pin": "7",
+    "net": "GRID_6"
+  },
+  {
+    "ref": "U6",
+    "pin": "8",
+    "net": "GRID_7"
+  },
+  {
+    "ref": "U6",
+    "pin": "9",
+    "net": "GRID_8"
+  },
+  {
+    "ref": "U6",
+    "pin": "25",
+    "net": "SEG1"
+  },
+  {
+    "ref": "U6",
+    "pin": "24",
+    "net": "SEG2"
+  },
+  {
+    "ref": "U6",
+    "pin": "23",
+    "net": "SEG3"
+  },
+  {
+    "ref": "U6",
+    "pin": "22",
+    "net": "SEG4"
+  },
+  {
+    "ref": "U6",
+    "pin": "21",
+    "net": "SEG5"
+  },
+  {
+    "ref": "U6",
+    "pin": "20",
+    "net": "SEG6"
+  },
+  {
+    "ref": "U6",
+    "pin": "19",
+    "net": "SEG7"
+  },
+  {
+    "ref": "U6",
+    "pin": "18",
+    "net": "SEG8"
+  },
+  {
+    "ref": "U6",
+    "pin": "17",
+    "net": "LED_ROW"
+  },
+  {
+    "ref": "DS1",
+    "pin": "7",
+    "net": "SEG1"
+  },
+  {
+    "ref": "DS1",
+    "pin": "6",
+    "net": "SEG2"
+  },
+  {
+    "ref": "DS1",
+    "pin": "4",
+    "net": "SEG3"
+  },
+  {
+    "ref": "DS1",
+    "pin": "2",
+    "net": "SEG4"
+  },
+  {
+    "ref": "DS1",
+    "pin": "1",
+    "net": "SEG5"
+  },
+  {
+    "ref": "DS1",
+    "pin": "9",
+    "net": "SEG6"
+  },
+  {
+    "ref": "DS1",
+    "pin": "10",
+    "net": "SEG7"
+  },
+  {
+    "ref": "DS1",
+    "pin": "5",
+    "net": "SEG8"
+  },
+  {
+    "ref": "DS1",
+    "pin": "3",
+    "net": "GRID_1"
+  },
+  {
+    "ref": "DS1",
+    "pin": "8",
+    "net": "GRID_1"
+  },
+  {
+    "ref": "DS2",
+    "pin": "7",
+    "net": "SEG1"
+  },
+  {
+    "ref": "DS2",
+    "pin": "6",
+    "net": "SEG2"
+  },
+  {
+    "ref": "DS2",
+    "pin": "4",
+    "net": "SEG3"
+  },
+  {
+    "ref": "DS2",
+    "pin": "2",
+    "net": "SEG4"
+  },
+  {
+    "ref": "DS2",
+    "pin": "1",
+    "net": "SEG5"
+  },
+  {
+    "ref": "DS2",
+    "pin": "9",
+    "net": "SEG6"
+  },
+  {
+    "ref": "DS2",
+    "pin": "10",
+    "net": "SEG7"
+  },
+  {
+    "ref": "DS2",
+    "pin": "5",
+    "net": "SEG8"
+  },
+  {
+    "ref": "DS2",
+    "pin": "3",
+    "net": "GRID_2"
+  },
+  {
+    "ref": "DS2",
+    "pin": "8",
+    "net": "GRID_2"
+  },
+  {
+    "ref": "DS3",
+    "pin": "7",
+    "net": "SEG1"
+  },
+  {
+    "ref": "DS3",
+    "pin": "6",
+    "net": "SEG2"
+  },
+  {
+    "ref": "DS3",
+    "pin": "4",
+    "net": "SEG3"
+  },
+  {
+    "ref": "DS3",
+    "pin": "2",
+    "net": "SEG4"
+  },
+  {
+    "ref": "DS3",
+    "pin": "1",
+    "net": "SEG5"
+  },
+  {
+    "ref": "DS3",
+    "pin": "9",
+    "net": "SEG6"
+  },
+  {
+    "ref": "DS3",
+    "pin": "10",
+    "net": "SEG7"
+  },
+  {
+    "ref": "DS3",
+    "pin": "5",
+    "net": "SEG8"
+  },
+  {
+    "ref": "DS3",
+    "pin": "3",
+    "net": "GRID_3"
+  },
+  {
+    "ref": "DS3",
+    "pin": "8",
+    "net": "GRID_3"
+  },
+  {
+    "ref": "DS4",
+    "pin": "7",
+    "net": "SEG1"
+  },
+  {
+    "ref": "DS4",
+    "pin": "6",
+    "net": "SEG2"
+  },
+  {
+    "ref": "DS4",
+    "pin": "4",
+    "net": "SEG3"
+  },
+  {
+    "ref": "DS4",
+    "pin": "2",
+    "net": "SEG4"
+  },
+  {
+    "ref": "DS4",
+    "pin": "1",
+    "net": "SEG5"
+  },
+  {
+    "ref": "DS4",
+    "pin": "9",
+    "net": "SEG6"
+  },
+  {
+    "ref": "DS4",
+    "pin": "10",
+    "net": "SEG7"
+  },
+  {
+    "ref": "DS4",
+    "pin": "5",
+    "net": "SEG8"
+  },
+  {
+    "ref": "DS4",
+    "pin": "3",
+    "net": "GRID_4"
+  },
+  {
+    "ref": "DS4",
+    "pin": "8",
+    "net": "GRID_4"
+  },
+  {
+    "ref": "DS5",
+    "pin": "7",
+    "net": "SEG1"
+  },
+  {
+    "ref": "DS5",
+    "pin": "6",
+    "net": "SEG2"
+  },
+  {
+    "ref": "DS5",
+    "pin": "4",
+    "net": "SEG3"
+  },
+  {
+    "ref": "DS5",
+    "pin": "2",
+    "net": "SEG4"
+  },
+  {
+    "ref": "DS5",
+    "pin": "1",
+    "net": "SEG5"
+  },
+  {
+    "ref": "DS5",
+    "pin": "9",
+    "net": "SEG6"
+  },
+  {
+    "ref": "DS5",
+    "pin": "10",
+    "net": "SEG7"
+  },
+  {
+    "ref": "DS5",
+    "pin": "5",
+    "net": "SEG8"
+  },
+  {
+    "ref": "DS5",
+    "pin": "3",
+    "net": "GRID_5"
+  },
+  {
+    "ref": "DS5",
+    "pin": "8",
+    "net": "GRID_5"
+  },
+  {
+    "ref": "DS6",
+    "pin": "7",
+    "net": "SEG1"
+  },
+  {
+    "ref": "DS6",
+    "pin": "6",
+    "net": "SEG2"
+  },
+  {
+    "ref": "DS6",
+    "pin": "4",
+    "net": "SEG3"
+  },
+  {
+    "ref": "DS6",
+    "pin": "2",
+    "net": "SEG4"
+  },
+  {
+    "ref": "DS6",
+    "pin": "1",
+    "net": "SEG5"
+  },
+  {
+    "ref": "DS6",
+    "pin": "9",
+    "net": "SEG6"
+  },
+  {
+    "ref": "DS6",
+    "pin": "10",
+    "net": "SEG7"
+  },
+  {
+    "ref": "DS6",
+    "pin": "5",
+    "net": "SEG8"
+  },
+  {
+    "ref": "DS6",
+    "pin": "3",
+    "net": "GRID_6"
+  },
+  {
+    "ref": "DS6",
+    "pin": "8",
+    "net": "GRID_6"
+  },
+  {
+    "ref": "DS7",
+    "pin": "7",
+    "net": "SEG1"
+  },
+  {
+    "ref": "DS7",
+    "pin": "6",
+    "net": "SEG2"
+  },
+  {
+    "ref": "DS7",
+    "pin": "4",
+    "net": "SEG3"
+  },
+  {
+    "ref": "DS7",
+    "pin": "2",
+    "net": "SEG4"
+  },
+  {
+    "ref": "DS7",
+    "pin": "1",
+    "net": "SEG5"
+  },
+  {
+    "ref": "DS7",
+    "pin": "9",
+    "net": "SEG6"
+  },
+  {
+    "ref": "DS7",
+    "pin": "10",
+    "net": "SEG7"
+  },
+  {
+    "ref": "DS7",
+    "pin": "5",
+    "net": "SEG8"
+  },
+  {
+    "ref": "DS7",
+    "pin": "3",
+    "net": "GRID_7"
+  },
+  {
+    "ref": "DS7",
+    "pin": "8",
+    "net": "GRID_7"
+  },
+  {
+    "ref": "DS8",
+    "pin": "7",
+    "net": "SEG1"
+  },
+  {
+    "ref": "DS8",
+    "pin": "6",
+    "net": "SEG2"
+  },
+  {
+    "ref": "DS8",
+    "pin": "4",
+    "net": "SEG3"
+  },
+  {
+    "ref": "DS8",
+    "pin": "2",
+    "net": "SEG4"
+  },
+  {
+    "ref": "DS8",
+    "pin": "1",
+    "net": "SEG5"
+  },
+  {
+    "ref": "DS8",
+    "pin": "9",
+    "net": "SEG6"
+  },
+  {
+    "ref": "DS8",
+    "pin": "10",
+    "net": "SEG7"
+  },
+  {
+    "ref": "DS8",
+    "pin": "5",
+    "net": "SEG8"
+  },
+  {
+    "ref": "DS8",
+    "pin": "3",
+    "net": "GRID_8"
+  },
+  {
+    "ref": "DS8",
+    "pin": "8",
+    "net": "GRID_8"
+  },
+  {
+    "ref": "SW1",
+    "pin": "1",
+    "net": "KEY_R1"
+  },
+  {
+    "ref": "SW1",
+    "pin": "2",
+    "net": "KEY_C1"
+  },
+  {
+    "ref": "SW2",
+    "pin": "1",
+    "net": "KEY_R1"
+  },
+  {
+    "ref": "SW2",
+    "pin": "2",
+    "net": "KEY_C2"
+  },
+  {
+    "ref": "SW3",
+    "pin": "1",
+    "net": "KEY_R1"
+  },
+  {
+    "ref": "SW3",
+    "pin": "2",
+    "net": "KEY_C3"
+  },
+  {
+    "ref": "SW4",
+    "pin": "1",
+    "net": "KEY_R1"
+  },
+  {
+    "ref": "SW4",
+    "pin": "2",
+    "net": "KEY_C4"
+  },
+  {
+    "ref": "SW5",
+    "pin": "1",
+    "net": "KEY_R2"
+  },
+  {
+    "ref": "SW5",
+    "pin": "2",
+    "net": "KEY_C1"
+  },
+  {
+    "ref": "SW6",
+    "pin": "1",
+    "net": "KEY_R2"
+  },
+  {
+    "ref": "SW6",
+    "pin": "2",
+    "net": "KEY_C2"
+  },
+  {
+    "ref": "SW7",
+    "pin": "1",
+    "net": "KEY_R2"
+  },
+  {
+    "ref": "SW7",
+    "pin": "2",
+    "net": "KEY_C3"
+  },
+  {
+    "ref": "SW8",
+    "pin": "1",
+    "net": "KEY_R2"
+  },
+  {
+    "ref": "SW8",
+    "pin": "2",
+    "net": "KEY_C4"
+  },
+  {
+    "ref": "SW9",
+    "pin": "1",
+    "net": "KEY_R3"
+  },
+  {
+    "ref": "SW9",
+    "pin": "2",
+    "net": "KEY_C1"
+  },
+  {
+    "ref": "SW10",
+    "pin": "1",
+    "net": "KEY_R3"
+  },
+  {
+    "ref": "SW10",
+    "pin": "2",
+    "net": "KEY_C2"
+  },
+  {
+    "ref": "SW11",
+    "pin": "1",
+    "net": "KEY_R3"
+  },
+  {
+    "ref": "SW11",
+    "pin": "2",
+    "net": "KEY_C3"
+  },
+  {
+    "ref": "SW12",
+    "pin": "1",
+    "net": "KEY_R3"
+  },
+  {
+    "ref": "SW12",
+    "pin": "2",
+    "net": "KEY_C4"
+  },
+  {
+    "ref": "SW13",
+    "pin": "1",
+    "net": "KEY_R4"
+  },
+  {
+    "ref": "SW13",
+    "pin": "2",
+    "net": "KEY_C1"
+  },
+  {
+    "ref": "SW14",
+    "pin": "1",
+    "net": "KEY_R4"
+  },
+  {
+    "ref": "SW14",
+    "pin": "2",
+    "net": "KEY_C2"
+  },
+  {
+    "ref": "SW15",
+    "pin": "1",
+    "net": "KEY_R4"
+  },
+  {
+    "ref": "SW15",
+    "pin": "2",
+    "net": "KEY_C3"
+  },
+  {
+    "ref": "SW16",
+    "pin": "1",
+    "net": "KEY_R4"
+  },
+  {
+    "ref": "SW16",
+    "pin": "2",
+    "net": "KEY_C4"
+  },
+  {
+    "ref": "U1",
+    "pin": "42",
+    "net": "ROW1"
+  },
+  {
+    "ref": "RK1",
+    "pin": "1",
+    "net": "ROW1"
+  },
+  {
+    "ref": "RK1",
+    "pin": "2",
+    "net": "KEY_R1"
+  },
+  {
+    "ref": "U1",
+    "pin": "43",
+    "net": "ROW2"
+  },
+  {
+    "ref": "RK2",
+    "pin": "1",
+    "net": "ROW2"
+  },
+  {
+    "ref": "RK2",
+    "pin": "2",
+    "net": "KEY_R2"
+  },
+  {
+    "ref": "U1",
+    "pin": "44",
+    "net": "ROW3"
+  },
+  {
+    "ref": "RK3",
+    "pin": "1",
+    "net": "ROW3"
+  },
+  {
+    "ref": "RK3",
+    "pin": "2",
+    "net": "KEY_R3"
+  },
+  {
+    "ref": "U1",
+    "pin": "45",
+    "net": "ROW4"
+  },
+  {
+    "ref": "RK4",
+    "pin": "1",
+    "net": "ROW4"
+  },
+  {
+    "ref": "RK4",
+    "pin": "2",
+    "net": "KEY_R4"
+  },
+  {
+    "ref": "U1",
+    "pin": "46",
+    "net": "COL1"
+  },
+  {
+    "ref": "RPK1",
     "pin": "1",
     "net": "+3V3"
   },
   {
-    "ref": "RPU",
+    "ref": "RPK1",
     "pin": "2",
-    "net": "TM1638_DIO"
-  },
-  {
-    "ref": "U2",
-    "pin": "17",
-    "net": "TM1638_CLK"
-  },
-  {
-    "ref": "U2",
-    "pin": "16",
-    "net": "TM1638_STB"
-  },
-  {
-    "ref": "U2",
-    "pin": "15",
-    "net": "TM1638_DIO"
-  },
-  {
-    "ref": "U2",
-    "pin": "9",
-    "net": "+5V_LED"
-  },
-  {
-    "ref": "U2",
-    "pin": "GND",
-    "net": "GND"
-  },
-  {
-    "ref": "CTM1",
-    "pin": "1",
-    "net": "+5V_LED"
-  },
-  {
-    "ref": "CTM1",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "CTM2",
-    "pin": "1",
-    "net": "+5V_LED"
-  },
-  {
-    "ref": "CTM2",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U2",
-    "pin": "28",
-    "net": "SEG1"
-  },
-  {
-    "ref": "U2",
-    "pin": "27",
-    "net": "SEG2"
-  },
-  {
-    "ref": "U2",
-    "pin": "26",
-    "net": "SEG3"
-  },
-  {
-    "ref": "U2",
-    "pin": "14",
-    "net": "SEG4"
-  },
-  {
-    "ref": "U2",
-    "pin": "13",
-    "net": "SEG5"
-  },
-  {
-    "ref": "U2",
-    "pin": "12",
-    "net": "SEG6"
-  },
-  {
-    "ref": "U2",
-    "pin": "11",
-    "net": "SEG7"
-  },
-  {
-    "ref": "U2",
-    "pin": "10",
-    "net": "SEG8"
-  },
-  {
-    "ref": "DS1",
-    "pin": "7",
-    "net": "SEG1"
-  },
-  {
-    "ref": "DS1",
-    "pin": "6",
-    "net": "SEG2"
-  },
-  {
-    "ref": "DS1",
-    "pin": "4",
-    "net": "SEG3"
-  },
-  {
-    "ref": "DS1",
-    "pin": "2",
-    "net": "SEG4"
-  },
-  {
-    "ref": "DS1",
-    "pin": "1",
-    "net": "SEG5"
-  },
-  {
-    "ref": "DS1",
-    "pin": "9",
-    "net": "SEG6"
-  },
-  {
-    "ref": "DS1",
-    "pin": "10",
-    "net": "SEG7"
-  },
-  {
-    "ref": "DS1",
-    "pin": "5",
-    "net": "SEG8"
-  },
-  {
-    "ref": "U2",
-    "pin": "25",
-    "net": "GRID_TOP_1"
-  },
-  {
-    "ref": "DS1",
-    "pin": "3",
-    "net": "GRID_TOP_1"
-  },
-  {
-    "ref": "DS1",
-    "pin": "8",
-    "net": "GRID_TOP_1"
-  },
-  {
-    "ref": "DS2",
-    "pin": "7",
-    "net": "SEG1"
-  },
-  {
-    "ref": "DS2",
-    "pin": "6",
-    "net": "SEG2"
-  },
-  {
-    "ref": "DS2",
-    "pin": "4",
-    "net": "SEG3"
-  },
-  {
-    "ref": "DS2",
-    "pin": "2",
-    "net": "SEG4"
-  },
-  {
-    "ref": "DS2",
-    "pin": "1",
-    "net": "SEG5"
-  },
-  {
-    "ref": "DS2",
-    "pin": "9",
-    "net": "SEG6"
-  },
-  {
-    "ref": "DS2",
-    "pin": "10",
-    "net": "SEG7"
-  },
-  {
-    "ref": "DS2",
-    "pin": "5",
-    "net": "SEG8"
-  },
-  {
-    "ref": "U2",
-    "pin": "24",
-    "net": "GRID_TOP_2"
-  },
-  {
-    "ref": "DS2",
-    "pin": "3",
-    "net": "GRID_TOP_2"
-  },
-  {
-    "ref": "DS2",
-    "pin": "8",
-    "net": "GRID_TOP_2"
-  },
-  {
-    "ref": "DS3",
-    "pin": "7",
-    "net": "SEG1"
-  },
-  {
-    "ref": "DS3",
-    "pin": "6",
-    "net": "SEG2"
-  },
-  {
-    "ref": "DS3",
-    "pin": "4",
-    "net": "SEG3"
-  },
-  {
-    "ref": "DS3",
-    "pin": "2",
-    "net": "SEG4"
-  },
-  {
-    "ref": "DS3",
-    "pin": "1",
-    "net": "SEG5"
-  },
-  {
-    "ref": "DS3",
-    "pin": "9",
-    "net": "SEG6"
-  },
-  {
-    "ref": "DS3",
-    "pin": "10",
-    "net": "SEG7"
-  },
-  {
-    "ref": "DS3",
-    "pin": "5",
-    "net": "SEG8"
-  },
-  {
-    "ref": "U2",
-    "pin": "23",
-    "net": "GRID_TOP_3"
-  },
-  {
-    "ref": "DS3",
-    "pin": "3",
-    "net": "GRID_TOP_3"
-  },
-  {
-    "ref": "DS3",
-    "pin": "8",
-    "net": "GRID_TOP_3"
-  },
-  {
-    "ref": "DS4",
-    "pin": "7",
-    "net": "SEG1"
-  },
-  {
-    "ref": "DS4",
-    "pin": "6",
-    "net": "SEG2"
-  },
-  {
-    "ref": "DS4",
-    "pin": "4",
-    "net": "SEG3"
-  },
-  {
-    "ref": "DS4",
-    "pin": "2",
-    "net": "SEG4"
-  },
-  {
-    "ref": "DS4",
-    "pin": "1",
-    "net": "SEG5"
-  },
-  {
-    "ref": "DS4",
-    "pin": "9",
-    "net": "SEG6"
-  },
-  {
-    "ref": "DS4",
-    "pin": "10",
-    "net": "SEG7"
-  },
-  {
-    "ref": "DS4",
-    "pin": "5",
-    "net": "SEG8"
-  },
-  {
-    "ref": "U2",
-    "pin": "22",
-    "net": "GRID_TOP_4"
-  },
-  {
-    "ref": "DS4",
-    "pin": "3",
-    "net": "GRID_TOP_4"
-  },
-  {
-    "ref": "DS4",
-    "pin": "8",
-    "net": "GRID_TOP_4"
-  },
-  {
-    "ref": "DS5",
-    "pin": "7",
-    "net": "SEG1"
-  },
-  {
-    "ref": "DS5",
-    "pin": "6",
-    "net": "SEG2"
-  },
-  {
-    "ref": "DS5",
-    "pin": "4",
-    "net": "SEG3"
-  },
-  {
-    "ref": "DS5",
-    "pin": "2",
-    "net": "SEG4"
-  },
-  {
-    "ref": "DS5",
-    "pin": "1",
-    "net": "SEG5"
-  },
-  {
-    "ref": "DS5",
-    "pin": "9",
-    "net": "SEG6"
-  },
-  {
-    "ref": "DS5",
-    "pin": "10",
-    "net": "SEG7"
-  },
-  {
-    "ref": "DS5",
-    "pin": "5",
-    "net": "SEG8"
-  },
-  {
-    "ref": "U2",
-    "pin": "21",
-    "net": "GRID_BOT_1"
-  },
-  {
-    "ref": "DS5",
-    "pin": "3",
-    "net": "GRID_BOT_1"
-  },
-  {
-    "ref": "DS5",
-    "pin": "8",
-    "net": "GRID_BOT_1"
-  },
-  {
-    "ref": "DS6",
-    "pin": "7",
-    "net": "SEG1"
-  },
-  {
-    "ref": "DS6",
-    "pin": "6",
-    "net": "SEG2"
-  },
-  {
-    "ref": "DS6",
-    "pin": "4",
-    "net": "SEG3"
-  },
-  {
-    "ref": "DS6",
-    "pin": "2",
-    "net": "SEG4"
-  },
-  {
-    "ref": "DS6",
-    "pin": "1",
-    "net": "SEG5"
-  },
-  {
-    "ref": "DS6",
-    "pin": "9",
-    "net": "SEG6"
-  },
-  {
-    "ref": "DS6",
-    "pin": "10",
-    "net": "SEG7"
-  },
-  {
-    "ref": "DS6",
-    "pin": "5",
-    "net": "SEG8"
-  },
-  {
-    "ref": "U2",
-    "pin": "20",
-    "net": "GRID_BOT_2"
-  },
-  {
-    "ref": "DS6",
-    "pin": "3",
-    "net": "GRID_BOT_2"
-  },
-  {
-    "ref": "DS6",
-    "pin": "8",
-    "net": "GRID_BOT_2"
-  },
-  {
-    "ref": "DS7",
-    "pin": "7",
-    "net": "SEG1"
-  },
-  {
-    "ref": "DS7",
-    "pin": "6",
-    "net": "SEG2"
-  },
-  {
-    "ref": "DS7",
-    "pin": "4",
-    "net": "SEG3"
-  },
-  {
-    "ref": "DS7",
-    "pin": "2",
-    "net": "SEG4"
-  },
-  {
-    "ref": "DS7",
-    "pin": "1",
-    "net": "SEG5"
-  },
-  {
-    "ref": "DS7",
-    "pin": "9",
-    "net": "SEG6"
-  },
-  {
-    "ref": "DS7",
-    "pin": "10",
-    "net": "SEG7"
-  },
-  {
-    "ref": "DS7",
-    "pin": "5",
-    "net": "SEG8"
-  },
-  {
-    "ref": "U2",
-    "pin": "19",
-    "net": "GRID_BOT_3"
-  },
-  {
-    "ref": "DS7",
-    "pin": "3",
-    "net": "GRID_BOT_3"
-  },
-  {
-    "ref": "DS7",
-    "pin": "8",
-    "net": "GRID_BOT_3"
-  },
-  {
-    "ref": "DS8",
-    "pin": "7",
-    "net": "SEG1"
-  },
-  {
-    "ref": "DS8",
-    "pin": "6",
-    "net": "SEG2"
-  },
-  {
-    "ref": "DS8",
-    "pin": "4",
-    "net": "SEG3"
-  },
-  {
-    "ref": "DS8",
-    "pin": "2",
-    "net": "SEG4"
-  },
-  {
-    "ref": "DS8",
-    "pin": "1",
-    "net": "SEG5"
-  },
-  {
-    "ref": "DS8",
-    "pin": "9",
-    "net": "SEG6"
-  },
-  {
-    "ref": "DS8",
-    "pin": "10",
-    "net": "SEG7"
-  },
-  {
-    "ref": "DS8",
-    "pin": "5",
-    "net": "SEG8"
-  },
-  {
-    "ref": "U2",
-    "pin": "18",
-    "net": "GRID_BOT_4"
-  },
-  {
-    "ref": "DS8",
-    "pin": "3",
-    "net": "GRID_BOT_4"
-  },
-  {
-    "ref": "DS8",
-    "pin": "8",
-    "net": "GRID_BOT_4"
-  },
-  {
-    "ref": "SW1",
-    "pin": "1",
-    "net": "KEY_R1"
-  },
-  {
-    "ref": "SW1",
-    "pin": "2",
-    "net": "KEY_C1"
-  },
-  {
-    "ref": "SW2",
-    "pin": "1",
-    "net": "KEY_R1"
-  },
-  {
-    "ref": "SW2",
-    "pin": "2",
-    "net": "KEY_C2"
-  },
-  {
-    "ref": "SW3",
-    "pin": "1",
-    "net": "KEY_R1"
-  },
-  {
-    "ref": "SW3",
-    "pin": "2",
-    "net": "KEY_C3"
-  },
-  {
-    "ref": "SW4",
-    "pin": "1",
-    "net": "KEY_R1"
-  },
-  {
-    "ref": "SW4",
-    "pin": "2",
-    "net": "KEY_C4"
-  },
-  {
-    "ref": "SW5",
-    "pin": "1",
-    "net": "KEY_R2"
-  },
-  {
-    "ref": "SW5",
-    "pin": "2",
-    "net": "KEY_C1"
-  },
-  {
-    "ref": "SW6",
-    "pin": "1",
-    "net": "KEY_R2"
-  },
-  {
-    "ref": "SW6",
-    "pin": "2",
-    "net": "KEY_C2"
-  },
-  {
-    "ref": "SW7",
-    "pin": "1",
-    "net": "KEY_R2"
-  },
-  {
-    "ref": "SW7",
-    "pin": "2",
-    "net": "KEY_C3"
-  },
-  {
-    "ref": "SW8",
-    "pin": "1",
-    "net": "KEY_R2"
-  },
-  {
-    "ref": "SW8",
-    "pin": "2",
-    "net": "KEY_C4"
-  },
-  {
-    "ref": "SW9",
-    "pin": "1",
-    "net": "KEY_R3"
-  },
-  {
-    "ref": "SW9",
-    "pin": "2",
-    "net": "KEY_C1"
-  },
-  {
-    "ref": "SW10",
-    "pin": "1",
-    "net": "KEY_R3"
-  },
-  {
-    "ref": "SW10",
-    "pin": "2",
-    "net": "KEY_C2"
-  },
-  {
-    "ref": "SW11",
-    "pin": "1",
-    "net": "KEY_R3"
-  },
-  {
-    "ref": "SW11",
-    "pin": "2",
-    "net": "KEY_C3"
-  },
-  {
-    "ref": "SW12",
-    "pin": "1",
-    "net": "KEY_R3"
-  },
-  {
-    "ref": "SW12",
-    "pin": "2",
-    "net": "KEY_C4"
-  },
-  {
-    "ref": "SW13",
-    "pin": "1",
-    "net": "KEY_R4"
-  },
-  {
-    "ref": "SW13",
-    "pin": "2",
-    "net": "KEY_C1"
-  },
-  {
-    "ref": "SW14",
-    "pin": "1",
-    "net": "KEY_R4"
-  },
-  {
-    "ref": "SW14",
-    "pin": "2",
-    "net": "KEY_C2"
-  },
-  {
-    "ref": "SW15",
-    "pin": "1",
-    "net": "KEY_R4"
-  },
-  {
-    "ref": "SW15",
-    "pin": "2",
-    "net": "KEY_C3"
-  },
-  {
-    "ref": "SW16",
-    "pin": "1",
-    "net": "KEY_R4"
-  },
-  {
-    "ref": "SW16",
-    "pin": "2",
-    "net": "KEY_C4"
-  },
-  {
-    "ref": "U2",
-    "pin": "1",
-    "net": "TM_KS1"
-  },
-  {
-    "ref": "RK1",
-    "pin": "1",
-    "net": "TM_KS1"
-  },
-  {
-    "ref": "RK1",
-    "pin": "2",
-    "net": "KEY_R1"
-  },
-  {
-    "ref": "CK1",
-    "pin": "1",
-    "net": "KEY_R1"
-  },
-  {
-    "ref": "CK1",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U2",
-    "pin": "2",
-    "net": "TM_KS2"
-  },
-  {
-    "ref": "RK2",
-    "pin": "1",
-    "net": "TM_KS2"
-  },
-  {
-    "ref": "RK2",
-    "pin": "2",
-    "net": "KEY_R2"
-  },
-  {
-    "ref": "CK2",
-    "pin": "1",
-    "net": "KEY_R2"
-  },
-  {
-    "ref": "CK2",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U2",
-    "pin": "3",
-    "net": "TM_KS3"
-  },
-  {
-    "ref": "RK3",
-    "pin": "1",
-    "net": "TM_KS3"
-  },
-  {
-    "ref": "RK3",
-    "pin": "2",
-    "net": "KEY_R3"
-  },
-  {
-    "ref": "CK3",
-    "pin": "1",
-    "net": "KEY_R3"
-  },
-  {
-    "ref": "CK3",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U2",
-    "pin": "4",
-    "net": "TM_KS4"
-  },
-  {
-    "ref": "RK4",
-    "pin": "1",
-    "net": "TM_KS4"
-  },
-  {
-    "ref": "RK4",
-    "pin": "2",
-    "net": "KEY_R4"
-  },
-  {
-    "ref": "CK4",
-    "pin": "1",
-    "net": "KEY_R4"
-  },
-  {
-    "ref": "CK4",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U2",
-    "pin": "5",
-    "net": "TM_KS5"
+    "net": "COL1"
   },
   {
     "ref": "RC1",
     "pin": "1",
-    "net": "TM_KS5"
+    "net": "COL1"
   },
   {
     "ref": "RC1",
@@ -1500,24 +1395,24 @@
     "net": "KEY_C1"
   },
   {
-    "ref": "CC1",
+    "ref": "U1",
+    "pin": "47",
+    "net": "COL2"
+  },
+  {
+    "ref": "RPK2",
     "pin": "1",
-    "net": "KEY_C1"
+    "net": "+3V3"
   },
   {
-    "ref": "CC1",
+    "ref": "RPK2",
     "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U2",
-    "pin": "6",
-    "net": "TM_KS6"
+    "net": "COL2"
   },
   {
     "ref": "RC2",
     "pin": "1",
-    "net": "TM_KS6"
+    "net": "COL2"
   },
   {
     "ref": "RC2",
@@ -1525,24 +1420,24 @@
     "net": "KEY_C2"
   },
   {
-    "ref": "CC2",
+    "ref": "U1",
+    "pin": "48",
+    "net": "COL3"
+  },
+  {
+    "ref": "RPK3",
     "pin": "1",
-    "net": "KEY_C2"
+    "net": "+3V3"
   },
   {
-    "ref": "CC2",
+    "ref": "RPK3",
     "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U2",
-    "pin": "7",
-    "net": "TM_KS7"
+    "net": "COL3"
   },
   {
     "ref": "RC3",
     "pin": "1",
-    "net": "TM_KS7"
+    "net": "COL3"
   },
   {
     "ref": "RC3",
@@ -1550,24 +1445,24 @@
     "net": "KEY_C3"
   },
   {
-    "ref": "CC3",
+    "ref": "U1",
+    "pin": "41",
+    "net": "COL4"
+  },
+  {
+    "ref": "RPK4",
     "pin": "1",
-    "net": "KEY_C3"
+    "net": "+3V3"
   },
   {
-    "ref": "CC3",
+    "ref": "RPK4",
     "pin": "2",
-    "net": "GND"
-  },
-  {
-    "ref": "U2",
-    "pin": "8",
-    "net": "TM_KS8"
+    "net": "COL4"
   },
   {
     "ref": "RC4",
     "pin": "1",
-    "net": "TM_KS8"
+    "net": "COL4"
   },
   {
     "ref": "RC4",
@@ -1575,173 +1470,83 @@
     "net": "KEY_C4"
   },
   {
-    "ref": "CC4",
-    "pin": "1",
-    "net": "KEY_C4"
-  },
-  {
-    "ref": "CC4",
-    "pin": "2",
-    "net": "GND"
-  },
-  {
     "ref": "D10",
     "pin": "1",
-    "net": "+5V_LED"
+    "net": "LED_ROW"
   },
   {
     "ref": "D10",
     "pin": "2",
-    "net": "STAT_LED_1"
-  },
-  {
-    "ref": "RLED1",
-    "pin": "1",
-    "net": "STAT_LED_1"
-  },
-  {
-    "ref": "RLED1",
-    "pin": "2",
-    "net": "TM_LED_1"
+    "net": "GRID_1"
   },
   {
     "ref": "D11",
     "pin": "1",
-    "net": "+5V_LED"
+    "net": "LED_ROW"
   },
   {
     "ref": "D11",
     "pin": "2",
-    "net": "STAT_LED_2"
-  },
-  {
-    "ref": "RLED2",
-    "pin": "1",
-    "net": "STAT_LED_2"
-  },
-  {
-    "ref": "RLED2",
-    "pin": "2",
-    "net": "TM_LED_2"
+    "net": "GRID_2"
   },
   {
     "ref": "D12",
     "pin": "1",
-    "net": "+5V_LED"
+    "net": "LED_ROW"
   },
   {
     "ref": "D12",
     "pin": "2",
-    "net": "STAT_LED_3"
-  },
-  {
-    "ref": "RLED3",
-    "pin": "1",
-    "net": "STAT_LED_3"
-  },
-  {
-    "ref": "RLED3",
-    "pin": "2",
-    "net": "TM_LED_3"
+    "net": "GRID_3"
   },
   {
     "ref": "D13",
     "pin": "1",
-    "net": "+5V_LED"
+    "net": "LED_ROW"
   },
   {
     "ref": "D13",
     "pin": "2",
-    "net": "STAT_LED_4"
-  },
-  {
-    "ref": "RLED4",
-    "pin": "1",
-    "net": "STAT_LED_4"
-  },
-  {
-    "ref": "RLED4",
-    "pin": "2",
-    "net": "TM_LED_4"
+    "net": "GRID_4"
   },
   {
     "ref": "D14",
     "pin": "1",
-    "net": "+5V_LED"
+    "net": "LED_ROW"
   },
   {
     "ref": "D14",
     "pin": "2",
-    "net": "STAT_LED_5"
-  },
-  {
-    "ref": "RLED5",
-    "pin": "1",
-    "net": "STAT_LED_5"
-  },
-  {
-    "ref": "RLED5",
-    "pin": "2",
-    "net": "TM_LED_5"
+    "net": "GRID_5"
   },
   {
     "ref": "D15",
     "pin": "1",
-    "net": "+5V_LED"
+    "net": "LED_ROW"
   },
   {
     "ref": "D15",
     "pin": "2",
-    "net": "STAT_LED_6"
-  },
-  {
-    "ref": "RLED6",
-    "pin": "1",
-    "net": "STAT_LED_6"
-  },
-  {
-    "ref": "RLED6",
-    "pin": "2",
-    "net": "TM_LED_6"
+    "net": "GRID_6"
   },
   {
     "ref": "D16",
     "pin": "1",
-    "net": "+5V_LED"
+    "net": "LED_ROW"
   },
   {
     "ref": "D16",
     "pin": "2",
-    "net": "STAT_LED_7"
-  },
-  {
-    "ref": "RLED7",
-    "pin": "1",
-    "net": "STAT_LED_7"
-  },
-  {
-    "ref": "RLED7",
-    "pin": "2",
-    "net": "TM_LED_7"
+    "net": "GRID_7"
   },
   {
     "ref": "D17",
     "pin": "1",
-    "net": "+5V_LED"
+    "net": "LED_ROW"
   },
   {
     "ref": "D17",
     "pin": "2",
-    "net": "STAT_LED_8"
-  },
-  {
-    "ref": "RLED8",
-    "pin": "1",
-    "net": "STAT_LED_8"
-  },
-  {
-    "ref": "RLED8",
-    "pin": "2",
-    "net": "TM_LED_8"
+    "net": "GRID_8"
   }
 ]

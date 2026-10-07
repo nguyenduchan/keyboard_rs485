@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Place footprints from schematic netlist and add ratsnest-style tracks on B.Cu."""
+"""Obsolete. Do not run: it restores an old placement and draws copper.
+
+Current board comes from build_schematic.py plus the text layout tools.
+"""
 
 from __future__ import annotations
 
@@ -20,7 +23,7 @@ PLACEMENT: dict[str, tuple[float, float, int]] = {
     "F1": (28.0, 12.0, 0),
     "C15": (34.0, 12.0, 0),
     "TVS1": (34.0, 18.0, 90),
-    "Q12": (40.0, 12.0, 0),
+    "Q17": (40.0, 12.0, 0),
     "R17": (40.0, 18.0, 0),
     "C4": (46.0, 12.0, 0),
     "C14": (46.0, 18.0, 0),
@@ -46,7 +49,6 @@ PLACEMENT: dict[str, tuple[float, float, int]] = {
     "CVDD1": (10.0, 115.0, 0),
     "RNST": (22.0, 115.0, 0),
     "CNRST": (28.0, 115.0, 0),
-    "RBOT0": (34.0, 115.0, 0),
     "J2": (8.0, 118.0, 90),
     "U3": (58.0, 135.0, 0),
     "R47A": (52.0, 132.0, 0),
@@ -59,13 +61,6 @@ PLACEMENT: dict[str, tuple[float, float, int]] = {
     "RTERM": (82.0, 135.0, 0),
     "JTERM": (86.0, 135.0, 0),
     "TVS2": (88.0, 10.0, 90),
-    "U2": (40.0, 125.0, 0),
-    "R33A": (35.0, 120.0, 0),
-    "R33B": (40.0, 120.0, 0),
-    "R33C": (45.0, 120.0, 0),
-    "RPU": (50.0, 120.0, 0),
-    "CTM1": (55.0, 120.0, 0),
-    "CTM2": (60.0, 120.0, 0),
     "DISP1": (39.0, 100.5, 0),
     "DISP2": (39.0, 70.5, 0),
 }
@@ -76,7 +71,7 @@ FOOTPRINTS: dict[str, str] = {
     "F1": "Fuse:Fuse_2920_7451Metric",
     "C15": "Capacitor_SMD:C_0805_2012Metric",
     "TVS1": "Diode_SMD:D_SMA",
-    "Q12": "Package_TO_SOT_SMD:SOT-23",
+    "Q17": "Package_TO_SOT_SMD:SOT-23",
     "R17": "Resistor_SMD:R_0805_2012Metric",
     "C4": "Capacitor_SMD:CP_Elec_10x10.5",
     "C14": "Capacitor_SMD:C_0805_2012Metric",
@@ -103,7 +98,6 @@ FOOTPRINTS: dict[str, str] = {
     "CVDD1": "Capacitor_SMD:C_0805_2012Metric",
     "RNST": "Resistor_SMD:R_0805_2012Metric",
     "CNRST": "Capacitor_SMD:C_0805_2012Metric",
-    "RBOT0": "Resistor_SMD:R_0805_2012Metric",
     "J2": "Connector_PinHeader_1.27mm:PinHeader_1x04_P1.27mm_Vertical",
     "U3": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
     "R47A": "Resistor_SMD:R_0805_2012Metric",
@@ -115,13 +109,6 @@ FOOTPRINTS: dict[str, str] = {
     "RBIAS_B": "Resistor_SMD:R_0805_2012Metric",
     "RTERM": "Resistor_SMD:R_0805_2012Metric",
     "JTERM": "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm",
-    "U2": "Package_SO:SOIC-28_7.5x17.8mm_P1.27mm",
-    "R33A": "Resistor_SMD:R_0805_2012Metric",
-    "R33B": "Resistor_SMD:R_0805_2012Metric",
-    "R33C": "Resistor_SMD:R_0805_2012Metric",
-    "RPU": "Resistor_SMD:R_0805_2012Metric",
-    "CTM1": "Capacitor_SMD:C_0805_2012Metric",
-    "CTM2": "Capacitor_SMD:C_0805_2012Metric",
     "DISP1": "Connector_PinHeader_2.54mm:PinHeader_1x12_P2.54mm_Vertical",
     "DISP2": "Connector_PinHeader_2.54mm:PinHeader_1x12_P2.54mm_Vertical",
     "SW": "Button_Switch_SMD:SW_SPST_Tactile_12x12mm",
@@ -235,22 +222,8 @@ def main() -> None:
         esc = name.replace('"', '\\"')
         net_lines.append(f'\t(net {i} "{esc}")')
 
-    # minimal tracks: star GND and +5V buses (logical connectivity via same net on pads requires pad defs)
+    # Placement only — copper routes and pours are added later in KiCad.
     tracks: list[str] = []
-    gnd_pts = [(19, 8), (15, 125), (40, 125), (80, 8)]
-    for i in range(len(gnd_pts) - 1):
-        x1, y1 = gnd_pts[i]
-        x2, y2 = gnd_pts[i + 1]
-        tracks.append(
-            f"""\t(segment
-\t\t(start {x1} {y1})
-\t\t(end {x2} {y2})
-\t\t(width 0.4)
-\t\t(layer "B.Cu")
-\t\t(net {net_name_to_id.get("GND", 0)})
-\t\t(uuid "{uid()}")
-\t)"""
-        )
 
     insert_at = pcb_text.rfind("(zone")
     if insert_at < 0:
@@ -264,31 +237,7 @@ def main() -> None:
             count=1,
         )
 
-    zone = """
-\t(zone
-\t\t(net 1)
-\t\t(net_name "GND")
-\t\t(layer "B.Cu")
-\t\t(uuid "{zid}")
-\t\t(hatch edge 0.5)
-\t\t(connect_pads (clearance 0.2))
-\t\t(min_thickness 0.2)
-\t\t(filled_areas_thickness no)
-\t\t(fill yes (thermal_gap 0.5) (thermal_bridge_width 0.5))
-\t\t(polygon
-\t\t\t(pts
-\t\t\t\t(xy 1 1)
-\t\t\t\t(xy 99 1)
-\t\t\t\t(xy 99 149)
-\t\t\t\t(xy 1 149)
-\t\t\t)
-\t\t)
-\t)
-""".format(
-        zid=uid()
-    )
-
-    out = body + "\n" + "\n".join(new_fps) + "\n" + "\n".join(tracks) + zone + "\n)\n"
+    out = body + "\n" + "\n".join(new_fps) + "\n" + "\n".join(tracks) + "\n)\n"
     PCB.write_text(out, encoding="utf-8")
     print(f"Updated {PCB} with {len(new_fps)} footprints, {len(nets)} nets")
 

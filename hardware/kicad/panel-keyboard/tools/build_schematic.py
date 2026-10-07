@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 import uuid
 from pathlib import Path
@@ -10,7 +11,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "panel-keyboard.kicad_sch"
 KICAD_SYM = Path(
-    r"C:\Users\duchan.nguyen\AppData\Local\Programs\KiCad\10.0\share\kicad\symbols"
+    os.environ.get(
+        "KICAD_SYMBOL_DIR",
+        r"C:\Users\duchan.nguyen\AppData\Local\Programs\KiCad\10.0\share\kicad\symbols",
+    )
 )
 
 
@@ -116,11 +120,21 @@ class SchematicBuilder:
         else:
             path = KICAD_SYM / f"{lib}.kicad_sym"
         text = path.read_text(encoding="utf-8")
+        for _ in range(6):
+            head = text.find(f'(symbol "{name}"')
+            if head < 0:
+                break
+            ext = re.search(r'\(extends "([^"]+)"\)', text[head : head + 2500])
+            if not ext:
+                break
+            name = ext.group(1)
         sub = f"{name}_1_{unit}"
         idx = text.find(f'(symbol "{sub}"')
         if idx < 0:
             idx = text.find(f'(symbol "{name}_0_1"')
-        chunk = text[idx : idx + 200000] if idx >= 0 else text
+        if idx < 0:
+            raise KeyError(f"symbol pins not found: {lib_id}")
+        chunk = text[idx : idx + 400000]
         pins: dict[str, tuple[float, float, int]] = {}
         for m in re.finditer(r"\(pin\b", chunk):
             start = m.start()
@@ -200,12 +214,12 @@ class SchematicBuilder:
 \t(uuid "e1c0e0c0-0000-4000-8000-000000000001")
 \t(paper "A2")
 \t(title_block
-\t\t(title "Panel Keyboard All-in-One 100x150")
+\t\t(title "Panel Keyboard All-in-One 120x120")
 \t\t(date "2026-10-07")
 \t\t(rev "B")
 \t\t(company "Embedded Keyboard Project")
 \t\t(comment 1 "Full schematic — SO_DO_NGUYEN_LY.md")
-\t\t(comment 2 "J_PWR + J485 bottom edge, spaced")
+\t\t(comment 2 "Power block above MCU; J_PWR and J485 on the right edge")
 \t\t(comment 3 "Regenerate: python tools/build_schematic.py")
 \t)
 \t(lib_symbols)
@@ -252,10 +266,9 @@ def main() -> None:
     b.place("Device:D_TVS", "TVS1", "SMAJ28A", 70, y0 + 16, footprint="Diode_SMD:D_SMA")
     b.place("Device:C", "C19", "10uF", 70, y0, footprint="Capacitor_SMD:C_0805_2012Metric")
     b.place("Device:C", "C15", "100nF", 70, y0 + 28, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Transistor_FET:Q_PMOS_GSD", "Q12", "AO4407A", 85, y0, footprint="Package_TO_SOT_SMD:SOT-23")
+    b.place("Transistor_FET:Q_PMOS_GSD", "Q17", "AO4407A", 85, y0, footprint="Package_TO_SOT_SMD:SOT-23")
     b.place("Device:R", "R17", "100k", 85, y0 + 18, footprint="Resistor_SMD:R_0805_2012Metric")
     b.place("Device:C", "C4", "1000uF", 100, y0, footprint="Capacitor_SMD:CP_Elec_10x12.5")
-    b.place("Device:C", "C14", "100nF", 100, y0 + 16, footprint="Capacitor_SMD:C_0805_2012Metric")
     b.place(
         "Connector_Generic:Conn_01x02",
         "NT1",
@@ -274,17 +287,15 @@ def main() -> None:
     b.place("Device:R", "R36", "3k", 132, y0 + 28, footprint="Resistor_SMD:R_0805_2012Metric")
     b.place("Device:R", "R37", "1k", 118, y0 + 28, footprint="Resistor_SMD:R_0805_2012Metric")
     b.place("Device:R", "R38", "10k", 118, y0 + 14, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:Ferrite_Bead", "FB2", "BLM21PG121", 162, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
+    b.place("Device:FerriteBead", "FB2", "BLM21PG121", 162, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
     b.place("Device:C", "C22", "220uF", 178, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
-    b.place("Device:Ferrite_Bead", "FB5V", "BLM21PG121", 178, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
+    b.place("Device:FerriteBead", "FB5V", "BLM21PG121", 178, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
 
     b.place("Regulator_Linear:AMS1117-3.3", "U5", "AMS1117-3.3", 194, y0, footprint="Package_TO_SOT_SMD:SOT-223-3_TabPin2")
     b.place("Device:C", "C7", "10uF", 188, y0 + 14, footprint="Capacitor_SMD:C_0805_2012Metric")
     b.place("Device:C", "C3", "22uF", 210, y0, footprint="Capacitor_SMD:C_0805_2012Metric")
     b.place("Device:C", "C18", "100nF", 210, y0 + 14, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:Ferrite_Bead", "FB1", "BLM21PG121", 210, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
-    b.place("Device:C", "C21", "100nF", 225, y0, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:C", "CVDDA", "1uF", 225, y0 + 14, footprint="Capacitor_SMD:C_0805_2012Metric")
+    b.place("Device:FerriteBead", "FB1", "BLM21PG121", 210, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
 
     b.power_flag("power:+24V", 100, y0 - 10)
     b.power_flag("power:GND", 110, y0 + 40)
@@ -308,15 +319,13 @@ def main() -> None:
     b.net_label("C19", "2", "GND_PWR")
     b.net_label("C15", "1", "VIN_PROTECT")
     b.net_label("C15", "2", "GND_PWR")
-    b.net_label("Q12", "2", "VIN_PROTECT")
-    b.net_label("Q12", "1", "FET_G")
+    b.net_label("Q17", "2", "VIN_PROTECT")
+    b.net_label("Q17", "1", "FET_G")
     b.net_label("R17", "1", "FET_G")
     b.net_label("R17", "2", "GND_PWR")
-    b.net_label("Q12", "3", "+24V")
+    b.net_label("Q17", "3", "+24V")
     b.net_label("C4", "1", "+24V")
     b.net_label("C4", "2", "GND_PWR")
-    b.net_label("C14", "1", "+24V")
-    b.net_label("C14", "2", "GND_PWR")
     b.net_label("NT1", "1", "GND_PWR")
     b.net_label("NT1", "2", "GND")
     b.net_label("U4", "1", "+24V")
@@ -359,25 +368,21 @@ def main() -> None:
     b.net_label("C18", "2", "GND")
     b.net_label("FB1", "1", "+3V3_LDO")
     b.net_label("FB1", "2", "+3V3")
-    b.net_label("C21", "1", "+3V3")
-    b.net_label("C21", "2", "GND")
-    b.net_label("CVDDA", "1", "+3V3")
-    b.net_label("CVDDA", "2", "GND")
 
     # MCU + RS485 (center)
     my = 90.0
+    # STM32G030C8T6 LQFP-48: đủ GPIO để tự quét 7-seg, LED trạng thái và phím.
     b.place(
-        "MCU_ST_STM32F0:STM32F030F4Px",
+        "MCU_ST_STM32G0:STM32G030C8Tx",
         "U1",
-        "STM32F030F4P6",
+        "STM32G030C8T6",
         80,
         my,
-        footprint="Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm",
+        footprint="Package_QFP:LQFP-48_7x7mm_P0.5mm",
     )
     b.place("Device:C", "CVDD1", "100n", 65, my + 20, footprint="Capacitor_SMD:C_0805_2012Metric")
     b.place("Device:R", "RNST", "10k", 65, my - 15, footprint="Resistor_SMD:R_0805_2012Metric")
     b.place("Device:C", "CNRST", "100n", 75, my - 15, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:R", "RBOT0", "10k", 95, my - 15, footprint="Resistor_SMD:R_0805_2012Metric")
     b.place("Connector_Generic:Conn_01x04", "J2", "SWD_1.27", 50, my, footprint="Connector_PinHeader_1.27mm:PinHeader_1x04_P1.27mm_Vertical")
 
     b.place("Interface_UART:MAX485E", "U3", "MAX485CSA", 140, my, footprint="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
@@ -400,29 +405,26 @@ def main() -> None:
     b.place("Device:D_TVS", "TVS2", "SM712", 225, my, rot=90, footprint="Package_TO_SOT_SMD:SOT-23-3")
     b.place("Connector_Generic:Conn_01x03", "J485", "2EDGVC-5.08-03P", 245, my, footprint="Panel:TerminalBlock_3P_5.08")
 
-    # STM32F030F4P6 (TSSOP-20, ST chính hãng, đủ cho phím/LED/Modbus chậm) — TM1638 PA4/PA5/PA6
-    b.net_label("U1", "1", "BOOT0")
-    b.net_label("U1", "4", "NRST")
+    # STM32G030C8Tx LQFP-48 (DS12991 Fig.6): một cặp VDD/VSS chân 6/7.
+    # VBAT và VREF+ nối +3V3 (không pin, không dùng ADC).
+    # PA1 DE, PA2 TX, PA3 RX. PA13/PA14 = SWD. PA9/PA10 = I2C tới HT16K33A.
+    b.net_label("U1", "4", "+3V3")
     b.net_label("U1", "5", "+3V3")
-    b.net_label("U1", "16", "+3V3")
-    b.net_label("U1", "15", "GND")
-    b.net_label("U1", "7", "RS485_DE")
-    b.net_label("U1", "8", "UART_TX")
-    b.net_label("U1", "9", "UART_RX")
-    b.net_label("U1", "10", "TM_CLK")
-    b.net_label("U1", "11", "TM_STB")
-    b.net_label("U1", "12", "TM_DIO")
-    b.net_label("U1", "19", "SWDIO")
-    b.net_label("U1", "20", "SWCLK")
+    b.net_label("U1", "6", "+3V3")
+    b.net_label("U1", "7", "GND")
+    b.net_label("U1", "10", "NRST")
+    b.net_label("U1", "12", "RS485_DE")
+    b.net_label("U1", "13", "UART_TX")
+    b.net_label("U1", "14", "UART_RX")
+    b.net_label("U1", "35", "SWDIO")
+    b.net_label("U1", "36", "SWCLK")
     b.net_label("CVDD1", "1", "+3V3")
     b.net_label("CVDD1", "2", "GND")
     b.net_label("RNST", "1", "+3V3")
     b.net_label("RNST", "2", "NRST")
     b.net_label("CNRST", "1", "NRST")
     b.net_label("CNRST", "2", "GND")
-    b.net_label("RBOT0", "1", "GND")
-    b.net_label("RBOT0", "2", "BOOT0")
-    for _nc in ("2", "3", "6", "13", "14", "17", "18"):
+    for _nc in ("1", "2", "3", "8", "9", "11"):
         b.no_connect("U1", _nc)
     b.net_label("J2", "1", "+3V3")
     b.net_label("J2", "2", "SWDIO")
@@ -467,38 +469,48 @@ def main() -> None:
     b.net_label("J485", "2", "RS485_B_BUS")
     b.net_label("J485", "3", "GND")
 
-    # TM1638 + UI (right)
+    # UI: HT16K33A quét 7-seg và LED trạng thái. STM32 giữ phím và RS485.
+    # ROW nguồn dòng, COM hút cathode. Địa chỉ I2C 0x70 (ROW0–2 kéo xuống trong).
     ty = 140.0
-    b.place("Panel:TM1638", "U2", "TM1638", 60, ty, footprint="Panel:SOIC-28_TM1638")
-    b.place("Device:R", "R33A", "33", 45, ty - 10, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "R33B", "33", 45, ty, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "R33C", "33", 45, ty + 10, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "RPU", "4.7k", 45, ty + 20, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:C", "CTM1", "100n", 75, ty + 20, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:C", "CTM2", "10u", 85, ty + 20, footprint="Capacitor_SMD:C_0805_2012Metric")
+    row_mcu = ["42", "43", "44", "45"]
+    col_mcu = ["46", "47", "48", "41"]
+    r0805 = "Resistor_SMD:R_0805_2012Metric"
+    b.place(
+        "Panel:HT16K33A",
+        "U6",
+        "HT16K33A",
+        70,
+        ty,
+        footprint="Panel:HT16K33A_SSOP28",
+    )
+    b.place("Device:C", "CLED", "100n", 40, ty, footprint="Capacitor_SMD:C_0805_2012Metric")
+    b.place("Device:R", "RSCL", "4.7k", 40, ty + 8, footprint=r0805)
+    b.place("Device:R", "RSDA", "4.7k", 40, ty + 14, footprint=r0805)
+    b.net_label("U6", "1", "GND")
+    b.net_label("U6", "28", "+5V_LED")
+    b.net_label("CLED", "1", "+5V_LED")
+    b.net_label("CLED", "2", "GND")
+    b.net_label("U6", "26", "SCL")
+    b.net_label("U6", "27", "SDA")
+    b.net_label("U1", "29", "SCL")
+    b.net_label("U1", "32", "SDA")
+    b.net_label("RSCL", "1", "SCL")
+    b.net_label("RSCL", "2", "+5V_LED")
+    b.net_label("RSDA", "1", "SDA")
+    b.net_label("RSDA", "2", "+5V_LED")
+    for i in range(8):
+        b.net_label("U6", str(i + 2), f"GRID_{i + 1}")
+    for row, pin in enumerate(("25", "24", "23", "22", "21", "20", "19", "18")):
+        b.net_label("U6", pin, f"SEG{row + 1}")
+    b.net_label("U6", "17", "LED_ROW")
+    for pin in ("10", "11", "12", "13", "14", "15", "16"):
+        b.no_connect("U6", pin)
+    for pin in (
+        "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
+        "25", "26", "27", "28", "30", "31", "33", "34", "37", "38", "39", "40",
+    ):
+        b.no_connect("U1", pin)
 
-    b.net_label("R33A", "1", "TM_CLK")
-    b.net_label("R33A", "2", "TM1638_CLK")
-    b.net_label("R33B", "1", "TM_STB")
-    b.net_label("R33B", "2", "TM1638_STB")
-    b.net_label("R33C", "1", "TM_DIO")
-    b.net_label("R33C", "2", "TM1638_DIO")
-    b.net_label("RPU", "1", "+3V3")
-    b.net_label("RPU", "2", "TM1638_DIO")
-    b.net_label("U2", "17", "TM1638_CLK")
-    b.net_label("U2", "16", "TM1638_STB")
-    b.net_label("U2", "15", "TM1638_DIO")
-    b.net_label("U2", "9", "+5V_LED")
-    b.net_label("U2", "GND", "GND")
-    b.net_label("CTM1", "1", "+5V_LED")
-    b.net_label("CTM1", "2", "GND")
-    b.net_label("CTM2", "1", "+5V_LED")
-    b.net_label("CTM2", "2", "GND")
-
-    # 8× 7-seg đơn 0.56" CC THT (5611-class) — DS1..4 Target, DS5..8 Actual
-    seg_pins = {"1": "28", "2": "27", "3": "26", "4": "14", "5": "13", "6": "12", "7": "11", "8": "10"}
-    for seg, u2pin in seg_pins.items():
-        b.net_label("U2", u2pin, f"SEG{seg}")
     fp_seg = {"7": "SEG1", "6": "SEG2", "4": "SEG3", "2": "SEG4", "1": "SEG5", "9": "SEG6", "10": "SEG7", "5": "SEG8"}
     dx, dy_top, dy_bot = 12.0, 112.0, 84.0
     for i in range(1, 9):
@@ -515,17 +527,10 @@ def main() -> None:
         )
         for pin, seg in fp_seg.items():
             b.net_label(ref, pin, seg)
-        if i <= 4:
-            grid = f"GRID_TOP_{i}"
-            b.net_label("U2", str(25 - i + 1), grid)
-        else:
-            g = i - 4
-            grid = f"GRID_BOT_{g}"
-            b.net_label("U2", str(21 - g + 1), grid)
-        b.net_label(ref, "3", grid)
-        b.net_label(ref, "8", grid)
+        b.net_label(ref, "3", f"GRID_{i}")
+        b.net_label(ref, "8", f"GRID_{i}")
 
-    # Keypad 4x4
+    # Keypad 4x4. Hàng kéo xuống = quét. Cột pull-up, đọc mức thấp khi nhấn.
     sx, sy = 170.0, ty - 5
     for i in range(1, 17):
         b.place(
@@ -539,26 +544,22 @@ def main() -> None:
         row, col = (i - 1) // 4, (i - 1) % 4
         b.net_label(f"SW{i}", "1", f"KEY_R{row+1}")
         b.net_label(f"SW{i}", "2", f"KEY_C{col+1}")
-    # Matrix EMI filter (industrial panel: series R + RC at driver IC)
-    kx, ky = 55, ty + 35
+    kx, ky = 55, ty + 70
     for r in range(1, 5):
-        b.place("Device:R", f"RK{r}", "100", kx, ky + (r - 1) * 5, footprint="Resistor_SMD:R_0805_2012Metric")
-        b.place("Device:C", f"CK{r}", "100nF", kx + 8, ky + (r - 1) * 5, footprint="Capacitor_SMD:C_0805_2012Metric")
-        b.net_label("U2", str(r), f"TM_KS{r}")
-        b.net_label(f"RK{r}", "1", f"TM_KS{r}")
+        b.place("Device:R", f"RK{r}", "100", kx, ky + (r - 1) * 5, footprint=r0805)
+        b.net_label("U1", row_mcu[r - 1], f"ROW{r}")
+        b.net_label(f"RK{r}", "1", f"ROW{r}")
         b.net_label(f"RK{r}", "2", f"KEY_R{r}")
-        b.net_label(f"CK{r}", "1", f"KEY_R{r}")
-        b.net_label(f"CK{r}", "2", "GND")
     for c in range(1, 5):
-        b.place("Device:R", f"RC{c}", "100", kx + 16, ky + (c - 1) * 5, footprint="Resistor_SMD:R_0805_2012Metric")
-        b.place("Device:C", f"CC{c}", "100nF", kx + 24, ky + (c - 1) * 5, footprint="Capacitor_SMD:C_0805_2012Metric")
-        b.net_label("U2", str(c + 4), f"TM_KS{c+4}")
-        b.net_label(f"RC{c}", "1", f"TM_KS{c+4}")
+        b.place("Device:R", f"RC{c}", "100", kx + 16, ky + (c - 1) * 5, footprint=r0805)
+        b.place("Device:R", f"RPK{c}", "10k", kx + 24, ky + (c - 1) * 5, footprint=r0805)
+        b.net_label("U1", col_mcu[c - 1], f"COL{c}")
+        b.net_label(f"RPK{c}", "1", "+3V3")
+        b.net_label(f"RPK{c}", "2", f"COL{c}")
+        b.net_label(f"RC{c}", "1", f"COL{c}")
         b.net_label(f"RC{c}", "2", f"KEY_C{c}")
-        b.net_label(f"CC{c}", "1", f"KEY_C{c}")
-        b.net_label(f"CC{c}", "2", "GND")
 
-    # Status LEDs D10-D17 (D8 = buck SS34 on power sheet)
+    # Status LEDs D10-D17. Anode chung ROW8, cathode cùng COM của digit tương ứng.
     for i in range(8):
         ref = f"D{10 + i}"
         b.place(
@@ -569,18 +570,8 @@ def main() -> None:
             ty + 10,
             footprint="Panel:LED_3mm_THT",
         )
-        b.place(
-            "Device:R",
-            f"RLED{i+1}",
-            "1k",
-            200 + i * 2.54,
-            ty + 15,
-            footprint="Resistor_SMD:R_0805_2012Metric",
-        )
-        b.net_label(ref, "1", "+5V_LED")
-        b.net_label(ref, "2", f"STAT_LED_{i+1}")
-        b.net_label(f"RLED{i+1}", "1", f"STAT_LED_{i+1}")
-        b.net_label(f"RLED{i+1}", "2", f"TM_LED_{i+1}")
+        b.net_label(ref, "1", "LED_ROW")
+        b.net_label(ref, "2", f"GRID_{i + 1}")
 
     # Global rails
     b.global_net("+24V_IN", 25, 30)

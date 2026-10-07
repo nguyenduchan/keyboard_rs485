@@ -1,6 +1,6 @@
-"""Embed missing footprints, assign nets, route B.Cu/F.Cu traces.
+"""Embed missing footprints and assign nets.
 
-Does not call pcbnew (KiCad lock crashes LoadBoard on this machine).
+Copper routes are not generated. Placement lives in zone_layout.py.
 """
 
 from __future__ import annotations
@@ -516,37 +516,7 @@ def main() -> int:
     text = text.replace('(gr_text "B"\n\t\t(at 78 138 0)', '(gr_text "B"\n\t\t(at 86 138 0)')
     text = text.replace('(gr_text "0V"\n\t\t(at 83.1 138 0)', '(gr_text "0V"\n\t\t(at 91.08 138 0)')
 
-    pads = collect_pads(text)
-    print("pads", len(pads), "with net", sum(1 for p in pads if p["net"]))
-    segs, vias, failed = route(pads)
-    print("segments", len(segs), "vias", len(vias), "unrouted", len(failed))
-    for item in failed[:30]:
-        print("  open", item)
-    if '(zone\n\t\t(net "GND_PWR")' not in text:
-        segs.append(
-            "\t(zone\n"
-            '\t\t(net "GND_PWR")\n'
-            '\t\t(layer "B.Cu")\n'
-            f'\t\t(uuid "{uuid.uuid4()}")\n'
-            "\t\t(hatch edge 0.5)\n"
-            "\t\t(connect_pads\n"
-            "\t\t\t(clearance 0.2)\n"
-            "\t\t)\n"
-            "\t\t(min_thickness 0.2)\n"
-            "\t\t(fill yes\n"
-            "\t\t\t(thermal_gap 0.5)\n"
-            "\t\t\t(thermal_bridge_width 0.5)\n"
-            "\t\t)\n"
-            "\t\t(polygon\n"
-            "\t\t\t(pts\n"
-            "\t\t\t\t(xy 3 107) (xy 77 107) (xy 77 132) (xy 3 132)\n"
-            "\t\t\t)\n"
-            "\t\t)\n"
-            "\t)"
-        )
-    blob = "\n".join(segs + vias) + "\n"
-    anchor = text.rfind("\t(embedded_fonts no)")
-    text = text[:anchor] + blob + text[anchor:]
+    print("routes skipped (board is placement-only)")
     if text.count("(") != text.count(")"):
         print("abort paren", text.count("(") - text.count(")"))
         return 1
