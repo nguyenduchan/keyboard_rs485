@@ -33,27 +33,28 @@ _B = {
     "0805": (-1.75, -1.05, 1.75, 1.05),
     "C4": (-7.0, -6.2, 7.0, 6.2),
     "ELEC63": (-5.0, -3.8, 5.0, 3.8),
-    "U4": (-10.4, -6.0, 6.8, 6.0),
-    "U1": (-5.2, -5.2, 5.2, 5.2),
-    "U6": (-3.45, -5.2, 3.45, 5.2),
+    "U4": (-3.7, -2.7, 3.7, 2.7),
+    "U1": (-3.7, -3.5, 3.7, 3.5),
+    "U6": (-5.9, -9.25, 5.9, 9.25),
     "U3": (-3.9, -2.9, 3.9, 2.9),
     "U5": (-4.6, -3.8, 4.6, 3.8),
-    "F1": (-4.8, -3.2, 4.8, 3.2),
+    "F1": (-3.0, -2.1, 3.0, 2.1),
     "RV1": (-5.5, -3.5, 5.5, 3.5),
     "TVS1": (-3.9, -2.5, 3.9, 2.5),
-    "L1": (-2.5, -1.8, 2.5, 1.8),
-    "D8": (-2.5, -1.3, 2.5, 1.3),
+    "L1": (-3.5, -3.5, 3.5, 3.5),
+    "D8": (-3.3, -1.6, 3.3, 1.6),
     "Q12": (-2.1, -1.9, 2.1, 1.9),
     "TVS2": (-2.2, -1.9, 2.2, 1.9),
     "LCM": (-1.7, -1.0, 1.7, 1.0),
     "J_PWR": (-6.2, -3.5, 6.2, 3.5),
     "J485": (-8.0, -3.5, 8.0, 3.5),
-    "J2": (-1.6, -5.2, 1.6, 1.4),
+    "J2": (-1.3, -1.3, 1.3, 8.9),
     "NT1": (-3.2, -1.3, 3.2, 1.3),
     "JTERM": (-1.8, -1.4, 1.8, 1.4),
-    "DS": (-6.35, -9.525, 6.35, 9.525),
+    "DS": (-25.45, -9.75, 25.45, 9.75),
     "SW": (-6.2, -6.2, 6.2, 6.2),
     "LED": (-2.3, -1.1, 2.3, 1.1),
+    "BZ": (-2.45, -6.25, 10.05, 6.25),
 }
 
 _KIND = {
@@ -64,6 +65,9 @@ _KIND = {
     "FB1": "0805",
     "FB2": "0805",
     "FB5V": "0805",
+    "BZ1": "BZ",
+    "QBZ": "Q12",
+    "DREV": "D8",
 }
 
 
@@ -114,20 +118,12 @@ def _hits_hole(box: tuple[float, float, float, float], hx: float, hy: float, rad
 BOTTOM_POS: dict[str, tuple[float, float, int]] = {}
 
 # Each capacitor sits against the pin it bypasses. Duplicate ceramics are gone.
-BOTTOM_POS["U6"] = (78.0, 90.0, 180)
-BOTTOM_POS["CLED"] = (74.0, 97.7, 180)
-BOTTOM_POS["RSCL"] = (78.6, 97.7, 180)
-BOTTOM_POS["RSDA"] = (83.2, 97.7, 180)
+BOTTOM_POS["U6"] = (78.0, 86.0, 0)
 
-BOTTOM_POS["U1"] = (96.0, 84.0, 180)
-BOTTOM_POS["CVDD1"] = (86.5, 81.0, 180)
-BOTTOM_POS["RNST"] = (86.5, 85.6, 180)
-BOTTOM_POS["CNRST"] = (86.5, 90.2, 180)
-BOTTOM_POS["J2"] = (96.0, 94.0, 90)
-_key_r = [f"RK{i}" for i in range(1, 5)] + [f"RC{i}" for i in range(1, 5)] + [f"RPK{i}" for i in range(1, 5)]
-_kx = (78.0, 82.6, 87.2, 91.8, 96.4, 101.0)
-for _i, _ref in enumerate(_key_r):
-    BOTTOM_POS[_ref] = (_kx[_i % 6], 101.4 if _i < 6 else 106.0, 180)
+BOTTOM_POS["U1"] = (95.0, 86.0, 180)
+BOTTOM_POS["CVDD1"] = (100.3, 87.0, 90)
+BOTTOM_POS["CNRST"] = (100.3, 83.6, 90)
+BOTTOM_POS["J2"] = (94.5, 94.0, 90)
 
 BOTTOM_POS["U3"] = (108.0, 84.0, 180)
 BOTTOM_POS["R47A"] = (104.2, 76.2, 180)
@@ -135,40 +131,49 @@ BOTTOM_POS["R47B"] = (108.8, 76.2, 180)
 BOTTOM_POS["CM3"] = (113.4, 76.2, 180)
 BOTTOM_POS["RDE"] = (113.4, 89.5, 180)
 BOTTOM_POS["TVS2"] = (108.0, 94.0, 180)
-for _ref, _x in zip(("L485", "RBIAS_A", "RBIAS_B", "RTERM", "JTERM"), (78.0, 82.6, 87.2, 91.8, 96.4)):
+for _ref, _x in zip(("RBIAS_A", "RBIAS_B", "RTERM", "JTERM"), (82.6, 87.2, 91.8, 96.4)):
     BOTTOM_POS[_ref] = (_x, 110.2, 180)
 
 # Power column, upper right. Local ceramics sit on the pin they serve.
 BOTTOM_POS["J_PWR"] = (115.0, 16.0, 90)
 BOTTOM_POS["C16"] = (84.7, 22.4, 180)
 BOTTOM_POS["C17"] = (89.3, 22.4, 180)
-BOTTOM_POS["R38"] = (93.9, 22.4, 180)
-BOTTOM_POS["R36"] = (98.5, 22.4, 180)
-BOTTOM_POS["R37"] = (103.1, 22.4, 180)
 BOTTOM_POS["C5"] = (107.7, 22.4, 180)
-BOTTOM_POS["U4"] = (93.5, 32.0, 180)
+BOTTOM_POS["U4"] = (95.5, 32.0, 0)
 BOTTOM_POS["C2"] = (109.0, 31.0, 90)
-BOTTOM_POS["D8"] = (87.0, 43.0, 90)
-BOTTOM_POS["L1"] = (93.0, 43.0, 90)
+BOTTOM_POS["D8"] = (86.5, 43.0, 90)
+BOTTOM_POS["L1"] = (93.0, 43.0, 0)
 BOTTOM_POS["FB2"] = (99.6, 43.0, 180)
 BOTTOM_POS["C22"] = (109.0, 42.5, 90)
 BOTTOM_POS["FB5V"] = (96.2, 48.2, 180)
 BOTTOM_POS["F1"] = (89.0, 55.0, 90)
-BOTTOM_POS["L2"] = (74.5, 55.0, 180)
-BOTTOM_POS["RV1"] = (96.8, 56.0, 90)
 BOTTOM_POS["C4"] = (108.0, 56.0, 90)
 BOTTOM_POS["NT1"] = (88.0, 64.0, 180)
 BOTTOM_POS["C19"] = (96.8, 64.2, 180)
 BOTTOM_POS["C15"] = (104.0, 65.2, 180)
-BOTTOM_POS["R17"] = (112.0, 65.2, 180)
 BOTTOM_POS["FB1"] = (73.2, 71.5, 180)
 BOTTOM_POS["C7"] = (78.0, 71.5, 180)
 BOTTOM_POS["U5"] = (91.0, 71.5, 180)
 BOTTOM_POS["C3"] = (99.2, 76.2, 180)
 BOTTOM_POS["C18"] = (86.5, 77.4, 180)
 BOTTOM_POS["TVS1"] = (104.0, 70.0, 180)
-BOTTOM_POS["Q17"] = (112.0, 70.0, 180)
 BOTTOM_POS["J485"] = (115.0, 102.0, 90)
+
+# Cấu hình thương mại (TM1638, STM32G030F6P6, linh kiện phổ biến)
+BOTTOM_POS["FBIN"] = (96.8, 56.0, 90)
+BOTTOM_POS["DREV"] = (112.0, 67.6, 90)
+BOTTOM_POS["CLED1"] = (70.6, 81.6, 90)
+BOTTOM_POS["CLED2"] = (82.5, 97.6, 0)
+BOTTOM_POS["CLED3"] = (78.0, 97.6, 0)
+BOTTOM_POS["RSTB"] = (86.5, 81.2, 0)
+BOTTOM_POS["RCLK"] = (86.5, 84.0, 0)
+BOTTOM_POS["RDIO"] = (86.5, 86.8, 0)
+
+# Còi chủ động 12 mm ở mặt trên, tâm thân (40, 50): dải trống giữa module 7-seg dưới và hàng phím trên
+# (mặt trên chỉ có chân hàn THT ở đây). Gốc footprint = chân 1, tâm thân lệch +3,8 mm. Mạch lái bên phải còi.
+BOTTOM_POS["BZ1"] = (36.2, 50.0, 0)
+BOTTOM_POS["QBZ"] = (51.5, 49.2, 0)
+BOTTOM_POS["RBZG"] = (56.2, 49.2, 0)
 
 FRONT_POS: dict[str, tuple[float, float, int]] = {}
 for ref, (x, y) in digit_centers().items():

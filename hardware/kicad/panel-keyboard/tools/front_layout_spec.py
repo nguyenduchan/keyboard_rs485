@@ -18,8 +18,9 @@ DIGIT_ROWS = 2
 STATUS_COUNT = 8
 
 KEY_PITCH = 16.0
-# Kingbright SC56 / 5611: thân 12,70 × 19,05 mm, dung sai ±0,25.
-# Khe danh định 1 mm → khe xấu nhất khoảng 0,5 mm, vẫn lắp được.
+# Module 4 số 0,56" (5641AS): thân 50,4 × 19,0 mm, bước digit 12,7 mm.
+# Hai hàng giữ khoảng cách cũ (khe 1 mm giữa hai thân).
+DIGIT_MODULE_W_MM = 50.4
 DIGIT_BODY_W_MM = 12.70
 DIGIT_BODY_H_MM = 19.05
 DIGIT_GAP_MM = 1.0
@@ -63,14 +64,14 @@ STATUS_X = status_column_x_mm()
 
 
 def digit_centers() -> dict[str, tuple[float, float]]:
-    """Cả DS1–DS4 và DS5–DS8 sát nhau, tâm mỗi hàng = tâm keypad."""
-    out: dict[str, tuple[float, float]] = {}
-    for i in range(DIGIT_COLS):
-        x = round(_grid_x(i, DIGIT_COLS, DIGIT_PITCH_TOP), 2)
-        out[f"DS{i + 1}"] = (x, DIGIT_ROW_TOP_Y)
-        if DIGIT_ROWS >= 2:
-            out[f"DS{i + 1 + DIGIT_COLS}"] = (x, DIGIT_ROW_BOT_Y)
-    return out
+    """Hai module 4 số 0,56" (5641AS): DS1 hàng trên (digit 1–4), DS2 hàng dưới (digit 5–8).
+
+    Thân module 50,4 × 19,0 mm, bước digit 12,7 mm; tâm module = tâm keypad.
+    """
+    return {
+        "DS1": (MAIN_AXIS_X, DIGIT_ROW_TOP_Y),
+        "DS2": (MAIN_AXIS_X, DIGIT_ROW_BOT_Y),
+    }
 
 
 def switch_centers() -> dict[str, tuple[float, float]]:

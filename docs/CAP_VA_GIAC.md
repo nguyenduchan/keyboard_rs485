@@ -22,15 +22,15 @@ Thiết kế dùng **terminal dạng cắm rút 5,08 mm** (chuẩn tủ điện,
 
 | Pin | Net | Nối tới |
 |-----|-----|---------|
-| 1 | +24V_IN | F1 → L2 CM → VIN_PROTECT (MOV/TVS/Q17) → C4 → buck (`PWR_24V_PROTECT_BUCK_GUIDE.txt`) |
+| 1 | +24V_IN | F1 → FBIN → VIN_PROTECT (TVS) → DREV → C4 → buck (`PWR_24V_PROTECT_BUCK_GUIDE.txt`) |
 | 2 | GND | **STAR GND** (mọi return về đây trước) |
 
 ### J485 (3P)
 
 | Pin | Net | Nối tới |
 |-----|-----|---------|
-| 1 | RS485_A | Sau L485, TVS2, JTERM |
-| 2 | RS485_B | Sau L485, TVS2, JTERM |
+| 1 | RS485_A_BUS | TVS2, JTERM, bias 560R |
+| 2 | RS485_B_BUS | TVS2, JTERM, bias 560R |
 | 3 | SG | Signal GND / reference Modbus (nối plane GND tại **một điểm** gần J485, không tách đảo nguồn) |
 
 *Pin 3 = reference cho bias failsafe và shield cáp — cùng potential với GND tủ tại panel.*

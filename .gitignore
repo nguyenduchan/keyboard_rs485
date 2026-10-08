@@ -23,3 +23,7 @@ __pycache__/
 # Editor
 .vs/
 *.swp
+**/.history/
+
+# Firmware build output
+firmware/build/

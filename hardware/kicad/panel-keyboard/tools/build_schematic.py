@@ -250,25 +250,22 @@ class SchematicBuilder:
 def main() -> None:
     b = SchematicBuilder()
 
-    # --- PWR_24V_PROTECT + PWR_BUCK (fiberboard PWR_24V_PROTECT_BUCK_GUIDE.txt, level 1) ---
+    # --- Nguồn 24 V: bảo vệ + buck 5 V + LDO 3,3 V (cấu hình thương mại, linh kiện phổ biến) ---
+    # J_PWR → F1 (PPTC 1812) → FBIN (ferrite) → VIN_PROTECT [TVS1, C19, C15] → DREV (SS34 chống ngược) → +24V
+    # XL1509-5.0 (SOP-8, bản cố định): FB nối thẳng ngõ ra +5V_RAW, ~EN nối GND (luôn chạy).
     y0 = 40.0
-    b.place("Connector_Generic:Conn_01x02", "J_PWR", "2EDGVC-5.08-02P", 25, y0, footprint="Panel:TerminalBlock_2P_5.08")
-    b.place("Device:Fuse", "F1", "MF-MSMF350", 40, y0, footprint="Fuse:Fuse_2920_7451Metric")
-    b.place(
-        "Device:Filter_EMI_CommonMode",
-        "L2",
-        "ACM2012-201",
-        55,
-        y0,
-        footprint="Inductor_SMD:L_CommonModeChoke_Coilank_ACM2012",
-    )
-    b.place("Device:Varistor", "RV1", "14D390K", 55, y0 + 16, footprint="Varistor:Varistor_Panasonic_VF")
+    r0805 = "Resistor_SMD:R_0805_2012Metric"
+    c0805 = "Capacitor_SMD:C_0805_2012Metric"
+    c1206 = "Capacitor_SMD:C_1206_3216Metric"
+    fb0805 = "Inductor_SMD:L_0805_2012Metric"
+    b.place("Connector_Generic:Conn_01x02", "J_PWR", "KF2EDGV-5.08-2P", 25, y0, footprint="Panel:TerminalBlock_2P_5.08")
+    b.place("Device:Fuse", "F1", "PPTC 1812 0.5A 33V", 40, y0, footprint="Fuse:Fuse_1812_4532Metric")
+    b.place("Device:FerriteBead", "FBIN", "600R@100MHz 2A", 55, y0, footprint=fb0805)
     b.place("Device:D_TVS", "TVS1", "SMAJ28A", 70, y0 + 16, footprint="Diode_SMD:D_SMA")
-    b.place("Device:C", "C19", "10uF", 70, y0, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:C", "C15", "100nF", 70, y0 + 28, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Transistor_FET:Q_PMOS_GSD", "Q17", "AO4407A", 85, y0, footprint="Package_TO_SOT_SMD:SOT-23")
-    b.place("Device:R", "R17", "100k", 85, y0 + 18, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:C", "C4", "1000uF", 100, y0, footprint="Capacitor_SMD:CP_Elec_10x12.5")
+    b.place("Device:C", "C19", "10uF 50V", 70, y0, footprint=c1206)
+    b.place("Device:C", "C15", "100nF 50V", 70, y0 + 28, footprint=c0805)
+    b.place("Device:D", "DREV", "SS34", 85, y0, rot=180, footprint="Diode_SMD:D_SMA")
+    b.place("Device:C", "C4", "470uF 35V", 100, y0, footprint="Capacitor_SMD:CP_Elec_10x10.5")
     b.place(
         "Connector_Generic:Conn_01x02",
         "NT1",
@@ -277,62 +274,52 @@ def main() -> None:
         y0 + 30,
         footprint="NetTie:NetTie-2_SMD_Pad2.0mm",
     )
-    b.place("Regulator_Switching:XL1509-5.0", "U4", "XL1509-5.0", 118, y0, footprint="Package_TO_SOT_SMD:TO-263-5_TabPin3")
-    b.place("Device:C", "C16", "10uF", 106, y0, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:C", "C17", "100nF", 106, y0 + 14, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:D", "D8", "SS34", 132, y0 + 14, footprint="Diode_SMD:D_SOD-123")
-    b.place("Device:L", "L1", "47uH", 146, y0, footprint="Inductor_SMD:L_1210_3225Metric")
-    b.place("Device:C", "C2", "220uF", 162, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
-    b.place("Device:C", "C5", "100nF", 162, y0 + 14, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:R", "R36", "3k", 132, y0 + 28, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "R37", "1k", 118, y0 + 28, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "R38", "10k", 118, y0 + 14, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:FerriteBead", "FB2", "BLM21PG121", 162, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
-    b.place("Device:C", "C22", "220uF", 178, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
-    b.place("Device:FerriteBead", "FB5V", "BLM21PG121", 178, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
+    b.place("Regulator_Switching:XL1509-5.0", "U4", "XL1509-5.0E1", 118, y0, footprint="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
+    b.place("Device:C", "C16", "10uF 50V", 106, y0, footprint=c1206)
+    b.place("Device:C", "C17", "100nF 50V", 106, y0 + 14, footprint=c0805)
+    b.place("Device:D", "D8", "SS34", 132, y0 + 14, rot=90, footprint="Diode_SMD:D_SMA")
+    b.place("Device:L", "L1", "47uH 6045", 146, y0, footprint="Inductor_SMD:L_Taiyo-Yuden_NR-60xx")
+    b.place("Device:C", "C2", "220uF 10V", 162, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
+    b.place("Device:C", "C5", "100nF", 162, y0 + 14, footprint=c0805)
+    b.place("Device:FerriteBead", "FB2", "120R@100MHz 2A", 162, y0 - 12, footprint=fb0805)
+    b.place("Device:C", "C22", "220uF 10V", 178, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
+    b.place("Device:FerriteBead", "FB5V", "120R@100MHz 2A", 178, y0 - 12, footprint=fb0805)
 
     b.place("Regulator_Linear:AMS1117-3.3", "U5", "AMS1117-3.3", 194, y0, footprint="Package_TO_SOT_SMD:SOT-223-3_TabPin2")
-    b.place("Device:C", "C7", "10uF", 188, y0 + 14, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:C", "C3", "22uF", 210, y0, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:C", "C18", "100nF", 210, y0 + 14, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:FerriteBead", "FB1", "BLM21PG121", 210, y0 - 12, footprint="Inductor_SMD:L_0805_2012Metric")
+    b.place("Device:C", "C7", "10uF", 188, y0 + 14, footprint=c0805)
+    b.place("Device:C", "C3", "22uF", 210, y0, footprint=c0805)
+    b.place("Device:C", "C18", "100nF", 210, y0 + 14, footprint=c0805)
+    b.place("Device:FerriteBead", "FB1", "120R@100MHz 2A", 210, y0 - 12, footprint=fb0805)
 
     b.power_flag("power:+24V", 100, y0 - 10)
     b.power_flag("power:GND", 110, y0 + 40)
     b.power_flag("power:+5V", 178, y0 - 25)
     b.power_flag("power:+3V3", 225, y0 - 25)
 
-    # Nets — section 4 of PWR_24V_PROTECT_BUCK_GUIDE.txt
     b.net_label("J_PWR", "1", "+24V_IN")
     b.net_label("J_PWR", "2", "GND_PWR")
     b.net_label("F1", "1", "+24V_IN")
     b.net_label("F1", "2", "+24V_FUSE")
-    b.net_label("L2", "1", "+24V_FUSE")
-    b.net_label("L2", "2", "VIN_PROTECT")
-    b.net_label("L2", "3", "GND_PWR")
-    b.net_label("L2", "4", "GND_PWR")
-    b.net_label("RV1", "1", "VIN_PROTECT")
-    b.net_label("RV1", "2", "GND_PWR")
+    b.net_label("FBIN", "1", "+24V_FUSE")
+    b.net_label("FBIN", "2", "VIN_PROTECT")
     b.net_label("TVS1", "1", "VIN_PROTECT")
     b.net_label("TVS1", "2", "GND_PWR")
     b.net_label("C19", "1", "VIN_PROTECT")
     b.net_label("C19", "2", "GND_PWR")
     b.net_label("C15", "1", "VIN_PROTECT")
     b.net_label("C15", "2", "GND_PWR")
-    b.net_label("Q17", "2", "VIN_PROTECT")
-    b.net_label("Q17", "1", "FET_G")
-    b.net_label("R17", "1", "FET_G")
-    b.net_label("R17", "2", "GND_PWR")
-    b.net_label("Q17", "3", "+24V")
+    b.net_label("DREV", "2", "VIN_PROTECT")  # A
+    b.net_label("DREV", "1", "+24V")  # K
     b.net_label("C4", "1", "+24V")
     b.net_label("C4", "2", "GND_PWR")
     b.net_label("NT1", "1", "GND_PWR")
     b.net_label("NT1", "2", "GND")
     b.net_label("U4", "1", "+24V")
     b.net_label("U4", "2", "+5V_SW")
-    b.net_label("U4", "3", "BUCK_FB")
-    b.net_label("U4", "4", "BUCK_EN")
-    b.net_label("U4", "5", "GND_PWR")
+    b.net_label("U4", "3", "+5V_RAW")  # FB bản 5.0 cảm nhận thẳng ngõ ra
+    b.net_label("U4", "4", "GND_PWR")  # ~EN mức thấp = chạy
+    for _p in ("5", "6", "7", "8"):
+        b.net_label("U4", _p, "GND_PWR")
     b.net_label("C16", "1", "+24V")
     b.net_label("C16", "2", "GND_PWR")
     b.net_label("C17", "1", "+24V")
@@ -349,12 +336,6 @@ def main() -> None:
     b.net_label("FB2", "2", "+5V")
     b.net_label("C22", "1", "+5V")
     b.net_label("C22", "2", "GND")
-    b.net_label("R36", "1", "+5V")
-    b.net_label("R36", "2", "BUCK_FB")
-    b.net_label("R37", "1", "BUCK_FB")
-    b.net_label("R37", "2", "GND_PWR")
-    b.net_label("R38", "1", "+24V")
-    b.net_label("R38", "2", "BUCK_EN")
     b.net_label("FB5V", "1", "+5V")
     b.net_label("FB5V", "2", "+5V_LED")
     b.net_label("U5", "1", "GND")
@@ -369,63 +350,61 @@ def main() -> None:
     b.net_label("FB1", "1", "+3V3_LDO")
     b.net_label("FB1", "2", "+3V3")
 
-    # MCU + RS485 (center)
+    # --- MCU + RS485 ---
+    # STM32G030F6P6 TSSOP-20: chỉ cần UART+DE, 3 dây TM1638, còi, SWD.
     my = 90.0
-    # STM32G030C8T6 LQFP-48: đủ GPIO để tự quét 7-seg, LED trạng thái và phím.
     b.place(
-        "MCU_ST_STM32G0:STM32G030C8Tx",
+        "MCU_ST_STM32G0:STM32G030F6Px",
         "U1",
-        "STM32G030C8T6",
+        "STM32G030F6P6",
         80,
         my,
-        footprint="Package_QFP:LQFP-48_7x7mm_P0.5mm",
+        footprint="Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm",
     )
-    b.place("Device:C", "CVDD1", "100n", 65, my + 20, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:R", "RNST", "10k", 65, my - 15, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:C", "CNRST", "100n", 75, my - 15, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Connector_Generic:Conn_01x04", "J2", "SWD_1.27", 50, my, footprint="Connector_PinHeader_1.27mm:PinHeader_1x04_P1.27mm_Vertical")
-
-    b.place("Interface_UART:MAX485E", "U3", "MAX485CSA", 140, my, footprint="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
-    b.place("Device:R", "R47A", "47", 120, my + 12, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "R47B", "47", 120, my - 12, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "RDE", "10k", 155, my - 12, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:C", "CM3", "100n", 155, my + 12, footprint="Capacitor_SMD:C_0805_2012Metric")
+    b.place("Device:C", "CVDD1", "100nF", 65, my + 20, footprint=c0805)
+    b.place("Device:C", "CNRST", "100nF", 75, my - 15, footprint=c0805)
     b.place(
-        "Device:Filter_EMI_CommonMode",
-        "L485",
-        "ACM2012-201",
-        175,
+        "Connector_Generic:Conn_01x04",
+        "J2",
+        "SWD (DNP)",
+        50,
         my,
-        footprint="Inductor_SMD:L_CommonModeChoke_Coilank_ACM2012",
+        footprint="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
     )
-    b.place("Device:R", "RBIAS_A", "560", 195, my + 8, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "RBIAS_B", "560", 195, my - 8, footprint="Resistor_SMD:R_0805_2012Metric")
-    b.place("Device:R", "RTERM", "120", 210, my, footprint="Resistor_SMD:R_0805_2012Metric")
+
+    b.place("Interface_UART:MAX485E", "U3", "SIT3485 / MAX3485", 140, my, footprint="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
+    b.place("Device:R", "R47A", "47", 120, my + 12, footprint=r0805)
+    b.place("Device:R", "R47B", "47", 120, my - 12, footprint=r0805)
+    b.place("Device:R", "RDE", "10k", 155, my - 12, footprint=r0805)
+    b.place("Device:C", "CM3", "100nF", 155, my + 12, footprint=c0805)
+    b.place("Device:R", "RBIAS_A", "560", 195, my + 8, footprint=r0805)
+    b.place("Device:R", "RBIAS_B", "560", 195, my - 8, footprint=r0805)
+    b.place("Device:R", "RTERM", "120", 210, my, footprint=r0805)
     b.place("Jumper:SolderJumper_2_Open", "JTERM", "120R", 210, my + 12, footprint="Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm")
     b.place("Device:D_TVS", "TVS2", "SM712", 225, my, rot=90, footprint="Package_TO_SOT_SMD:SOT-23-3")
-    b.place("Connector_Generic:Conn_01x03", "J485", "2EDGVC-5.08-03P", 245, my, footprint="Panel:TerminalBlock_3P_5.08")
+    b.place("Connector_Generic:Conn_01x03", "J485", "KF2EDGV-5.08-3P", 245, my, footprint="Panel:TerminalBlock_3P_5.08")
 
-    # STM32G030C8Tx LQFP-48 (DS12991 Fig.6): một cặp VDD/VSS chân 6/7.
-    # VBAT và VREF+ nối +3V3 (không pin, không dùng ADC).
-    # PA1 DE, PA2 TX, PA3 RX. PA13/PA14 = SWD. PA9/PA10 = I2C tới HT16K33A.
+    # STM32G030F6P6 TSSOP-20 (DS12991): VDD 4, VSS 5, NRST 6 (pull-up nội ~40k + CNRST).
+    # PA1 DE, PA2 TX, PA3 RX (USART2). PA4 STB, PA5 CLK, PA6 DIO (open-drain, kéo lên +5V_LED,
+    # các chân FT chịu 5 V). PA7 còi. PA13/PA14 SWD.
     b.net_label("U1", "4", "+3V3")
-    b.net_label("U1", "5", "+3V3")
-    b.net_label("U1", "6", "+3V3")
-    b.net_label("U1", "7", "GND")
-    b.net_label("U1", "10", "NRST")
-    b.net_label("U1", "12", "RS485_DE")
-    b.net_label("U1", "13", "UART_TX")
-    b.net_label("U1", "14", "UART_RX")
-    b.net_label("U1", "35", "SWDIO")
-    b.net_label("U1", "36", "SWCLK")
+    b.net_label("U1", "5", "GND")
+    b.net_label("U1", "6", "NRST")
+    b.net_label("U1", "8", "RS485_DE")
+    b.net_label("U1", "9", "UART_TX")
+    b.net_label("U1", "10", "UART_RX")
+    b.net_label("U1", "11", "TM_STB")
+    b.net_label("U1", "12", "TM_CLK")
+    b.net_label("U1", "13", "TM_DIO")
+    b.net_label("U1", "14", "BZ_ON")
+    b.net_label("U1", "18", "SWDIO")
+    b.net_label("U1", "19", "SWCLK")
+    for _nc in ("1", "2", "3", "7", "15", "16", "17", "20"):
+        b.no_connect("U1", _nc)
     b.net_label("CVDD1", "1", "+3V3")
     b.net_label("CVDD1", "2", "GND")
-    b.net_label("RNST", "1", "+3V3")
-    b.net_label("RNST", "2", "NRST")
     b.net_label("CNRST", "1", "NRST")
     b.net_label("CNRST", "2", "GND")
-    for _nc in ("1", "2", "3", "8", "9", "11"):
-        b.no_connect("U1", _nc)
     b.net_label("J2", "1", "+3V3")
     b.net_label("J2", "2", "SWDIO")
     b.net_label("J2", "3", "SWCLK")
@@ -436,24 +415,17 @@ def main() -> None:
     b.net_label("R47B", "1", "UART_RX")
     b.net_label("R47B", "2", "MAX_RO")
     b.net_label("U3", "1", "MAX_RO")
-    b.net_label("U3", "2", "MAX_RE")
-    b.net_label("U3", "3", "MAX_DE")
-    b.net_label("U3", "4", "MAX_DI")
-    b.net_label("U3", "5", "GND")
-    b.net_label("U3", "6", "RS485_A")
-    b.net_label("U3", "7", "RS485_B")
-    b.net_label("U3", "8", "+5V")
-    b.net_label("RDE", "1", "RS485_DE")
-    b.net_label("RDE", "2", "GND")
     b.net_label("U3", "2", "RS485_DE")
     b.net_label("U3", "3", "RS485_DE")
-    b.net_label("CM3", "1", "+5V")
+    b.net_label("U3", "4", "MAX_DI")
+    b.net_label("U3", "5", "GND")
+    b.net_label("U3", "6", "RS485_A_BUS")
+    b.net_label("U3", "7", "RS485_B_BUS")
+    b.net_label("U3", "8", "+3V3")
+    b.net_label("RDE", "1", "RS485_DE")
+    b.net_label("RDE", "2", "GND")
+    b.net_label("CM3", "1", "+3V3")
     b.net_label("CM3", "2", "GND")
-    # Cuộn CM: 1—4 = A, 2—3 = B (ACM2012 / symbol KiCad).
-    b.net_label("L485", "1", "RS485_A")
-    b.net_label("L485", "4", "RS485_A_BUS")
-    b.net_label("L485", "2", "RS485_B")
-    b.net_label("L485", "3", "RS485_B_BUS")
     b.net_label("RBIAS_A", "1", "+5V")
     b.net_label("RBIAS_A", "2", "RS485_A_BUS")
     b.net_label("RBIAS_B", "1", "RS485_B_BUS")
@@ -469,68 +441,59 @@ def main() -> None:
     b.net_label("J485", "2", "RS485_B_BUS")
     b.net_label("J485", "3", "GND")
 
-    # UI: HT16K33A quét 7-seg và LED trạng thái. STM32 giữ phím và RS485.
-    # ROW nguồn dòng, COM hút cathode. Địa chỉ I2C 0x70 (ROW0–2 kéo xuống trong).
+    # --- UI: TM1638 quét 2 module 4 số, 8 LED trạng thái và 16 phím ---
+    # SEG1–SEG8 = đoạn a–g, dp (đồng thời KS1–KS8 quét phím). SEG9 = anode chung 8 LED trạng thái.
+    # GRID1–GRID8 = cathode digit 1–8 (LED trạng thái Dk chung cathode với digit k).
+    # Phím: KSx ↔ K1 (hàng phím 1–2) hoặc K2 (hàng 3–4). K1–K3 có pull-down 10k nội.
     ty = 140.0
-    row_mcu = ["42", "43", "44", "45"]
-    col_mcu = ["46", "47", "48", "41"]
-    r0805 = "Resistor_SMD:R_0805_2012Metric"
-    b.place(
-        "Panel:HT16K33A",
-        "U6",
-        "HT16K33A",
-        70,
-        ty,
-        footprint="Panel:HT16K33A_SSOP28",
-    )
-    b.place("Device:C", "CLED", "100n", 40, ty, footprint="Capacitor_SMD:C_0805_2012Metric")
-    b.place("Device:R", "RSCL", "4.7k", 40, ty + 8, footprint=r0805)
-    b.place("Device:R", "RSDA", "4.7k", 40, ty + 14, footprint=r0805)
-    b.net_label("U6", "1", "GND")
-    b.net_label("U6", "28", "+5V_LED")
-    b.net_label("CLED", "1", "+5V_LED")
-    b.net_label("CLED", "2", "GND")
-    b.net_label("U6", "26", "SCL")
-    b.net_label("U6", "27", "SDA")
-    b.net_label("U1", "29", "SCL")
-    b.net_label("U1", "32", "SDA")
-    b.net_label("RSCL", "1", "SCL")
-    b.net_label("RSCL", "2", "+5V_LED")
-    b.net_label("RSDA", "1", "SDA")
-    b.net_label("RSDA", "2", "+5V_LED")
-    for i in range(8):
-        b.net_label("U6", str(i + 2), f"GRID_{i + 1}")
-    for row, pin in enumerate(("25", "24", "23", "22", "21", "20", "19", "18")):
-        b.net_label("U6", pin, f"SEG{row + 1}")
-    b.net_label("U6", "17", "LED_ROW")
-    for pin in ("10", "11", "12", "13", "14", "15", "16"):
-        b.no_connect("U6", pin)
-    for pin in (
-        "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
-        "25", "26", "27", "28", "30", "31", "33", "34", "37", "38", "39", "40",
-    ):
-        b.no_connect("U1", pin)
-
-    fp_seg = {"7": "SEG1", "6": "SEG2", "4": "SEG3", "2": "SEG4", "1": "SEG5", "9": "SEG6", "10": "SEG7", "5": "SEG8"}
-    dx, dy_top, dy_bot = 12.0, 112.0, 84.0
+    b.place("Panel:TM1638", "U6", "TM1638", 70, ty, footprint="Package_SO:SOIC-28W_7.5x17.9mm_P1.27mm")
+    b.place("Device:C", "CLED1", "100nF", 40, ty - 8, footprint=c0805)
+    b.place("Device:C", "CLED2", "100nF", 40, ty, footprint=c0805)
+    b.place("Device:C", "CLED3", "10uF", 40, ty + 8, footprint=c0805)
+    b.place("Device:R", "RSTB", "4.7k", 100, ty - 8, footprint=r0805)
+    b.place("Device:R", "RCLK", "4.7k", 100, ty, footprint=r0805)
+    b.place("Device:R", "RDIO", "4.7k", 100, ty + 8, footprint=r0805)
+    b.net_label("U6", "4", "+5V_LED")
+    b.net_label("U6", "15", "+5V_LED")
+    b.net_label("U6", "18", "GND")
+    b.net_label("U6", "25", "GND")
+    b.net_label("U6", "28", "TM_STB")
+    b.net_label("U6", "27", "TM_CLK")
+    b.net_label("U6", "26", "TM_DIO")
+    b.net_label("U6", "1", "KEY_K1")
+    b.net_label("U6", "2", "KEY_K2")
+    b.no_connect("U6", "3")
+    b.no_connect("U6", "14")
     for i in range(1, 9):
-        ref = f"DS{i}"
-        x = dx + ((i - 1) % 4) * 15.0
-        y = dy_top if i <= 4 else dy_bot
-        b.place(
-            "Connector_Generic:Conn_01x10",
-            ref,
-            "7SEG_0.56_CC",
-            x,
-            y,
-            footprint="Panel:LED7seg_1digit_0.56in_CC_THT",
-        )
-        for pin, seg in fp_seg.items():
-            b.net_label(ref, pin, seg)
-        b.net_label(ref, "3", f"GRID_{i}")
-        b.net_label(ref, "8", f"GRID_{i}")
+        b.net_label("U6", str(4 + i), f"SEG{i}")
+    b.net_label("U6", "13", "LED_ROW")
+    for i, pin in zip(range(1, 9), ("24", "23", "22", "21", "20", "19", "17", "16")):
+        b.net_label("U6", pin, f"GRID_{i}")
+    for ref in ("CLED1", "CLED2", "CLED3"):
+        b.net_label(ref, "1", "+5V_LED")
+        b.net_label(ref, "2", "GND")
+    for ref, net in (("RSTB", "TM_STB"), ("RCLK", "TM_CLK"), ("RDIO", "TM_DIO")):
+        b.net_label(ref, "1", "+5V_LED")
+        b.net_label(ref, "2", net)
 
-    # Keypad 4x4. Hàng kéo xuống = quét. Cột pull-up, đọc mức thấp khi nhấn.
+    # Module 4 số 0,56" CC (5641AS): 1 E, 2 D, 3 DP, 4 C, 5 G, 6 DIG4, 7 B, 8 DIG3, 9 DIG2, 10 F, 11 A, 12 DIG1.
+    mod_seg = {"11": "SEG1", "7": "SEG2", "4": "SEG3", "2": "SEG4", "1": "SEG5", "10": "SEG6", "5": "SEG7", "3": "SEG8"}
+    mod_dig = {"12": 0, "9": 1, "8": 2, "6": 3}
+    for m, (ref, y) in enumerate((("DS1", 112.0), ("DS2", 84.0))):
+        b.place(
+            "Connector_Generic:Conn_01x12",
+            ref,
+            "5641AS (4 digit 0.56in CC)",
+            12.0,
+            y,
+            footprint="Panel:Display_4digit_0.56in_THT",
+        )
+        for pin, seg in mod_seg.items():
+            b.net_label(ref, pin, seg)
+        for pin, d in mod_dig.items():
+            b.net_label(ref, pin, f"GRID_{4 * m + d + 1}")
+
+    # Keypad 4×4: SW pin1/4 = KSx (SEGx), pin2/3 = K1 hoặc K2. Firmware nhận một phím một lúc.
     sx, sy = 170.0, ty - 5
     for i in range(1, 17):
         b.place(
@@ -542,24 +505,10 @@ def main() -> None:
             footprint="Panel:SW_Tactile_12mm_THT",
         )
         row, col = (i - 1) // 4, (i - 1) % 4
-        b.net_label(f"SW{i}", "1", f"KEY_R{row+1}")
-        b.net_label(f"SW{i}", "2", f"KEY_C{col+1}")
-    kx, ky = 55, ty + 70
-    for r in range(1, 5):
-        b.place("Device:R", f"RK{r}", "100", kx, ky + (r - 1) * 5, footprint=r0805)
-        b.net_label("U1", row_mcu[r - 1], f"ROW{r}")
-        b.net_label(f"RK{r}", "1", f"ROW{r}")
-        b.net_label(f"RK{r}", "2", f"KEY_R{r}")
-    for c in range(1, 5):
-        b.place("Device:R", f"RC{c}", "100", kx + 16, ky + (c - 1) * 5, footprint=r0805)
-        b.place("Device:R", f"RPK{c}", "10k", kx + 24, ky + (c - 1) * 5, footprint=r0805)
-        b.net_label("U1", col_mcu[c - 1], f"COL{c}")
-        b.net_label(f"RPK{c}", "1", "+3V3")
-        b.net_label(f"RPK{c}", "2", f"COL{c}")
-        b.net_label(f"RC{c}", "1", f"COL{c}")
-        b.net_label(f"RC{c}", "2", f"KEY_C{c}")
+        b.net_label(f"SW{i}", "1", f"SEG{(row % 2) * 4 + col + 1}")
+        b.net_label(f"SW{i}", "2", f"KEY_K{row // 2 + 1}")
 
-    # Status LEDs D10-D17. Anode chung ROW8, cathode cùng COM của digit tương ứng.
+    # Status LEDs D10-D17: anode chung SEG9 (LED_ROW), cathode chung GRID của digit tương ứng.
     for i in range(8):
         ref = f"D{10 + i}"
         b.place(
@@ -570,8 +519,22 @@ def main() -> None:
             ty + 10,
             footprint="Panel:LED_3mm_THT",
         )
-        b.net_label(ref, "1", "LED_ROW")
-        b.net_label(ref, "2", f"GRID_{i + 1}")
+        b.net_label(ref, "1", "GRID_" + str(i + 1))
+        b.net_label(ref, "2", "LED_ROW")
+
+    # Còi báo phím: còi chủ động 5 V 12×9,5 mm (có mạch dao động sẵn), PA7 bật 30–50 ms mỗi lần nhận phím.
+    # QBZ hút cực âm còi; RBZG giữ còi tắt khi MCU reset.
+    bzx, bzy = 115.0, 205.0
+    b.place("Device:Buzzer", "BZ1", "Active buzzer 5V 12x9.5", bzx, bzy, footprint="Buzzer_Beeper:Buzzer_12x9.5RM7.6")
+    b.place("Transistor_FET:2N7002", "QBZ", "2N7002", bzx, bzy + 16, footprint="Package_TO_SOT_SMD:SOT-23")
+    b.place("Device:R", "RBZG", "100k", bzx - 14, bzy + 22, footprint=r0805)
+    b.net_label("BZ1", "1", "+5V")
+    b.net_label("BZ1", "2", "BZ_DRV")
+    b.net_label("QBZ", "3", "BZ_DRV")
+    b.net_label("QBZ", "2", "GND")
+    b.net_label("QBZ", "1", "BZ_ON")
+    b.net_label("RBZG", "1", "BZ_ON")
+    b.net_label("RBZG", "2", "GND")
 
     # Global rails
     b.global_net("+24V_IN", 25, 30)

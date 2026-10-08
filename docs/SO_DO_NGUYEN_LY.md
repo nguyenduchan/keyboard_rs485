@@ -1,4 +1,6 @@
-# Sơ đồ nguyên lý — Panel Keyboard RS485
+# Sơ đồ nguyên lý — Panel Keyboard RS485 (rev C, cấu hình thương mại)
+
+Rev C dùng linh kiện phổ biến ở cửa hàng VN và trên LCSC: **STM32G030F6P6**, **TM1638**, **SIT3485/MAX3485**, **XL1509-5.0 (SOP-8)**, **AMS1117-3.3**, 2 module LED 4 số 0,56", còi chủ động 12 mm. Schematic sinh bằng `hardware/kicad/panel-keyboard/tools/build_schematic.py`.
 
 ## 1. Khối hệ thống
 
@@ -6,191 +8,151 @@
 flowchart LR
   JPWR["J_PWR 2P\n+24V GND"]
   J485["J485 3P\nA B SG"]
-  PWR["Buck 24→5V\nXL1509/LM2596"]
+  PWR["Buck 24→5V\nXL1509-5.0"]
   LDO["AMS1117-3.3"]
-  STM["STM32G030C8T6"]
-  RS["MAX485"]
+  STM["STM32G030F6P6"]
+  RS["SIT3485"]
+  TM["TM1638"]
   UI["Mặt trước:\n2× LED 4 số\n4×4 phím\n8× LED 3mm"]
+  BZ["Còi 5V"]
 
   JPWR --> PWR
   PWR --> LDO
-  PWR --> RS
+  PWR --> TM
   LDO --> STM
-  STM -->|quét GPIO| UI
+  LDO --> RS
+  STM -->|STB/CLK/DIO| TM
+  TM -->|SEG/GRID + quét phím| UI
+  STM --> BZ
   STM <-->|UART + DE| RS
   J485 --> RS
 ```
 
-## 2. Bố trí PCB & phím
+## 2. Bố trí PCB
 
-- **Mặt trên:** toàn bộ chip và SMD, stencil một lần. **Mặt dưới:** chỉ phím / LED / 7-seg. Ba vùng 24V / buck / MCU ở cột phải (`PCB_LAYOUT.md`, `CHONG_PHIM_MA.md`).
-- Ma trận: **RK/RC 100Ω** sát GPIO, **RPK 10k** kéo cột lên +3V3; firmware debounce, một phím một lúc.
+- **Mặt trên:** toàn bộ chip và SMD (stencil một lần) + còi BZ1 (chân cắm). **Mặt dưới:** 2 module LED 4 số, 16 phím, 8 LED 3 mm.
+- Cột phải: nguồn ở trên, MCU + TM1638 + RS485 ở dưới. Chi tiết: `PCB_LAYOUT.md`.
 
-## 3. Nguồn (24 V tủ điện) — có lọc & clamp chống nhiễu
-
-Chi tiết review: `docs/CHONG_NHIEM_EMC.md`.
+## 3. Nguồn (24 V tủ điện)
 
 ```
-Tham chiếu: fiberboard/pcb/PWR_24V_PROTECT_BUCK_GUIDE.txt (mức 1 — VFD/EMI).
+J_PWR +24V ── F1 PPTC 1812 0,5A/33V ── FBIN ferrite 0805 ── VIN_PROTECT
+VIN_PROTECT: TVS1 SMAJ28A || C19 10µF/50V || C15 100nF ── DREV SS34 (chống ngược cực) ── +24V
++24V: C4 470µF/35V, C16 10µF/50V + C17 100nF sát chân VIN U4
 
-J_PWR +24V ── F1 PPTC ── L2 CM (2 dây + và return) ── VIN_PROTECT
-VIN_PROTECT: RV1 MOV || TVS1 SMAJ28A || C19/C15 || Q17 AO4407A + R17
-J_PWR GND ── L2 return ── GND_PWR
+U4 XL1509-5.0 (SOP-8): 1 VIN, 2 OUT (SW), 3 FB → +5V_RAW (bản 5.0 cố định, không chia áp),
+   4 ~EN → GND_PWR (mức thấp = chạy), 5–8 GND_PWR
+D8 SS34 (SW → GND_PWR), L1 47µH cỡ 6045 → +5V_RAW (C2 220µF/10V + C5) ── FB2 ── +5V (C22 220µF) ── FB5V → +5V_LED
 
-Sau Q17: C4 1000µF → +24V → XL1509 U4 (C16 10µF + C17 100nF sát chân VIN)
-Buck: D8 SS34, L1 47µH → +5V_RAW (C2 220µF + C5) ── FB2 ── +5V (C22) ── FB5V → +5V_LED
-
-GND_PWR ── NT1 ── GND (logic / MCU / tụ 5V/3V3)
-
-+5V ── AMS1117 ── +3V3_LDO (C3 22µF + C18 100nF sát chân ra) ── FB1 ── +3V3 ── CVDD1 100nF sát VDD STM32
-
-STM32G030C8T6 LQFP-48: VDD/VDDA chân 6, VSS chân 7, 100nF. VBAT chân 4 và VREF+ chân 5 nối +3V3. NRST 10k→3V3 + 100nF→GND. PA14 là SWCLK và BOOT0, pull-down nội.
+GND_PWR ── NT1 ── GND (logic)
++5V ── U5 AMS1117-3.3 ── +3V3_LDO (C3 22µF + C18 100nF) ── FB1 ── +3V3
 ```
 
 | Net | Mô tả |
 |-----|--------|
-| `+24V_IN` | Tủ → F1 |
-| `+24V` | Sau Q17, vào buck |
-| `GND_PWR` | Return 24V / switching (star qua NT1) |
-| `GND` | Logic / MCU / RS485 signal GND |
-| `+5V` | MAX485, nguồn anode 7-seg (`+5V_LED`) |
-| `+3V3` | STM32 |
+| `+24V_IN` / `+24V_FUSE` | Tủ → F1 → FBIN |
+| `VIN_PROTECT` | Sau ferrite, có TVS |
+| `+24V` | Sau diode chống ngược, vào buck |
+| `GND_PWR` | Return 24 V / switching (star qua NT1) |
+| `GND` | Logic / MCU / RS485 |
+| `+5V` / `+5V_LED` | Còi, bias RS485 / TM1638 + LED |
+| `+3V3` | STM32, SIT3485 |
 
-MAX485 dùng 5 V, IO chịu được mức 3.3 V.
+Dòng tải 5 V ước tính ≤ 300 mA (LED quét + còi + logic) → dòng vào 24 V ≈ 80 mA. Diode SS34 chống ngược sụt ~0,4 V, tổn hao < 0,05 W.
 
-## 3. STM32G030C8T6 + HT16K33A
+## 4. STM32G030F6P6 (TSSOP-20)
 
-**U6 HT16K33A** quét 8 chữ số và 8 LED trạng thái trên rail **+5V_LED**. STM32 chỉ nối I2C: **PA9 = SCL**, **PA10 = SDA**, kéo lên +5V_LED bằng **4,7 kΩ** vì VIH của chip là 0,7×5 V. Địa chỉ **0x70**. Các chân GPIO từng dùng cho segment, digit và LED để trống.
+| Chức năng | Chân | GPIO | Ghi chú |
+|-----------|------|------|---------|
+| VDD / VSS | 4 / 5 | | CVDD1 100nF sát chân |
+| NRST | 6 | | pull-up nội + CNRST 100nF |
+| DE | 8 | PA1 | RDE 10k kéo xuống (mặc định RX) |
+| TX / RX | 9 / 10 | PA2 / PA3 | USART2, 47 Ω nối tiếp |
+| TM_STB / TM_CLK / TM_DIO | 11 / 12 / 13 | PA4 / PA5 / PA6 | **open-drain**, kéo lên +5V_LED 4,7k (chân FT chịu 5 V; VIH TM1638 ≈ 0,7·VDD) |
+| BZ_ON | 14 | PA7 | bật còi |
+| SWDIO / SWCLK | 18 / 19 | PA13 / PA14 | PA14 cũng là BOOT0 (pull-down nội) |
 
-| Chức năng | Chân symbol | GPIO |
-|-----------|-------------|------|
-| DE / TX / RX | 12 / 13 / 14 | PA1 / PA2 / PA3 |
-| I2C SCL / SDA | 29 / 32 | PA9 / PA10 |
-| Hàng phím | 42–45 | PB3–PB6 |
-| Cột phím | 46–48, 41 | PB7–PB9, PD3 |
-| SWD | 35 / 36 | PA13 / PA14 |
+Chân 1, 2, 3, 7, 15, 16, 17, 20 để trống (dự phòng).
 
-## 4. Hiển thị 7 đoạn (2 × 4 digit, 0.56", DIP)
+## 5. TM1638 — hiển thị, LED trạng thái, quét phím
 
-Tám LED 7 thanh **common cathode**. HT16K33A nối thẳng, không điện trở nối tiếp (datasheet: ROW ra panel).
+| Chân TM1638 | Net | Nối tới |
+|-------------|-----|---------|
+| 5–12 SEG1/KS1–SEG8/KS8 | SEG1–SEG8 | đoạn a, b, c, d, e, f, g, dp của 2 module + chân phím |
+| 13 SEG9 | LED_ROW | anode chung D10–D17 |
+| 24, 23, 22, 21, 20, 19, 17, 16 GRID1–8 | GRID_1–GRID_8 | DIG1–4 của DS1, DIG1–4 của DS2; cathode D10–D17 |
+| 1 / 2 K1 / K2 | KEY_K1 / KEY_K2 | chân còn lại của phím |
+| 4, 15 VDD | +5V_LED | CLED1 100nF (chân 4), CLED2 100nF + CLED3 10µF (chân 15) |
+| 18, 25 GND | GND | |
+| 26 / 27 / 28 | TM_DIO / TM_CLK / TM_STB | STM32 |
+| 3 K3, 14 SEG10 | — | không dùng |
 
-| Net | Chân U6 | Ý nghĩa |
-|-----|---------|---------|
-| SEG1–SEG8 | ROW0–ROW7 (chân 25…18) | a, b, c, d, e, f, g, dp |
-| GRID_1–GRID_8 | COM0–COM7 (chân 2…9) | cathode DS1–DS8 |
-| LED_ROW | ROW8 (chân 17) | anode chung D10–D17 |
+**Module 4 số 0,56" CC (5641AS):** 1 E, 2 D, 3 DP, 4 C, 5 G, 6 DIG4, 7 B, 8 DIG3, 9 DIG2, 10 F, 11 A, 12 DIG1. DS1 = digit 1–4 (hàng trên), DS2 = digit 5–8 (hàng dưới). TM1638 hạn dòng segment bên trong, không cần điện trở.
 
-RAM: byte chẵn của mỗi COM là ROW0–ROW7, bit 0 = ROW0 = nét a. Byte lẻ bit 0 = ROW8 = LED trạng thái của digit đó. Chip quét khoảng 1/9.
+**LED trạng thái:** D10…D17 anode → SEG9, cathode → GRID_1…GRID_8 (sáng khi digit tương ứng được quét; bit SEG9 của byte lẻ mỗi GRID).
 
-## 5. Ma trận phím 4×4 (16 tact SMD 12×12)
-
-STM32 quét ma trận 4×4. Kéo một hàng xuống GND, đọc cột (kéo lên 10k). Mức thấp = nhấn.
-
-```
-        C1    C2    C3    C4
-R1      SW00  SW01  SW02  SW03
-R2      SW04  SW05  SW06  SW07
-R3      SW08  SW09  SW10  SW11
-R4      SW12  SW13  SW14  SW15
-```
-
-RK/RC 100Ω nối tiếp sát GPIO, RPK 10k kéo cột lên +3V3. Firmware debounce, chỉ nhận một phím.
-
-## 6. Eight LED trạng thái (0805, cột phải)
-
-Anode nối **LED_ROW** (ROW8). Cathode D10 nối **GRID_1**, D11 nối **GRID_2**, … D17 nối **GRID_8**. LED sáng cùng lúc digit tương ứng được quét.
-
-| LED | Màu (gợi ý) | GPIO | Chức năng decal (ví dụ) |
-|-----|-------------|------|-------------------------|
-| D1 | Xanh | PA9 | RUN |
-| D2 | Đỏ | | STOP |
-| D3 | Vàng | | FAULT |
-| D4 | Xanh | | AUTO |
-| D5 | Vàng | | MANUAL |
-| D6 | Xanh | | READY |
-| D7 | Vàng | | COMM |
-| D8 | Đỏ | | ALARM |
-
-Mỗi LED: **THT 3 mm** (PCB **D10–D17**), do **U6** quét. Cột **X = 79.5 mm**. Chi tiết `docs/MAT_BANG_CHUC_NANG_LED.md`.
-
-## 7. RS485 (Modbus slave) — ESD, CM, failsafe
+**Ma trận phím (TM1638 quét, đọc bằng lệnh 0x42):**
 
 ```
-STM32 PA2 (TX) ── 47Ω ── MAX485 DI
-STM32 PA3 (RX) ── 47Ω ── MAX485 RO
-STM32 PA1 ── 0Ω ── ~RE + DE (nối chung); **10k pulldown GND** (mặc định RX)
-MAX485 VCC ── 100nF sát chân; GND via stitch cạnh IC
-
-MAX485 A,B ── [L485 CM choke] ── nets RS485_A, RS485_B
-  RS485_A ── 560Ω ── +5V        (bias failsafe — idle high A)
-  RS485_B ── 560Ω ── GND        (bias failsafe — idle low B)
-  RS485_A ──┬── [JTERM: 120Ω] ──┬── RS485_B   (jumper/solder, node cuối bus)
-            └── [TVS2 SM712] ── J485 pin1 A, pin2 B, pin3 SG
+              KS1/SEG1  KS2/SEG2  KS3/SEG3  KS4/SEG4  KS5/SEG5  KS6/SEG6  KS7/SEG7  KS8/SEG8
+K1 (hàng 1-2)  SW1       SW2       SW3       SW4       SW5       SW6       SW7       SW8
+K2 (hàng 3-4)  SW9       SW10      SW11      SW12      SW13      SW14      SW15      SW16
 ```
 
-**Không** dùng 470Ω trên UART (edge quá chậm / lỗi Modbus tốc cao). **Không** đặt cap lớn trực tiếp A–B ngoài termination.
+Không có diode nối tiếp phím: firmware chỉ nhận **một phím một lúc** (nhấn 2 phím cùng K có thể làm nhấp nháy nét trong lúc giữ — không hại chip vì SEG là PMOS open-drain). K1–K3 có pull-down 10k nội.
 
-Giắc cắm rút trên PCB: **J485 = Degson 2EDG-5.08** (socket **2EDGVC-5.08-03P**). Chi tiết cáp → `docs/CAP_VA_GIAC.md`.
+## 6. Còi báo phím (BZ1)
 
-| J_PWR 2P | J485 3P |
-|----------|---------|
-| 1 +24V | 1 A |
-| 2 GND | 2 B |
-| | 3 SG |
-
-## 8. Lập trình & reset
-
-| Tín hiệu | Ghép chân |
-|----------|-----------|
-| SWDIO | PA13 |
-| SWCLK | PA14 |
-| NRST | 10k → 3V3, nút reset optional mặt trên |
-| BOOT0 | PA14, pull-down nội (cùng chân SWCLK) — không gắn R |
-
-Header 1.27 mm 4-pin SWD **mặt trên**, cùng phía với STM32.
-
-## 9. Netlist tóm tắt (cho ERC/DRC)
+Còi **chủ động** 5 V 12×9,5 mm (có mạch dao động sẵn, ~2,3–2,7 kHz). Mỗi lần nhận phím hợp lệ, PA7 = 1 trong **30–50 ms**.
 
 ```
-+24V, GND, +5V, +5V_LED, +3V3, +3V3_ANA
-UART_TX, UART_RX, RS485_DE
-RS485_A, RS485_B
-SEG1..SEG8, GRID_1..GRID_8
-ROW1..ROW4, COL1..COL4
-LED_1..LED_8
++5V ── BZ1 (+) ── BZ1 (−) ── BZ_DRV ── D  QBZ 2N7002  S ── GND
+PA7 (BZ_ON) ──┬── G
+              RBZG 100k → GND   (còi tắt khi MCU reset)
 ```
 
-## 11. EMC — checklist linh kiện (cross-ref BOM)
+Còi đặt mặt trên, tâm thân X=40, Y=50 (dải trống giữa module 7 đoạn dưới và hàng phím trên).
 
-| Ref | Value | Vị trí |
-|-----|-------|--------|
-| F1 | MF-MSMF350 | PPTC |
-| L2 | ACM2012-201 | CM sau F1 |
-| RV1 | 14D390K | MOV tại VIN_PROTECT |
-| TVS1 | SMAJ28A | TVS nhanh |
-| Q17 | AO4407A | Chống cực ngược |
-| C4 | 1000µF | Bulk 24V (mức 1) |
-| FB2/C22 | BLM21PG121 + 220µF | Rail +5V |
-| FB1/CVDD1 | BLM21PG121 + 100nF | +3V3, tụ sát chân VDD |
-| NT1 | NetTie | GND_PWR ↔ GND |
-| FB5V, FB33 | 600Ω@100MHz | 5V→LED driver; 3V3→VDDA |
-| L485 | CM choke RS485 | Giữa U3 và J1 |
-| TVS2 | SM712 | Sát J485 A/B |
-| Rbias | 560Ω ×2 | Failsafe A/B |
-| JTERM | 120Ω + jumper | Termination |
-| U6 | HT16K33A | Quét 7-seg và LED trạng thái |
-| RSCL, RSDA | 4.7k | Kéo I2C lên +5V_LED |
-| R47 ×2 | 47Ω | UART DI/RO |
-
-## 10. Sơ đồ ASCII một trang
+## 7. RS485 (Modbus slave)
 
 ```
-                    +24V --[F1][TVS][Q17][C4]-- XL1509 --+5V--[FB5V]-- +5V_LED U6
-                    GND_PWR -- NT1 -- GND (logic) ===================|
-                    +5V ---------------- MAX485 / AMS1117 --> +3V3 --[FB]-- VDDA
-  J485 A/B/SG <-- SM712 <-- CM choke <-- (bias 560R) <-- MAX485 <-- UART 47R (STM32)
-                           DE/~RE + 10k pulldown
-
-  STM32 PA9/PA10 I2C -- 4.7k -- HT16K33A --> SEG + GRID + LED_ROW
-  STM32 ROW/COL ------------------> 4x4 tact
+STM32 PA2 (TX) ── 47Ω ── SIT3485 DI
+STM32 PA3 (RX) ── 47Ω ── SIT3485 RO
+STM32 PA1 ── ~RE + DE (nối chung); RDE 10k → GND (mặc định nhận)
+SIT3485 VCC = +3V3, CM3 100nF sát chân
+SIT3485 A/B = RS485_A_BUS / RS485_B_BUS
+  A ── 560Ω ── +5V, B ── 560Ω ── GND   (bias failsafe)
+  A ── [JTERM hàn tắt] ── 120Ω ── B    (node cuối bus)
+  TVS2 SM712 (A, B → GND) sát J485; J485: 1 A, 2 B, 3 SG
 ```
+
+SIT3485 / MAX3485 / SP3485 cùng sơ đồ chân MAX485, chạy 3,3 V.
+
+## 8. Lập trình
+
+J2 (4 pad 2,54 mm, **không lắp** khi sản xuất): 1 +3V3, 2 SWDIO, 3 SWCLK, 4 GND. Nạp bằng kim pogo hoặc hàn tạm header.
+
+## 9. Netlist tóm tắt
+
+```
++24V_IN, +24V_FUSE, VIN_PROTECT, +24V, +5V_SW, +5V_RAW, +5V, +5V_LED, +3V3_LDO, +3V3, GND, GND_PWR
+UART_TX, UART_RX, RS485_DE, MAX_DI, MAX_RO, RS485_A_BUS, RS485_B_BUS, NRST, SWDIO, SWCLK
+TM_STB, TM_CLK, TM_DIO, SEG1..SEG8, LED_ROW, GRID_1..GRID_8, KEY_K1, KEY_K2
+BZ_ON, BZ_DRV
+```
+
+## 10. Thay đổi so với rev B
+
+| Rev B | Rev C | Lý do |
+|-------|-------|-------|
+| STM32G030C8T6 LQFP-48 | STM32G030F6P6 TSSOP-20 | TM1638 quét phím → MCU chỉ cần ~9 GPIO, rẻ hơn |
+| HT16K33A SSOP-28 (I2C) | TM1638 SOP-28 | phổ biến hơn, có nguồn thay thế AiP1638 / GN1638 |
+| 8 LED 7 đoạn 1 số | 2 module 4 số 5641AS | 24 chân thay vì 80, dây ít hơn |
+| RK/RC/RPK (12 điện trở) | bỏ | phím do TM1638 quét |
+| MAX485 5 V + L485 | SIT3485 3,3 V, bỏ L485 | rẻ, dễ mua |
+| L2 ACM2012, RV1 MOV, Q17 AO4407A + R17 | FBIN ferrite, bỏ RV1, DREV SS34 | linh kiện hiếm; AO4407A sai gói (thực tế SO-8) và Vgs ±20 V < 24 V |
+| XL1509 footprint TO-263-5, R36/R37/R38 | SOP-8, FB nối ngõ ra, ~EN nối GND | **sửa lỗi**: XL1509 là SOP-8; R38 kéo ~EN lên 24 V làm buck không chạy; bản 5.0 không dùng chia áp |
+| L1 1210, D8 SOD-123, F1 2920, C4 1000µF/25V | L1 6045, D8 SMA, F1 1812, C4 470µF/35V | dòng bão hoà đủ, gói đúng cho SS34, điện áp tụ đủ dư |
+| Còi CMT-8504 + driver PWM | còi chủ động 12 mm + 2N7002 | phổ biến, firmware chỉ bật/tắt |
+| Footprint LED 3 mm pad "K/A" | pad "1"=K, "2"=A | khớp ký hiệu Device:LED (rev B nối ngược trong schematic) |
+| Lỗ ốc MH nối GND | MH cách ly | tránh vòng đất qua vỏ tủ |

@@ -1,58 +1,37 @@
 Qty,RefDes,Value,Footprint,Layer,Manufacturer,MPN,Notes
-1,U1,STM32G030C8T6,LQFP-48 7x7,Top,ST,STM32G030C8T6,MCU G0 64KB/8KB; tự quét phím và LED; VBAT+VREF+ nối +3V3; PA14 SWCLK+BOOT0 nội
-1,U3,MAX485 or SP3485EN,SOIC-8,Top,Maxim/TI,MAX485CSA+,3.3V IO compatible; 100nF on VCC
-1,U4,XL1509-5.0,TO-263-5 TabPin3,Top,XLSEMI,XL1509-5.0,PWR_BUCK per fiberboard PWR_24V_PROTECT_BUCK_GUIDE
-1,U5,AMS1117-3.3,SOT-223,Top,AMS,AMS1117-3.3,LDO 5V→3.3V after FB1
-1,L2,ACM2012-201-2P,ACM2012 CM,Top,TDK/Bourns,ACM2012-201,CM on V+ and GND after F1
-1,RV1,Panasonic VF MOV,VF 6x8mm SMD,Top,Panasonic,Varistor_Panasonic_VF,MOV at VIN_PROTECT
-1,Q17,AO4407A,SOT-23,Top,,,P-FET anti-reverse at VIN_PROTECT
-1,D8,SS34,SOD-123,Top,,,Buck freewheel K=SW A=GND_PWR
-1,F1,MF-MSMF350,PPTC 2920,Top,Bourns,MF-MSMF350/24,Input OCP
-1,R17,100k,0805,Top,,,Q17 gate
-1,R36,3k,0805,Top,,,Buck FB (XL1509)
-1,R37,1k,0805,Top,,,Buck FB → GND_PWR
-1,R38,10k,0805,Top,,,EN pull-up → +24V
-1,C4,1000uF 25V,10x12.5 elec,Top,,,Bulk 24V level-1 (470uF min if no space)
-1,C15,100nF,0805,Top,,,HF next to TVS1
-1,C19,10uF 25V,0805,Top,,,Bulk small at VIN_PROTECT
-1,C16,10uF,0805,Top,,,Ceramic at XL1509 VIN
-1,C17,100nF,0805,Top,,,HF ceramic at XL1509 VIN
-1,C2,220uF 6.3V,CP_Elec 6.3x5.4,Top,,,Bulk +5V_RAW at L1
-1,C5,100nF,0805,Top,,,HF next to L1 / C2
-1,C22,220uF 6.3V,CP_Elec 6.3x5.4,Top,,,Bulk +5V (MAX485 and +5V_LED)
-1,C7,10uF,0805,Top,,,AMS1117 input pin
-1,C3,22uF,0805,Top,,,AMS1117 output, stability
-1,C18,100nF,0805,Top,,,HF at AMS1117 output pin
-1,NT1,NetTie GND_STAR,SMD 2-pad,Top,,,GND_PWR ↔ GND at C4−
-1,TVS1,SMAJ28A,SMA,Top,Littelfuse,SMAJ28A,TVS D7 in guide
-1,FB2,BLM21PG121,0805,Top,Murata,BLM21PG121,+5V_RAW → +5V
-1,FB1,BLM21PG121,0805,Top,Murata,BLM21PG121,+3V3_LDO → +3V3
-1,TVS2,SM712,SOT-23-3,Top,Semtech,SM712,RS485 A/B ESD to GND
-1,L485,Common-mode choke 90-120 ohm CM,4-pin 0805/1210,Top,Bourns/Murata,ACM2012 or DLW21SN,Between U3 and J485
-1,FB5V,BLM21PG121,0805,Top,Murata,BLM21PG121,+5V → +5V_LED (display)
-8,DS1-DS8,7-seg 0.56in CC single digit,THT 10-pin 2.54/15.24mm,Bottom,,,5611/SC56 body 12.70x19.05; DS1-4 Target DS5-8 Actual
-16,,B3F-4055 cap,,Mechanical,,,Key caps
-8,D10-D17,LED 3mm THT,,Bottom,,,Status column; anode ROW8 of U6, cathode shares digit COM
-16,SW1-SW16,Tact 12mm THT,,Bottom,,,Panel:SW_Tactile_12mm_THT
-1,U6,HT16K33A,SSOP-28 3.9x9.9 P0.635,Top,Holtek,HT16K33A-28SSOP,I2C 0x70; drives 8 digits + 8 status LEDs
-2,RSCL RSDA,4.7k,0805,Top,,,I2C pull-up to +5V_LED; PA9=SCL PA10=SDA
-4,RK1-RK4,100,0805,Top,,,Series KEY row, next to STM32
-4,RC1-RC4,100,0805,Top,,,Series KEY col, next to STM32
-4,RPK1-RPK4,10k,0805,Top,,,Column pull-up to +3V3, next to STM32
-1,CLED,100n,0805,Top,,,100nF at U6 VDD pin
-2,R47,47,0805,Top,,,UART series next to MAX485 DI/RO
-1,RDE,10k,0805,Top,,,DE/~RE pulldown default RX
-2,RBIAS,560,0805,Top,,,A pull-up 5V; B pull-down GND
-1,RTERM,120,0805,Top,,,Across A-B via JTERM jumper
-1,JTERM,Solder jumper 2-pin,,Top,,,Enable termination at bus end
-1,RNST,10k,0805,Top,,,NRST pull-up next to STM32
-1,CNRST,100n,0805,Top,,,NRST filter next to STM32
-1,CVDD1,100n,0805,Top,,,100nF at STM32 VDD pin 6
-1,CM3,100n,0805,Top,,,100nF at MAX485 VCC pin
-1,J_PWR,Terminal plug 2P 5.08mm,2EDGVC-5.08-02P Vertical,Top,Degson/Phoenix,MC 1.5/2-G-5.08,Socket +24V GND
-1,J485,2EDG-5.08 socket 3P,2EDGVC-5.08-03P Vertical,Top,Degson,2EDGVC-5.08-03P,RS485 A B SG on PCB
-1,,2EDG-5.08 plug 3P,cable assy,,Degson,2EDGK-5.08-03P,Prefab RS485 cable to PLC
-1,,2EDG-5.08 plug cover,,,Degson,2EDGY-5.08 or series,Optional strain relief cap
-2,CBL,,,Assembly,,,Prefabricated: 2P power cable + 3P Belden9841 RS485 cable see CAP_VA_GIAC.md
-1,J2,SWD 1.27mm 4pin,Pin header,Top,,,Debug
-1,L1,Inductor 47uH,1210,Top,,,Buck inductor (fiberboard)
+1,U1,STM32G030F6P6,TSSOP-20,Top,ST,STM32G030F6P6,MCU; PA1 DE PA2/PA3 USART2; PA4-PA6 TM1638 open-drain; PA7 còi
+1,U6,TM1638,SOP-28 300mil,Top,Titan Micro,TM1638,Quét 2 module 4 số + 8 LED + 16 phím; thay thế AiP1638 / GN1638
+1,U3,SIT3485 / MAX3485,SOIC-8,Top,SIT / Maxim clone,SIT3485ESA,RS485 3.3V cùng chân MAX485
+1,U4,XL1509-5.0E1,SOP-8,Top,XLSEMI,XL1509-5.0E1,Buck 24V→5V; FB nối +5V_RAW; ~EN nối GND
+1,U5,AMS1117-3.3,SOT-223,Top,AMS,AMS1117-3.3,LDO 5V→3.3V
+2,D8 DREV,SS34,SMA,Top,,SS34,D8 diode buck; DREV chống ngược cực đầu vào
+1,TVS1,SMAJ28A,SMA,Top,,SMAJ28A,TVS 24V tại VIN_PROTECT
+1,TVS2,SM712,SOT-23,Top,,SM712,ESD/surge RS485 A/B
+1,F1,PPTC 0.5A 33V,1812,Top,,SMD1812P050TF/33,Cầu chì tự phục hồi đầu vào
+1,L1,47uH,SMD 6045 (6x6 mm),Top,,NR6045-470M,Cuộn buck; Isat ≥ 0.8A
+4,FBIN FB1 FB2 FB5V,Ferrite bead 0805,0805,Top,,,FBIN 600R; FB1/FB2/FB5V 120R@100MHz ≥2A
+1,C4,470uF 35V,CP_Elec 10x10.5 SMD,Top,,,Bulk +24V
+2,C2 C22,220uF 10V,CP_Elec 6.3x5.4 SMD,Top,,,+5V_RAW / +5V
+2,C16 C19,10uF 50V,1206,Top,,,VIN buck / VIN_PROTECT
+1,C3,22uF,0805,Top,,,AMS1117 ngõ ra
+2,C7 CLED3,10uF,0805,Top,,,AMS1117 ngõ vào; TM1638 VDD bulk
+2,C15 C17,100nF 50V,0805,Top,,,HF trên rail 24V
+7,C5 C18 CVDD1 CNRST CM3 CLED1 CLED2,100nF,0805,Top,,,Decoupling
+2,R47A R47B,47R,0805,Top,,,UART nối tiếp
+1,RDE,10k,0805,Top,,,Kéo DE xuống (mặc định nhận)
+1,RBZG,100k,0805,Top,,,Kéo cổng QBZ xuống
+3,RSTB RCLK RDIO,4.7k,0805,Top,,,Kéo lên +5V_LED cho 3 dây TM1638
+2,RBIAS_A RBIAS_B,560R,0805,Top,,,Bias failsafe RS485
+1,RTERM,120R,0805,Top,,,Termination (bật bằng JTERM)
+1,JTERM,Solder jumper,SMD,Top,,,Hàn tắt ở node cuối bus (không phải linh kiện)
+1,NT1,Net tie,SMD,Top,,,GND_PWR ↔ GND (không phải linh kiện)
+1,QBZ,2N7002,SOT-23,Top,,2N7002,Lái còi
+1,BZ1,Active buzzer 5V 12x9.5,THT RM7.6,Top (THT),,TMB12A05,Còi chủ động; tự hàn
+2,DS1 DS2,5641AS 0.56in 4 digit CC,THT 12 pin,Bottom (THT),,5641AS,Đỏ; tự hàn
+16,SW1-SW16,Tact 12x12mm,THT 4 pin,Bottom (THT),,TS-1212,Tự hàn
+8,D10-D17,LED 3mm,THT,Bottom (THT),,,Tự hàn
+1,J_PWR,KF2EDGV-5.08-2P,THT,Top (THT),Kefa/Degson,2EDGVC-5.08-02P,+24V / GND; tự hàn
+1,J485,KF2EDGV-5.08-3P,THT,Top (THT),Kefa/Degson,2EDGVC-5.08-03P,A / B / SG; tự hàn
+1,J2,SWD 4 pad 2.54mm,PinHeader 1x04,Top,,,Không lắp (DNP) — nạp bằng kim pogo
+16,,Nắp phím B3F 12mm,,Mechanical,,,Hoặc decal màng in nổi
+2,,Phích KF2EDGK-5.08 2P / 3P,,Cable,,2EDGK-5.08,Cáp nguồn + cáp RS485

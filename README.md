@@ -1,6 +1,6 @@
 # Bàn phím công nghiệp All-in-One (PCB 120 × 120 mm)
 
-Mạch **STM32G030C8 + RS485**. MCU tự quét phím. **HT16K33A** quét 7-seg và LED. **Mặt trên (F.Cu):** toàn bộ **chip và SMD**, stencil một lần. **Mặt dưới (B.Cu):** chỉ **phím, LED 3 mm, 8× 7-seg**. Cột phải tách **nguồn (trên)** và **MCU + RS485 (dưới)**. Chống phím ma: `docs/CHONG_PHIM_MA.md`.
+Mạch **STM32G030F6P6 + RS485 (SIT3485)**, rev C — linh kiện phổ biến. **TM1638** quét 2 module LED 4 số, 8 LED trạng thái và 16 phím. Còi chủ động báo nhận phím. **Mặt trên (F.Cu):** toàn bộ **chip và SMD**, stencil một lần. **Mặt dưới (B.Cu):** chỉ **phím, LED 3 mm, 2 module 7 đoạn 4 số**. PCB đã đi dây 2 lớp (autorouter PathFinder, `tools/pathfinder.cpp`), DRC KiCad sạch. Cột phải tách **nguồn (trên)** và **MCU + RS485 (dưới)**. Chống phím ma: `docs/CHONG_PHIM_MA.md`.
 
 ## Cấu trúc thư mục
 
@@ -29,15 +29,15 @@ python hardware/kicad/panel-keyboard/tools/verify_front_layout.py
 
 KiCad vẽ trang với **Y tăng xuống dưới** (đỉnh hình = Y nhỏ). Từ trên xuống: **7-seg → khe CNC 8 mm → keypad**. LED trạng thái ở cột phải của cụm phím. Thân phím và LED hướng xuống mặt dưới.
 
-Cả hai hàng 7-seg sát nhau, pitch **13,7 mm** (thân 12,70 mm + khe 1 mm), X = 19,45 / 33,15 / 46,85 / 60,55, tâm **X=40** trùng tâm keypad. Thân cao 19,05 mm, hàng chân cách 15,24 mm. Khe giữa mép dưới thân 7-seg và mép trên thân phím là **8 mm**.
+Hai module 4 số 0,56" (5641AS, thân 50,4 × 19,0 mm, bước digit 12,7 mm) đặt tâm **X=40** trùng tâm keypad. Hàng chân cách 15,24 mm. Khe giữa mép dưới thân 7-seg và mép trên thân phím là **8 mm**.
 
 | Y | 16 | 32 | 48 | 64 | | 79.5 |
 |---:|:---:|:---:|:---:|:---:|:---|:---:|
 | 12 | | | | | | D10 |
-| 15.4 | DS1–DS4 (X=19.45 / 33.15 / 46.85 / 60.55) | | | | | |
+| 15.4 | DS1 module 4 số (digit 1–4, tâm X=40) | | | | | |
 | 20 | | | | | | D11 |
 | 28 | | | | | | D12 |
-| 35.5 | DS5–DS8 (cùng X với hàng trên) | | | | | |
+| 35.5 | DS2 module 4 số (digit 5–8, tâm X=40) | | | | | |
 | 36 | | | | | | D13 |
 | 44 | | | | | | D14 |
 | 52 | | | | | | D15 |
@@ -58,8 +58,8 @@ python hardware/kicad/panel-keyboard/tools/verify_front_layout.py
 
 Tiêu chí:
 
-- 16 nút + 8 digit + 8 LED đúng tọa độ  
-- Khe **thân phím ↔ thân hàng 7-seg dưới (DS5–8)** ≥ **8 mm** (đủ lưỡi CNC khoảng 3 mm và gân mặt máy)
+- 16 nút + 2 module 4 số + 8 LED đúng tọa độ  
+- Khe **thân phím ↔ thân module 7-seg dưới (DS2)** ≥ **8 mm** (đủ lưỡi CNC khoảng 3 mm và gân mặt máy)
 
 Chuẩn hóa footprint trên PCB: `tools/fix_front_layout.py` (sau `update_pcb_all.py`).
 
@@ -67,14 +67,15 @@ Chuẩn hóa footprint trên PCB: `tools/fix_front_layout.py` (sau `update_pcb_a
 
 ## Chip và SMD — mặt trên (F.Cu)
 
-**U6 HT16K33A** nằm dưới cột LED trạng thái và quét 7-seg cùng LED 3 mm. Tụ bypass và trở phím nằm sát chân chip tương ứng. Cột phải **X ≈ 82…118** tách hai khối: nguồn phía trên, MCU + RS485 phía dưới. **J_PWR** (115, 16) và **J485** (115, 102) hướng ra **cạnh phải**.
+**U6 TM1638** (SOP-28) nằm dưới cột LED trạng thái, quét 7-seg, LED 3 mm và phím. **U1 STM32G030F6P6** ngay bên phải, nối 3 dây STB/CLK/DIO (kéo lên 4,7k). Còi **BZ1** mặt trên tại (40, 50). Cột phải **X ≈ 82…118** tách hai khối: nguồn phía trên, MCU + RS485 phía dưới. **J_PWR** (115, 16) và **J485** (115, 102) hướng ra **cạnh phải**.
 
 | Vùng | X (mm) | Y (mm) | Nội dung |
 |------|--------|--------|----------|
-| Dưới LED trạng thái | 72–88 | 74–96 | U6 HT16K33A, CLED, I2C |
-| Sát STM32 | 78–102 | 100–110 | RK/RC/RPK và lọc RS485 |
-| **BUCK_5V** | 82–118 | 4–46 | J_PWR, U4 XL1509, C2, C22 |
-| **24V_PROTECT** | 82–118 | 48–76 | C4, F1, Q17, U5 |
+| Dưới LED trạng thái | 70–90 | 74–99 | U6 TM1638, CLED1–3, RSTB/RCLK/RDIO |
+| MCU | 90–104 | 80–96 | U1, CVDD1, CNRST, J2 (SWD, không lắp) |
+| Còi | 34–58 | 44–56 | BZ1, QBZ, RBZG |
+| **BUCK_5V** | 82–118 | 4–46 | J_PWR, U4 XL1509 (SOP-8), L1, D8, C2, C22 |
+| **24V_PROTECT** | 82–118 | 48–76 | C4, F1, FBIN, TVS1, DREV, U5 |
 | **MCU_LOGIC** | 72–118 | 78–116 | U1, U3, J485 |
 
 Chi tiết: `docs/PCB_LAYOUT.md`, `tools/zone_layout.py`.
@@ -84,7 +85,7 @@ Chi tiết: `docs/PCB_LAYOUT.md`, `tools/zone_layout.py`.
 ## Cơ khí tủ
 
 - Khoét tủ **105 × 105 mm** — `hardware/mechanical/cabinet_cutout.svg`  
-- Decal **120 × 120 mm** — khe **8 mm** giữa 7-seg và phím, **8× Ø3 mm** LED  
+- Decal **120 × 120 mm** — khe **8 mm** giữa 7-seg và phím, **8× Ø3 mm** LED. ⚠ Rev C đổi sang module 4 số (50,4 × 19 mm/hàng): cửa sổ hiển thị trên decal / khoét mặt tủ cần chỉnh lại theo module.  
 - Chip nằm **mặt trên**. Mặt dưới chỉ có phím và LED, hướng ra mặt máy  
 
 ## Mở thiết kế

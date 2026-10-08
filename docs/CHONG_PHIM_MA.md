@@ -9,10 +9,10 @@
 
 | Biện pháp | Trên bo keyboard |
 |-----------|------------------|
-| Tách vùng PCB | Trở phím sát GPIO của STM32; **buck / 24V** nửa trên cột phải **X 82…118**; **MCU** nửa dưới |
+| Tách vùng PCB | TM1638 sát cụm phím; **buck / 24V** nửa trên cột phải **X 82…118**; **MCU** nửa dưới |
 | Một mặt SMT | Toàn chip và SMD **mặt trên**; phím + LED + 7-seg **mặt dưới** — stencil một lần |
-| Lọc ma trận tại MCU | **RK/RC 100Ω** nối tiếp sát GPIO; **RPK 10k** kéo cột lên +3V3. Debounce firmware ≥ 20 ms |
-| Nguồn quét LED | **CLED 100nF** trên VDD của **U6**, rail **+5V_LED** sau **FB5V** |
+| Quét phím | **TM1638** quét (KS1–KS8 × K1/K2, pull-down 10k nội). Đọc mã phím mỗi 5–10 ms, debounce firmware ≥ 20 ms |
+| Nguồn quét LED | **CLED1/CLED2 100nF + CLED3 10µF** trên VDD của **U6**, rail **+5V_LED** sau **FB5V** |
 | Mặt tủ | Decal che phím; **khung kim loại nối GND** (1 điểm) nếu có |
 | Firmware | Debounce **≥ 20 ms**, đọc 2 lần giống nhau, bỏ qua burst &lt; 3 ms |
 
@@ -22,7 +22,7 @@ Chi tiết 3 vùng chữ nhật: `docs/PCB_LAYOUT.md`.
 
 ## Route
 
-- Dây **KEY_R/KEY_C** (khi route): via gần **SW THT**, không song song **L1 / +5V_SW**.
+- Dây **SEGx/KEY_K1/KEY_K2**: via gần **SW THT**, không song song **L1 / +5V_SW**.
 - **GND** dưới ma trận: pour liên tục; via stitch quanh U1.
 - **Buck** nằm khối nguồn phía trên, **RS485** nằm khối MCU phía dưới, không đè courtyard phím.
 
