@@ -75,6 +75,11 @@ def main(out):
     for cx, cy, hx, hy, lay in fp_copper(t):
         L.append(f'OBS -1 {lay} R {cx:.4f} {cy:.4f} {hx:.4f} {hy:.4f}')
 
+    # slots milled inside footprints (J_KEY membrane tail): keep EDGE from copper on both layers
+    grow = EDGE - CLEARANCE
+    for cx, cy, hx, hy, _ in fp_copper(t, ('Edge.Cuts',)):
+        L.append(f'OBS -1 3 R {cx:.4f} {cy:.4f} {hx + grow:.4f} {hy + grow:.4f}')
+
     # terminals
     for p in pads:
         if not p['net'] or count[p['net']] < 2:

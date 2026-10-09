@@ -7,9 +7,9 @@ import sys
 from pathlib import Path
 
 from front_layout_spec import (
+    KEY_AXIS_X,
     MAIN_AXIS_X,
-    DIGIT_COLS,
-    DIGIT_PITCH_TOP,
+    DIGIT_ROW_PITCH_Y,
     MIN_GAP_KEYPAD_TO_DIGIT_MM,
     STATUS_X,
     digit_block_center_x_mm,
@@ -23,7 +23,7 @@ from front_layout_spec import (
 
 ROOT = Path(__file__).resolve().parents[1]
 PCB = ROOT / "panel-keyboard.kicad_pcb"
-TOL = 1.0  # mm
+TOL = 0.01  # mm — lỗ phay mặt máy tính từ tọa độ spec, PCB phải trùng chính xác
 
 
 def parse_positions(text: str) -> dict[str, tuple[float, float, str]]:
@@ -68,22 +68,15 @@ def main() -> int:
     else:
         print(f"OK gap keypad->7seg lower row: {gap:.1f} mm (>= {MIN_GAP_KEYPAD_TO_DIGIT_MM})")
     kx, dx = keypad_center_x_mm(), digit_block_center_x_mm()
-    if abs(kx - dx) > 0.05 or abs(kx - MAIN_AXIS_X) > 0.05:
-        errs.append(f"AXIS center misaligned: keypad {kx:.2f}, digit {dx:.2f}, spec {MAIN_AXIS_X}")
+    if abs(dx - MAIN_AXIS_X) > 0.05 or abs(kx - KEY_AXIS_X) > 0.05:
+        errs.append(f"AXIS center misaligned: keypad {kx:.2f} (spec {KEY_AXIS_X}), digit {dx:.2f} (spec {MAIN_AXIS_X})")
     else:
-        print(f"OK main axis X={MAIN_AXIS_X:.1f} mm (keypad + 7-seg + cutout)")
-    top_xs = [digit_centers()[f"DS{i + 1}"][0] for i in range(DIGIT_COLS)]
-    pitches = [round(top_xs[i + 1] - top_xs[i], 2) for i in range(DIGIT_COLS - 1)]
-    if any(abs(p - DIGIT_PITCH_TOP) > 0.05 for p in pitches):
-        errs.append(f"TOP row pitch expected {DIGIT_PITCH_TOP} mm, got {pitches}")
+        print(f"OK main axis X={MAIN_AXIS_X:.1f} mm (7-seg), keypad X={KEY_AXIS_X:.1f}")
+    ys = sorted(y for _, y in digit_centers().values())
+    if any(abs((b - a) - DIGIT_ROW_PITCH_Y) > 0.05 for a, b in zip(ys, ys[1:])):
+        errs.append(f"7-seg row pitch expected {DIGIT_ROW_PITCH_Y} mm, got {ys}")
     else:
-        print(f"OK top 7-seg pitch {DIGIT_PITCH_TOP} mm (body 12.70 + gap 1.0)")
-    bot_xs = [digit_centers()[f"DS{i + 5}"][0] for i in range(DIGIT_COLS)]
-    bot_pitches = [round(bot_xs[i + 1] - bot_xs[i], 2) for i in range(DIGIT_COLS - 1)]
-    if bot_xs != top_xs or any(abs(p - DIGIT_PITCH_TOP) > 0.05 for p in bot_pitches):
-        errs.append(f"BOTTOM row pitch expected {DIGIT_PITCH_TOP} mm aligned with top, got {bot_xs}")
-    else:
-        print(f"OK lower 7-seg pitch {DIGIT_PITCH_TOP} mm, same X as top row")
+        print(f"OK 7-seg module rows Y={ys}, pitch {DIGIT_ROW_PITCH_Y} mm")
     sx = {actual[r][0] for r in status_centers() if r in actual}
     if len(sx) > 1 or (sx and abs(next(iter(sx)) - STATUS_X) > TOL):
         errs.append(f"STATUS column X expected {STATUS_X:.1f}, got {sx}")

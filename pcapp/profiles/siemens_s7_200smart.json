@@ -1,0 +1,14 @@
+{
+  "id": "siemens_s7_200smart",
+  "name": "Siemens S7-200 SMART (MBUS_SERVER)",
+  "vendor": "Siemens",
+  "verified": false,
+  "source": "Hướng dẫn MBUS_SERVER của STEP 7-Micro/WIN SMART: HoldStart là địa chỉ V do người dùng đặt",
+  "notes": "CHƯA kiểm tra bằng PLC thật. Nhập 'Địa chỉ V bắt đầu' đúng bằng tham số HoldStart của khối MBUS_SERVER. Địa chỉ V tính theo byte (VW0, VW2, ...).",
+  "defaultWordOrder": "ABCD",
+  "needsUserOffset": true,
+  "offsetLabel": "HoldStart (địa chỉ V của thanh ghi Modbus 40001)",
+  "areas": [
+    { "name": "VW", "kind": "Word", "table": "Holding", "min": 0, "max": 65534, "stride": 2, "modbusStart": 0, "desc": "VW (word, chia hết cho 2)" }
+  ]
+}

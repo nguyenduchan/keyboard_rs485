@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="170mm" height="170mm" viewBox="-10 -10 170 170">
+<title>CNC mặt máy D2-L0-K16 — nhìn từ mặt tủ, mm</title>
+<rect x="0" y="0" width="120" height="120" fill="none" stroke="#999" stroke-width="0.3" stroke-dasharray="2,1.5"/>
+<text x="0" y="-3" font-size="3" font-family="sans-serif">D2-L0-K16 — NHÌN TỪ MẶT TỦ (gốc góc trên-trái vùng bo 120×120), mọi số đo nguyên mm</text>
+<rect x="54" y="5" width="52" height="40" fill="none" stroke="#c00" stroke-width="0.35"/>
+<text x="55" y="8.5" font-size="2.6" font-family="sans-serif" fill="#c00">7SEG x2 52×40</text>
+<rect x="95.5" y="52.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="79.5" y="52.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="63.5" y="52.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="47.5" y="52.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="95.5" y="68.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="79.5" y="68.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="63.5" y="68.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="47.5" y="68.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="95.5" y="84.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="79.5" y="84.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="63.5" y="84.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="47.5" y="84.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="95.5" y="100.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="79.5" y="100.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="63.5" y="100.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<rect x="47.5" y="100.5" width="13" height="13" fill="none" stroke="#c00" stroke-width="0.35"/>
+<circle cx="115" cy="5" r="1.5" fill="none" stroke="#06c" stroke-width="0.35"/>
+<circle cx="5" cy="5" r="1.5" fill="none" stroke="#06c" stroke-width="0.35"/>
+<circle cx="115" cy="115" r="1.5" fill="none" stroke="#06c" stroke-width="0.35"/>
+<circle cx="5" cy="115" r="1.5" fill="none" stroke="#06c" stroke-width="0.35"/>
+<text x="0" y="126" font-size="2.2" font-family="monospace">7SEG x2    chữ nhật 52 × 40       X 54…106, Y 5…45</text>
+<text x="0" y="128.6" font-size="2.2" font-family="monospace">SW13       chữ nhật 13 × 13       X 95.5…108.5, Y 52.5…65.5</text>
+<text x="0" y="131.2" font-size="2.2" font-family="monospace">SW14       chữ nhật 13 × 13       X 79.5…92.5, Y 52.5…65.5</text>
+<text x="0" y="133.79999999999998" font-size="2.2" font-family="monospace">SW15       chữ nhật 13 × 13       X 63.5…76.5, Y 52.5…65.5</text>
+<text x="0" y="136.39999999999998" font-size="2.2" font-family="monospace">SW16       chữ nhật 13 × 13       X 47.5…60.5, Y 52.5…65.5</text>
+<text x="0" y="138.99999999999997" font-size="2.2" font-family="monospace">SW9        chữ nhật 13 × 13       X 95.5…108.5, Y 68.5…81.5</text>
+<text x="0" y="141.59999999999997" font-size="2.2" font-family="monospace">SW10       chữ nhật 13 × 13       X 79.5…92.5, Y 68.5…81.5</text>
+<text x="0" y="144.19999999999996" font-size="2.2" font-family="monospace">SW11       chữ nhật 13 × 13       X 63.5…76.5, Y 68.5…81.5</text>
+<text x="0" y="146.79999999999995" font-size="2.2" font-family="monospace">SW12       chữ nhật 13 × 13       X 47.5…60.5, Y 68.5…81.5</text>
+<text x="0" y="149.39999999999995" font-size="2.2" font-family="monospace">SW5        chữ nhật 13 × 13       X 95.5…108.5, Y 84.5…97.5</text>
+<text x="0" y="151.99999999999994" font-size="2.2" font-family="monospace">SW6        chữ nhật 13 × 13       X 79.5…92.5, Y 84.5…97.5</text>
+<text x="0" y="154.59999999999994" font-size="2.2" font-family="monospace">SW7        chữ nhật 13 × 13       X 63.5…76.5, Y 84.5…97.5</text>
+<text x="0" y="157.19999999999993" font-size="2.2" font-family="monospace">SW8        chữ nhật 13 × 13       X 47.5…60.5, Y 84.5…97.5</text>
+<text x="0" y="160" font-size="2.2" font-family="monospace">… xem file .csv</text>
+</svg>

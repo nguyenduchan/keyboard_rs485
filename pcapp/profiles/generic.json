@@ -1,0 +1,16 @@
+{
+  "id": "generic",
+  "name": "Modbus chung (địa chỉ thô)",
+  "vendor": "Chung",
+  "verified": true,
+  "source": "Modbus Application Protocol V1.1b3",
+  "notes": "Địa chỉ Modbus thô. Chọn kiểu đánh số 0 / 1 / 40001 ở tab Kết nối PLC. HR=holding, IR=input reg, C=coil, DI=discrete input.",
+  "defaultWordOrder": "CDAB",
+  "isGeneric": true,
+  "areas": [
+    { "name": "HR", "kind": "Word", "table": "Holding",  "min": 0, "max": 65535, "modbusStart": 0, "desc": "Holding register" },
+    { "name": "IR", "kind": "Word", "table": "Input",    "min": 0, "max": 65535, "modbusStart": 0, "desc": "Input register" },
+    { "name": "C",  "kind": "Bit",  "table": "Coil",     "min": 0, "max": 65535, "modbusStart": 0, "desc": "Coil" },
+    { "name": "DI", "kind": "Bit",  "table": "Discrete", "min": 0, "max": 65535, "modbusStart": 0, "desc": "Discrete input" }
+  ]
+}

@@ -12,7 +12,7 @@
 #include "stm32g0xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "modbus_rtu.h"
+#include "rs485.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,8 +46,6 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern TIM_HandleTypeDef htim14;
-extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -138,15 +136,8 @@ void SysTick_Handler(void)
   */
 void TIM14_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM14_IRQn 0 */
-  /* Hết khoảng lặng t3.5: chốt khung Modbus. Không dùng HAL_TIM_IRQHandler. */
-  mb_rtu_timer_irq();
-  return;
-  /* USER CODE END TIM14_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim14);
-  /* USER CODE BEGIN TIM14_IRQn 1 */
-
-  /* USER CODE END TIM14_IRQn 1 */
+  /* Hết khoảng lặng t3.5: chốt khung Modbus */
+  rs485_timer_irq();
 }
 
 /**
@@ -154,15 +145,8 @@ void TIM14_IRQHandler(void)
   */
 void USART2_IRQHandler(void)
 {
-  /* USER CODE BEGIN USART2_IRQn 0 */
-  /* Nhận / phát Modbus từng byte bằng LL, bỏ qua HAL_UART_IRQHandler */
-  mb_rtu_uart_irq();
-  return;
-  /* USER CODE END USART2_IRQn 0 */
-  HAL_UART_IRQHandler(&huart2);
-  /* USER CODE BEGIN USART2_IRQn 1 */
-
-  /* USER CODE END USART2_IRQn 1 */
+  /* Nhận / phát Modbus từng byte bằng LL */
+  rs485_uart_irq();
 }
 
 /* USER CODE BEGIN 1 */

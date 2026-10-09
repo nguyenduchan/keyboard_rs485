@@ -1,0 +1,20 @@
+{
+  "id": "delta_dvp",
+  "name": "Delta DVP (SS/ES/EX/SA/SX/SV)",
+  "vendor": "Delta",
+  "verified": false,
+  "source": "Bảng gán địa chỉ Modbus trong sổ tay lập trình DVP (cần đối chiếu đúng dòng máy và trang)",
+  "notes": "CHƯA kiểm tra bằng PLC thật. X/Y dùng cơ số 8. Kiểm tra lại dải D4096+ và M1280+ theo dòng PLC của bạn.",
+  "defaultWordOrder": "CDAB",
+  "areas": [
+    { "name": "S", "kind": "Bit",  "table": "Coil",     "min": 0, "max": 1023, "modbusStart": 0,      "desc": "Step relay" },
+    { "name": "X", "kind": "Bit",  "table": "Discrete", "radix": 8, "min": 0, "max": 255, "modbusStart": 1024, "desc": "Ngõ vào (0x0400, bát phân)" },
+    { "name": "Y", "kind": "Bit",  "table": "Coil",     "radix": 8, "min": 0, "max": 255, "modbusStart": 1280, "desc": "Ngõ ra (0x0500, bát phân)" },
+    { "name": "M", "kind": "Bit",  "table": "Coil",     "min": 0,    "max": 1279, "modbusStart": 2048,  "desc": "M0..M1279 (0x0800)" },
+    { "name": "M", "kind": "Bit",  "table": "Coil",     "min": 1280, "max": 4095, "modbusStart": 45056, "desc": "M1280..M4095 (0xB000)" },
+    { "name": "T", "kind": "Word", "table": "Holding",  "min": 0, "max": 255, "modbusStart": 1536, "desc": "Giá trị timer (0x0600)" },
+    { "name": "C", "kind": "Word", "table": "Holding",  "min": 0, "max": 199, "modbusStart": 3584, "desc": "Giá trị counter 16 bit (0x0E00)" },
+    { "name": "D", "kind": "Word", "table": "Holding",  "min": 0,    "max": 4095, "modbusStart": 4096,  "desc": "D0..D4095 (0x1000)" },
+    { "name": "D", "kind": "Word", "table": "Holding",  "min": 4096, "max": 9999, "modbusStart": 36864, "desc": "D4096..D9999 (0x9000)" }
+  ]
+}

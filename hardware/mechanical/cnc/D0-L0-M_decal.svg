@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120mm" height="120mm" viewBox="0 0 120 120">
+<title>Decal D0-L0-M — nhìn từ mặt tủ</title>
+<rect width="120" height="120" fill="#2a2a2a"/>
+<rect x="110" y="15" width="4" height="29" fill="none" stroke="#666" stroke-width="0.2"/>
+<rect x="47" y="52" width="62" height="62" fill="none" stroke="#c90" stroke-width="0.25" stroke-dasharray="1,0.6"/>
+<text x="48" y="51" font-size="2.4" fill="#c90" font-family="sans-serif">vùng bàn phím màng (mặt tủ phẳng làm tấm đỡ)</text>
+</svg>

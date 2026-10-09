@@ -1,0 +1,8 @@
+bin/
+obj/
+*.user
+*.pkb
+
+TestResults/
+publish/
+*.nupkg

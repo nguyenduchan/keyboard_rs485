@@ -21,9 +21,9 @@ GAP_Y_MIN = 45.0
 GAP_Y_MAX = 53.0
 
 # Power block above, MCU block below, with a clear gap between the silk boxes.
-ZONE_BUCK = {"x0": 82.0, "x1": 118.0, "y0": 4.0, "y1": 46.0, "label": "BUCK_5V"}
-ZONE_PWR_24V = {"x0": 82.0, "x1": 118.0, "y0": 48.0, "y1": 76.0, "label": "24V_PROTECT"}
-ZONE_MCU = {"x0": 72.0, "x1": 118.0, "y0": 78.0, "y1": 116.0, "label": "MCU_LOGIC"}
+ZONE_BUCK = {"x0": 82.0, "x1": 118.5, "y0": 36.0, "y1": 59.0, "label": "BUCK_5V"}
+ZONE_PWR_24V = {"x0": 83.0, "x1": 118.5, "y0": 4.0, "y1": 34.5, "label": "INPUT_24V"}
+ZONE_MCU = {"x0": 90.5, "x1": 103.5, "y0": 76.0, "y1": 108.5, "label": "MCU_LOGIC"}
 
 BOTTOM_UI_MAX_Y = BOARD_H
 
@@ -32,7 +32,7 @@ BOTTOM_UI_MAX_Y = BOARD_H
 _B = {
     "0805": (-1.75, -1.05, 1.75, 1.05),
     "C4": (-7.0, -6.2, 7.0, 6.2),
-    "ELEC63": (-5.0, -3.8, 5.0, 3.8),
+    "ELEC63": (-4.7, -3.6, 4.7, 3.6),
     "U4": (-3.7, -2.7, 3.7, 2.7),
     "U1": (-3.7, -3.5, 3.7, 3.5),
     "U6": (-5.9, -9.25, 5.9, 9.25),
@@ -51,10 +51,12 @@ _B = {
     "J2": (-1.3, -1.3, 1.3, 8.9),
     "NT1": (-3.2, -1.3, 3.2, 1.3),
     "JTERM": (-1.8, -1.4, 1.8, 1.4),
-    "DS": (-25.45, -9.75, 25.45, 9.75),
-    "SW": (-6.2, -6.2, 6.2, 6.2),
+    "DS": (-7.5, -8.9, 7.5, 8.9),     # chỉ vùng chân THT; thân module nằm mặt dưới
+    "SW": (-3.7, -7.4, 3.7, 7.4),     # chân 12,5 dọc Y (SW1–SW12)
+    "SWX": (-7.4, -3.7, 7.4, 3.7),    # chân 12,5 dọc X (SW13–SW16)
     "LED": (-2.3, -1.1, 2.3, 1.1),
     "BZ": (-2.45, -6.25, 10.05, 6.25),
+    "J_KEY": (-4.9, -3.07, 1.6, 25.93),
 }
 
 _KIND = {
@@ -67,6 +69,8 @@ _KIND = {
     "FB5V": "0805",
     "BZ1": "BZ",
     "QBZ": "Q12",
+    "J_SWD": "J2",
+    "J_LOG": "J2",
     "DREV": "D8",
 }
 
@@ -81,7 +85,7 @@ def _kind(ref: str) -> str:
     if ref.startswith("DS"):
         return "DS"
     if ref.startswith("SW"):
-        return "SW"
+        return "SWX" if int(ref[2:]) >= 13 else "SW"
     if ref.startswith("D") and ref[1:].isdigit():
         return "LED"
     return "0805"
@@ -117,63 +121,90 @@ def _hits_hole(box: tuple[float, float, float, float], hx: float, hy: float, rad
 
 BOTTOM_POS: dict[str, tuple[float, float, int]] = {}
 
-# Each capacitor sits against the pin it bypasses. Duplicate ceramics are gone.
-BOTTOM_POS["U6"] = (78.0, 86.0, 0)
+# Nhóm chức năng, mỗi nhóm một khối gọn, khe ≥ 2 mm giữa courtyard để còn chỗ đi dây.
+# Dòng công suất đi từ trên xuống: INPUT → BUCK → (+5V) → LDO ở hàng dưới; MCU / RS485 / TM1638 ở giữa-dưới.
 
-BOTTOM_POS["U1"] = (95.0, 86.0, 180)
-BOTTOM_POS["CVDD1"] = (100.3, 87.0, 90)
-BOTTOM_POS["CNRST"] = (100.3, 83.6, 90)
-BOTTOM_POS["J2"] = (94.5, 94.0, 90)
-
-BOTTOM_POS["U3"] = (108.0, 84.0, 180)
-BOTTOM_POS["R47A"] = (104.2, 76.2, 180)
-BOTTOM_POS["R47B"] = (108.8, 76.2, 180)
-BOTTOM_POS["CM3"] = (113.4, 76.2, 180)
-BOTTOM_POS["RDE"] = (113.4, 89.5, 180)
-BOTTOM_POS["TVS2"] = (108.0, 94.0, 180)
-for _ref, _x in zip(("RBIAS_A", "RBIAS_B", "RTERM", "JTERM"), (82.6, 87.2, 91.8, 96.4)):
-    BOTTOM_POS[_ref] = (_x, 110.2, 180)
-
-# Power column, upper right. Local ceramics sit on the pin they serve.
+# --- INPUT: giắc 24 V, cầu chì, lọc, TVS, chống ngược cực, tụ bulk (x 84–118, y 4–36) ---
 BOTTOM_POS["J_PWR"] = (115.0, 16.0, 90)
-BOTTOM_POS["C16"] = (84.7, 22.4, 180)
-BOTTOM_POS["C17"] = (89.3, 22.4, 180)
-BOTTOM_POS["C5"] = (107.7, 22.4, 180)
-BOTTOM_POS["U4"] = (95.5, 32.0, 0)
-BOTTOM_POS["C2"] = (109.0, 31.0, 90)
-BOTTOM_POS["D8"] = (86.5, 43.0, 90)
-BOTTOM_POS["L1"] = (93.0, 43.0, 0)
-BOTTOM_POS["FB2"] = (99.6, 43.0, 180)
-BOTTOM_POS["C22"] = (109.0, 42.5, 90)
-BOTTOM_POS["FB5V"] = (96.2, 48.2, 180)
-BOTTOM_POS["F1"] = (89.0, 55.0, 90)
-BOTTOM_POS["C4"] = (108.0, 56.0, 90)
-BOTTOM_POS["NT1"] = (88.0, 64.0, 180)
-BOTTOM_POS["C19"] = (96.8, 64.2, 180)
-BOTTOM_POS["C15"] = (104.0, 65.2, 180)
-BOTTOM_POS["FB1"] = (73.2, 71.5, 180)
-BOTTOM_POS["C7"] = (78.0, 71.5, 180)
-BOTTOM_POS["U5"] = (91.0, 71.5, 180)
-BOTTOM_POS["C3"] = (99.2, 76.2, 180)
-BOTTOM_POS["C18"] = (86.5, 77.4, 180)
-BOTTOM_POS["TVS1"] = (104.0, 70.0, 180)
+BOTTOM_POS["F1"] = (107.0, 8.0, 0)
+BOTTOM_POS["FBIN"] = (99.5, 8.0, 0)
+BOTTOM_POS["TVS1"] = (90.5, 8.0, 0)
+BOTTOM_POS["C19"] = (99.5, 16.0, 0)
+BOTTOM_POS["C15"] = (105.0, 16.0, 0)
+BOTTOM_POS["DREV"] = (88.0, 17.0, 0)
+BOTTOM_POS["C4"] = (104.0, 28.0, 90)
+BOTTOM_POS["C16"] = (86.0, 25.0, 0)
+BOTTOM_POS["C17"] = (91.0, 25.0, 0)
+
+# --- BUCK 24 V → 5 V (x 82–118, y 36–58) ---
+BOTTOM_POS["U4"] = (96.0, 40.0, 0)
+BOTTOM_POS["D8"] = (86.0, 42.0, 90)
+BOTTOM_POS["L1"] = (108.0, 40.0, 0)
+BOTTOM_POS["C5"] = (114.0, 28.0, 90)
+BOTTOM_POS["C2"] = (113.3, 49.0, 0)
+BOTTOM_POS["C22"] = (102.8, 49.0, 0)
+BOTTOM_POS["FB2"] = (100.0, 57.0, 0)
+BOTTOM_POS["FB5V"] = (105.5, 57.0, 0)
+BOTTOM_POS["NT1"] = (113.0, 60.0, 0)
+
+# --- TM1638 (x 70–90, y 71–101) ---
+BOTTOM_POS["U6"] = (78.0, 86.0, 0)
+BOTTOM_POS["CLED1"] = (76.0, 73.0, 0)
+BOTTOM_POS["CLED2"] = (82.0, 99.0, 0)
+BOTTOM_POS["CLED3"] = (77.0, 99.0, 0)
+BOTTOM_POS["RSTB"] = (88.0, 79.0, 0)
+BOTTOM_POS["RCLK"] = (88.0, 84.0, 0)
+BOTTOM_POS["RDIO"] = (88.0, 89.0, 0)
+
+# --- MCU STM32G030 + giắc nạp (x 90–103, y 76–108) ---
+BOTTOM_POS["U1"] = (95.0, 86.0, 180)
+BOTTOM_POS["CVDD1"] = (102.0, 90.0, 90)
+BOTTOM_POS["CNRST"] = (102.0, 82.0, 90)
+# DAPLink 1×4, chân 1 (3V3) phía trên. J_SWD rồi J_LOG sát nhau, dưới U1.
+BOTTOM_POS["J_SWD"] = (92.5, 98.0, 0)
+BOTTOM_POS["J_LOG"] = (97.5, 98.0, 0)
+
+# --- RS485 (x 104–118, y 72–116) ---
+BOTTOM_POS["U3"] = (109.0, 84.0, 180)
+BOTTOM_POS["R47A"] = (105.0, 76.0, 180)
+BOTTOM_POS["R47B"] = (110.0, 76.0, 180)
+BOTTOM_POS["CM3"] = (115.0, 76.0, 180)
+BOTTOM_POS["RDE"] = (115.0, 90.0, 180)
+BOTTOM_POS["TVS2"] = (108.0, 96.0, 180)
 BOTTOM_POS["J485"] = (115.0, 102.0, 90)
+BOTTOM_POS["RTERM"] = (108.0, 101.0, 180)
+BOTTOM_POS["JTERM"] = (108.0, 105.0, 180)
+BOTTOM_POS["RBIAS_A"] = (108.0, 109.0, 180)
+BOTTOM_POS["RBIAS_B"] = (109.0, 113.0, 180)
 
-# Cấu hình thương mại (TM1638, STM32G030F6P6, linh kiện phổ biến)
-BOTTOM_POS["FBIN"] = (96.8, 56.0, 90)
-BOTTOM_POS["DREV"] = (112.0, 67.6, 90)
-BOTTOM_POS["CLED1"] = (70.6, 81.6, 90)
-BOTTOM_POS["CLED2"] = (82.5, 97.6, 0)
-BOTTOM_POS["CLED3"] = (78.0, 97.6, 0)
-BOTTOM_POS["RSTB"] = (86.5, 81.2, 0)
-BOTTOM_POS["RCLK"] = (86.5, 84.0, 0)
-BOTTOM_POS["RDIO"] = (86.5, 86.8, 0)
+# --- LDO 5 V → 3,3 V, hàng dưới cùng (x 77–105, y 108–118) ---
+BOTTOM_POS["C7"] = (79.0, 113.0, 180)
+BOTTOM_POS["U5"] = (87.0, 113.0, 180)
+BOTTOM_POS["C18"] = (95.0, 113.0, 180)
+BOTTOM_POS["C3"] = (99.5, 113.0, 180)
+BOTTOM_POS["FB1"] = (104.0, 113.0, 180)
 
-# Còi chủ động 12 mm ở mặt trên, tâm thân (40, 50): dải trống giữa module 7-seg dưới và hàng phím trên
-# (mặt trên chỉ có chân hàn THT ở đây). Gốc footprint = chân 1, tâm thân lệch +3,8 mm. Mạch lái bên phải còi.
-BOTTOM_POS["BZ1"] = (36.2, 50.0, 0)
-BOTTOM_POS["QBZ"] = (51.5, 49.2, 0)
-BOTTOM_POS["RBZG"] = (56.2, 49.2, 0)
+# Còi chủ động 12 mm ở mặt trên, góc dưới-trái khối BUCK (mặt dưới chỗ này chỉ có cột LED X ≤ 82,2).. Gốc footprint = chân 1, tâm thân lệch +3,8 mm. Mạch lái bên phải còi.
+BOTTOM_POS["BZ1"] = (86.2, 56.5, 0)   # tâm thân (90, 56,5), trong vùng nguồn, cách mọi linh kiện / courtyard khác ≥ 1,4 mm
+BOTTOM_POS["QBZ"] = (100.0, 62.0, 0)
+BOTTOM_POS["RBZG"] = (106.0, 62.0, 0)
+
+# Giắc bàn phím màng ở dải trái (KiCad), trống cả hai mặt, ngoài thân module 7-seg mặt dưới (X ≥ 14,8).
+# Header đực thẳng 1×10 cột X=11,4; khe phay PCB X 7,0…9,6, Y 15,5…43,5 ngay bên trái. Cánh tủ có khe
+# 4 × 29 mm trùng khe này, cách cửa sổ 7-seg 4 mm (tools/cnc_panel.py). Đuôi màng luồn qua hai khe,
+# vòng lại và cắm từ trên xuống — cắm/rút được khi bo đã bắt vít.
+BOTTOM_POS["J_KEY"] = (11.4, 18.07, 0)
+
+# Khung nhóm vẽ trên lớp F.SilkS: (x0, y0, x1, y1, nhãn) hoặc ("poly", [(x, y), ...], nhãn)
+GROUPS = [
+    (83.0, 4.0, 118.5, 34.5, "INPUT 24V"),
+    ("poly", [(82.0, 36.0), (118.5, 36.0), (118.5, 64.0), (97.5, 64.0), (97.5, 49.0), (82.0, 49.0)], "BUCK 5V"),
+    (70.0, 70.5, 90.5, 102.0, "TM1638"),
+    (90.5, 76.0, 103.5, 108.5, "MCU"),
+    (103.5, 72.0, 118.5, 116.5, "RS485"),
+    (76.0, 108.5, 106.0, 117.5, "LDO 3V3"),
+    (82.0, 49.0, 97.5, 64.0, "BUZZER"),
+]
 
 FRONT_POS: dict[str, tuple[float, float, int]] = {}
 for ref, (x, y) in digit_centers().items():

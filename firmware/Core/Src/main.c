@@ -4,16 +4,16 @@
   * @file           : main.c
   * @brief          : Main program body
   ******************************************************************************
-  * Bàn phím công nghiệp — Modbus RTU slave (STM32G030F6P6 + TM1638 + SIT3485).
+  * B�n ph�m c�ng nghi?p � Modbus RTU slave (STM32G030F6P6 + TM1638 + SIT3485).
   *
-  * Ghép chân (docs/SO_DO_NGUYEN_LY.md):
+  * Gh�p ch�n (docs/SO_DO_NGUYEN_LY.md):
   *   PA1 USART2_DE, PA2 USART2_TX, PA3 USART2_RX  -> SIT3485
-  *   PA4 TM_STB, PA5 TM_CLK, PA6 TM_DIO (open-drain, kéo lên +5V_LED 4,7k) -> TM1638
-  *   PA7 BZ_ON (còi chủ động)
+  *   PA4 TM_STB, PA5 TM_CLK, PA6 TM_DIO (open-drain, k�o l�n +5V_LED 4,7k) -> TM1638
+  *   PA7 BZ_ON (c�i ch? d?ng)
   *   PA13/PA14 SWD
   *
-  * Code ứng dụng nằm trong App/ và trong các khối USER CODE (giữ nguyên khi
-  * sinh lại code bằng STM32CubeMX từ keyboard.ioc).
+  * Code ?ng d?ng n?m trong App/ v� trong c�c kh?i USER CODE (gi? nguy�n khi
+  * sinh l?i code b?ng STM32CubeMX t? keyboard.ioc).
   ******************************************************************************
   */
 /* USER CODE END Header */
@@ -23,6 +23,12 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "app.h"
+#include "stm32g0xx_ll_bus.h"
+#include "stm32g0xx_ll_gpio.h"
+#include "stm32g0xx_ll_rcc.h"
+#include "stm32g0xx_ll_system.h"
+#include "stm32g0xx_ll_tim.h"
+#include "stm32g0xx_ll_usart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,10 +47,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-TIM_HandleTypeDef htim14;
-
-UART_HandleTypeDef huart2;
-
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -116,105 +118,75 @@ int main(void)
   */
 void SystemClock_Config(void)
 {
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-
-  /** Configure the main internal regulator output voltage
-  */
-  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
-
-  /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSIDiv = RCC_HSI_DIV1;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  /* HSI16 chia 1 l�m SYSCLK, kh�ng PLL, 0 wait state (d�ng LL d? ti?t ki?m flash so v?i HAL_RCC_OscConfig) */
+  LL_RCC_HSI_Enable();
+  while (!LL_RCC_HSI_IsReady())
   {
-    Error_Handler();
   }
-
-  /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  LL_RCC_SetHSIDiv(LL_RCC_HSI_DIV_1);
+  LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
+  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
+  while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
   {
-    Error_Handler();
   }
+  LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
+  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
+  SystemCoreClockUpdate();
+  HAL_InitTick(TICK_INT_PRIORITY);
 }
 
 /**
-  * @brief TIM14 Initialization Function
-  * @param None
-  * @retval None
+  * @brief TIM14 Initialization Function (LL)
+  * TIM14 d?m 1 �s d? do kho?ng l?ng t3.5 c?a Modbus RTU; ARR/PSC d?t l?i trong rs485_init().
   */
 static void MX_TIM14_Init(void)
 {
-
-  /* USER CODE BEGIN TIM14_Init 0 */
-  /* TIM14 đếm 1 µs, đo khoảng lặng t3.5 của Modbus RTU (ARR đặt lại trong mb_rtu_init) */
-  /* USER CODE END TIM14_Init 0 */
-
-  /* USER CODE BEGIN TIM14_Init 1 */
-
-  /* USER CODE END TIM14_Init 1 */
-  htim14.Instance = TIM14;
-  htim14.Init.Prescaler = 15;
-  htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim14.Init.Period = 4010;
-  htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM14_Init 2 */
-
-  /* USER CODE END TIM14_Init 2 */
-
+  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_TIM14);
+  NVIC_SetPriority(TIM14_IRQn, 1);
+  NVIC_EnableIRQ(TIM14_IRQn);
+  LL_TIM_SetPrescaler(TIM14, 15);
+  LL_TIM_SetCounterMode(TIM14, LL_TIM_COUNTERMODE_UP);
+  LL_TIM_SetAutoReload(TIM14, 4010);
+  LL_TIM_SetClockDivision(TIM14, LL_TIM_CLOCKDIVISION_DIV1);
+  LL_TIM_DisableARRPreload(TIM14);
 }
 
 /**
-  * @brief USART2 Initialization Function
-  * @param None
-  * @retval None
+  * @brief USART2 Initialization Function (LL): RS485, DE ph?n c?ng
+  *   PA1 USART2_DE, PA2 USART2_TX, PA3 USART2_RX. Baud / parity / stop do rs485_init() d?t.
   */
 static void MX_USART2_UART_Init(void)
 {
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2);
+  LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOA);
 
-  /* USER CODE BEGIN USART2_Init 0 */
-  /* Baud / parity thực tế lấy từ App/Inc/config.h (mb_rtu_init cấu hình lại) */
-  /* USER CODE END USART2_Init 0 */
+  LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_1, LL_GPIO_MODE_ALTERNATE);
+  LL_GPIO_SetAFPin_0_7(GPIOA, LL_GPIO_PIN_1, LL_GPIO_AF_1);
+  LL_GPIO_SetPinSpeed(GPIOA, LL_GPIO_PIN_1, LL_GPIO_SPEED_FREQ_LOW);
+  LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_1, LL_GPIO_PULL_NO);
+  LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_2, LL_GPIO_MODE_ALTERNATE);
+  LL_GPIO_SetAFPin_0_7(GPIOA, LL_GPIO_PIN_2, LL_GPIO_AF_1);
+  LL_GPIO_SetPinSpeed(GPIOA, LL_GPIO_PIN_2, LL_GPIO_SPEED_FREQ_LOW);
+  LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_2, LL_GPIO_PULL_NO);
+  LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_3, LL_GPIO_MODE_ALTERNATE);
+  LL_GPIO_SetAFPin_0_7(GPIOA, LL_GPIO_PIN_3, LL_GPIO_AF_1);
+  LL_GPIO_SetPinSpeed(GPIOA, LL_GPIO_PIN_3, LL_GPIO_SPEED_FREQ_LOW);
+  LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_3, LL_GPIO_PULL_UP);
 
-  /* USER CODE BEGIN USART2_Init 1 */
+  NVIC_SetPriority(USART2_IRQn, 0);
+  NVIC_EnableIRQ(USART2_IRQn);
 
-  /* USER CODE END USART2_Init 1 */
-  huart2.Instance = USART2;
-  huart2.Init.BaudRate = 9600;
-  huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  huart2.Init.StopBits = UART_STOPBITS_1;
-  huart2.Init.Parity = UART_PARITY_NONE;
-  huart2.Init.Mode = UART_MODE_TX_RX;
-  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-  huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart2.Init.ClockPrescaler = UART_PRESCALER_DIV1;
-  huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-  if (HAL_RS485Ex_Init(&huart2, UART_DE_POLARITY_HIGH, 8, 8) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN USART2_Init 2 */
-
-  /* USER CODE END USART2_Init 2 */
-
+  LL_USART_Disable(USART2);
+  LL_USART_SetTransferDirection(USART2, LL_USART_DIRECTION_TX_RX);
+  LL_USART_ConfigCharacter(USART2, LL_USART_DATAWIDTH_8B, LL_USART_PARITY_NONE, LL_USART_STOPBITS_1);
+  LL_USART_SetOverSampling(USART2, LL_USART_OVERSAMPLING_16);
+  LL_USART_SetBaudRate(USART2, SystemCoreClock, LL_USART_PRESCALER_DIV1, LL_USART_OVERSAMPLING_16, 9600);
+  LL_USART_ConfigAsyncMode(USART2);
+  LL_USART_SetDESignalPolarity(USART2, LL_USART_DE_POLARITY_HIGH);
+  LL_USART_SetDEAssertionTime(USART2, 8);
+  LL_USART_SetDEDeassertionTime(USART2, 8);
+  LL_USART_EnableDEMode(USART2);
+  LL_USART_Enable(USART2);
 }
 
 /**
@@ -268,7 +240,7 @@ static void MX_GPIO_Init(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* Treo tại đây; nếu IWDG đã chạy chip sẽ tự reset */
+  /* Treo t?i d�y; n?u IWDG d� ch?y chip s? t? reset */
   __disable_irq();
   while (1)
   {

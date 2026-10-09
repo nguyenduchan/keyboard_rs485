@@ -258,14 +258,14 @@ def main() -> None:
     c0805 = "Capacitor_SMD:C_0805_2012Metric"
     c1206 = "Capacitor_SMD:C_1206_3216Metric"
     fb0805 = "Inductor_SMD:L_0805_2012Metric"
-    b.place("Connector_Generic:Conn_01x02", "J_PWR", "KF2EDGV-5.08-2P", 25, y0, footprint="Panel:TerminalBlock_2P_5.08")
-    b.place("Device:Fuse", "F1", "PPTC 1812 0.5A 33V", 40, y0, footprint="Fuse:Fuse_1812_4532Metric")
-    b.place("Device:FerriteBead", "FBIN", "600R@100MHz 2A", 55, y0, footprint=fb0805)
-    b.place("Device:D_TVS", "TVS1", "SMAJ28A", 70, y0 + 16, footprint="Diode_SMD:D_SMA")
-    b.place("Device:C", "C19", "10uF 50V", 70, y0, footprint=c1206)
+    b.place("Connector_Generic:Conn_01x02", "J_PWR", "KF301-5.08-2P", 25, y0, footprint="Panel:TerminalBlock_2P_5.08")
+    b.place("Device:Fuse", "F1", "mSMD050-33V (PPTC 0.5A 33V)", 40, y0, footprint="Fuse:Fuse_1812_4532Metric")
+    b.place("Device:FerriteBead", "FBIN", "GZ2012D601TF 600R", 55, y0, footprint=fb0805)
+    b.place("Device:D_TVS", "TVS1", "SMAJ28CA", 70, y0 + 16, footprint="Diode_SMD:D_SMA")
+    b.place("Device:C", "C19", "2.2uF 50V X7R", 70, y0, footprint=c1206)
     b.place("Device:C", "C15", "100nF 50V", 70, y0 + 28, footprint=c0805)
     b.place("Device:D", "DREV", "SS34", 85, y0, rot=180, footprint="Diode_SMD:D_SMA")
-    b.place("Device:C", "C4", "470uF 35V", 100, y0, footprint="Capacitor_SMD:CP_Elec_10x10.5")
+    b.place("Device:C", "C4", "470uF 35V RVT1V471M1010", 100, y0, footprint="Capacitor_SMD:CP_Elec_10x10.5")
     b.place(
         "Connector_Generic:Conn_01x02",
         "NT1",
@@ -275,21 +275,21 @@ def main() -> None:
         footprint="NetTie:NetTie-2_SMD_Pad2.0mm",
     )
     b.place("Regulator_Switching:XL1509-5.0", "U4", "XL1509-5.0E1", 118, y0, footprint="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
-    b.place("Device:C", "C16", "10uF 50V", 106, y0, footprint=c1206)
+    b.place("Device:C", "C16", "2.2uF 50V X7R", 106, y0, footprint=c1206)
     b.place("Device:C", "C17", "100nF 50V", 106, y0 + 14, footprint=c0805)
     b.place("Device:D", "D8", "SS34", 132, y0 + 14, rot=90, footprint="Diode_SMD:D_SMA")
-    b.place("Device:L", "L1", "47uH 6045", 146, y0, footprint="Inductor_SMD:L_Taiyo-Yuden_NR-60xx")
-    b.place("Device:C", "C2", "220uF 10V", 162, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
+    b.place("Device:L", "L1", "SWPA6045S470MT 47uH", 146, y0, footprint="Inductor_SMD:L_Taiyo-Yuden_NR-60xx")
+    b.place("Device:C", "C2", "220uF 10V RVT1A221M0605", 162, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
     b.place("Device:C", "C5", "100nF", 162, y0 + 14, footprint=c0805)
-    b.place("Device:FerriteBead", "FB2", "120R@100MHz 2A", 162, y0 - 12, footprint=fb0805)
-    b.place("Device:C", "C22", "220uF 10V", 178, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
-    b.place("Device:FerriteBead", "FB5V", "120R@100MHz 2A", 178, y0 - 12, footprint=fb0805)
+    b.place("Device:FerriteBead", "FB2", "GZ2012D101TF 100R", 162, y0 - 12, footprint=fb0805)
+    b.place("Device:C", "C22", "220uF 10V RVT1A221M0605", 178, y0, footprint="Capacitor_SMD:CP_Elec_6.3x5.4")
+    b.place("Device:FerriteBead", "FB5V", "GZ2012D101TF 100R", 178, y0 - 12, footprint=fb0805)
 
     b.place("Regulator_Linear:AMS1117-3.3", "U5", "AMS1117-3.3", 194, y0, footprint="Package_TO_SOT_SMD:SOT-223-3_TabPin2")
     b.place("Device:C", "C7", "10uF", 188, y0 + 14, footprint=c0805)
     b.place("Device:C", "C3", "22uF", 210, y0, footprint=c0805)
     b.place("Device:C", "C18", "100nF", 210, y0 + 14, footprint=c0805)
-    b.place("Device:FerriteBead", "FB1", "120R@100MHz 2A", 210, y0 - 12, footprint=fb0805)
+    b.place("Device:FerriteBead", "FB1", "GZ2012D101TF 100R", 210, y0 - 12, footprint=fb0805)
 
     b.power_flag("power:+24V", 100, y0 - 10)
     b.power_flag("power:GND", 110, y0 + 40)
@@ -363,16 +363,26 @@ def main() -> None:
     )
     b.place("Device:C", "CVDD1", "100nF", 65, my + 20, footprint=c0805)
     b.place("Device:C", "CNRST", "100nF", 75, my - 15, footprint=c0805)
+    # DAPLink Thế Giới Module, hàng 5 chân, bỏ RST. Cáp 1×4 cắm thẳng, chân 1 = 3V3.
+    # J_SWD: 3V3, SWD, SCK, GND. J_LOG: 3V3, RXD (← TX chip), TXD (→ RX chip), GND.
     b.place(
         "Connector_Generic:Conn_01x04",
-        "J2",
-        "SWD (DNP)",
-        50,
+        "J_SWD",
+        "DAP SWD (DNP)",
+        42,
+        my,
+        footprint="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+    )
+    b.place(
+        "Connector_Generic:Conn_01x04",
+        "J_LOG",
+        "DAP COM (DNP)",
+        58,
         my,
         footprint="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
     )
 
-    b.place("Interface_UART:MAX485E", "U3", "SIT3485 / MAX3485", 140, my, footprint="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
+    b.place("Interface_UART:SP3485EN", "U3", "SP3485EN", 140, my, footprint="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
     b.place("Device:R", "R47A", "47", 120, my + 12, footprint=r0805)
     b.place("Device:R", "R47B", "47", 120, my - 12, footprint=r0805)
     b.place("Device:R", "RDE", "10k", 155, my - 12, footprint=r0805)
@@ -381,12 +391,13 @@ def main() -> None:
     b.place("Device:R", "RBIAS_B", "560", 195, my - 8, footprint=r0805)
     b.place("Device:R", "RTERM", "120", 210, my, footprint=r0805)
     b.place("Jumper:SolderJumper_2_Open", "JTERM", "120R", 210, my + 12, footprint="Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm")
-    b.place("Device:D_TVS", "TVS2", "SM712", 225, my, rot=90, footprint="Package_TO_SOT_SMD:SOT-23-3")
-    b.place("Connector_Generic:Conn_01x03", "J485", "KF2EDGV-5.08-3P", 245, my, footprint="Panel:TerminalBlock_3P_5.08")
+    b.place("Device:D_TVS", "TVS2", "PSM712-LF-T7", 225, my, rot=90, footprint="Package_TO_SOT_SMD:SOT-23-3")
+    b.place("Connector_Generic:Conn_01x03", "J485", "KF301-5.08-3P", 245, my, footprint="Panel:TerminalBlock_3P_5.08")
 
     # STM32G030F6P6 TSSOP-20 (DS12991): VDD 4, VSS 5, NRST 6 (pull-up nội ~40k + CNRST).
     # PA1 DE, PA2 TX, PA3 RX (USART2). PA4 STB, PA5 CLK, PA6 DIO (open-drain, kéo lên +5V_LED,
     # các chân FT chịu 5 V). PA7 còi. PA13/PA14 SWD.
+    # PB6 (chân 20) USART1_TX, PB7 (chân 1) USART1_RX — log qua DAPLink, không chung USART2.
     b.net_label("U1", "4", "+3V3")
     b.net_label("U1", "5", "GND")
     b.net_label("U1", "6", "NRST")
@@ -397,18 +408,24 @@ def main() -> None:
     b.net_label("U1", "12", "TM_CLK")
     b.net_label("U1", "13", "TM_DIO")
     b.net_label("U1", "14", "BZ_ON")
+    b.net_label("U1", "1", "LOG_RX")
+    b.net_label("U1", "20", "LOG_TX")
     b.net_label("U1", "18", "SWDIO")
     b.net_label("U1", "19", "SWCLK")
-    for _nc in ("1", "2", "3", "7", "15", "16", "17", "20"):
+    for _nc in ("2", "3", "7", "15", "16", "17"):
         b.no_connect("U1", _nc)
     b.net_label("CVDD1", "1", "+3V3")
     b.net_label("CVDD1", "2", "GND")
     b.net_label("CNRST", "1", "NRST")
     b.net_label("CNRST", "2", "GND")
-    b.net_label("J2", "1", "+3V3")
-    b.net_label("J2", "2", "SWDIO")
-    b.net_label("J2", "3", "SWCLK")
-    b.net_label("J2", "4", "GND")
+    b.net_label("J_SWD", "1", "+3V3")
+    b.net_label("J_SWD", "2", "SWDIO")
+    b.net_label("J_SWD", "3", "SWCLK")
+    b.net_label("J_SWD", "4", "GND")
+    b.net_label("J_LOG", "1", "+3V3")
+    b.net_label("J_LOG", "2", "LOG_TX")
+    b.net_label("J_LOG", "3", "LOG_RX")
+    b.net_label("J_LOG", "4", "GND")
 
     b.net_label("R47A", "1", "UART_TX")
     b.net_label("R47A", "2", "MAX_DI")
@@ -430,10 +447,11 @@ def main() -> None:
     b.net_label("RBIAS_A", "2", "RS485_A_BUS")
     b.net_label("RBIAS_B", "1", "RS485_B_BUS")
     b.net_label("RBIAS_B", "2", "GND")
-    b.net_label("RTERM", "1", "RS485_A_BUS")
-    b.net_label("RTERM", "2", "RS485_B_BUS")
+    # Termination: A -- JTERM (hàn tắt) -- RTERM 120R -- B
     b.net_label("JTERM", "1", "RS485_A_BUS")
-    b.net_label("JTERM", "2", "RS485_B_BUS")
+    b.net_label("JTERM", "2", "RS485_TERM")
+    b.net_label("RTERM", "1", "RS485_TERM")
+    b.net_label("RTERM", "2", "RS485_B_BUS")
     b.net_label("TVS2", "1", "RS485_A_BUS")
     b.net_label("TVS2", "2", "RS485_B_BUS")
     b.net_label("TVS2", "3", "GND")
@@ -499,7 +517,7 @@ def main() -> None:
         b.place(
             "Switch:SW_Push",
             f"SW{i}",
-            "Tact_12mm",
+            "B3F-4055",
             sx + ((i - 1) % 4) * 12.7,
             sy + ((i - 1) // 4) * 12.7,
             footprint="Panel:SW_Tactile_12mm_THT",
@@ -507,6 +525,21 @@ def main() -> None:
         row, col = (i - 1) // 4, (i - 1) % 4
         b.net_label(f"SW{i}", "1", f"SEG{(row % 2) * 4 + col + 1}")
         b.net_label(f"SW{i}", "2", f"KEY_K{row // 2 + 1}")
+
+    # J_KEY: giắc bàn phím màng (dán), nối song song ma trận tact. 1 K1, 2 K2, 3..10 KS1..KS8.
+    # Phím màng hàng r, cột c (r, c = 0..3) nối K(r // 2 + 1) với KS((r % 2) * 4 + c + 1), trùng SW.
+    b.place(
+        "Connector_Generic:Conn_01x10",
+        "J_KEY",
+        "Membrane 1x10 2.54",
+        sx + 70,
+        sy + 19,
+        footprint="Panel:Membrane_1x10_P2.54_Vertical_Slot",
+    )
+    b.net_label("J_KEY", "1", "KEY_K1")
+    b.net_label("J_KEY", "2", "KEY_K2")
+    for i in range(1, 9):
+        b.net_label("J_KEY", str(2 + i), f"SEG{i}")
 
     # Status LEDs D10-D17: anode chung SEG9 (LED_ROW), cathode chung GRID của digit tương ứng.
     for i in range(8):

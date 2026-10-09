@@ -27,3 +27,25 @@ __pycache__/
 
 # Firmware build output
 firmware/build/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Firmware / C build artifacts (ngoài firmware/build/)
+*.o
+*.obj
+*.elf
+*.map
+*.lst
+tests/build/
+
+# .NET (pcapp): đã có trong pcapp/.gitignore, thêm các thứ hay sinh ra
+TestResults/
+publish/
+*.nupkg
+
+# Claude Code local state (cài đặt riêng từng máy)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock

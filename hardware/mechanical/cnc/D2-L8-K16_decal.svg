@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120mm" height="120mm" viewBox="0 0 120 120">
+<title>Decal D2-L8-K16 — nhìn từ mặt tủ</title>
+<rect width="120" height="120" fill="#2a2a2a"/>
+<rect x="54" y="5" width="52" height="40" fill="#111" stroke="#666" stroke-width="0.2"/>
+<circle cx="40" cy="12" r="2" fill="#333" stroke="#888" stroke-width="0.15"/>
+<text x="36" y="12.9" font-size="2.6" fill="#eee" font-family="sans-serif" text-anchor="end">RUN</text>
+<circle cx="40" cy="20" r="2" fill="#333" stroke="#888" stroke-width="0.15"/>
+<text x="36" y="20.9" font-size="2.6" fill="#eee" font-family="sans-serif" text-anchor="end">STOP</text>
+<circle cx="40" cy="28" r="2" fill="#333" stroke="#888" stroke-width="0.15"/>
+<text x="36" y="28.9" font-size="2.6" fill="#eee" font-family="sans-serif" text-anchor="end">FAULT</text>
+<circle cx="40" cy="36" r="2" fill="#333" stroke="#888" stroke-width="0.15"/>
+<text x="36" y="36.9" font-size="2.6" fill="#eee" font-family="sans-serif" text-anchor="end">AUTO</text>
+<circle cx="40" cy="44" r="2" fill="#333" stroke="#888" stroke-width="0.15"/>
+<text x="36" y="44.9" font-size="2.6" fill="#eee" font-family="sans-serif" text-anchor="end">MAN</text>
+<circle cx="40" cy="52" r="2" fill="#333" stroke="#888" stroke-width="0.15"/>
+<text x="36" y="52.9" font-size="2.6" fill="#eee" font-family="sans-serif" text-anchor="end">RDY</text>
+<circle cx="40" cy="60" r="2" fill="#333" stroke="#888" stroke-width="0.15"/>
+<text x="36" y="60.9" font-size="2.6" fill="#eee" font-family="sans-serif" text-anchor="end">COMM</text>
+<circle cx="40" cy="68" r="2" fill="#333" stroke="#888" stroke-width="0.15"/>
+<text x="36" y="68.9" font-size="2.6" fill="#eee" font-family="sans-serif" text-anchor="end">ALM</text>
+<rect x="95.5" y="52.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="79.5" y="52.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="63.5" y="52.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="47.5" y="52.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="95.5" y="68.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="79.5" y="68.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="63.5" y="68.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="47.5" y="68.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="95.5" y="84.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="79.5" y="84.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="63.5" y="84.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="47.5" y="84.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="95.5" y="100.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="79.5" y="100.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="63.5" y="100.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+<rect x="47.5" y="100.5" width="13" height="13" fill="#1a1a1a" stroke="#888" stroke-width="0.15"/>
+</svg>

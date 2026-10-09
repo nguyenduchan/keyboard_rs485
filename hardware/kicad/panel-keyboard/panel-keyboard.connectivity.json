@@ -326,6 +326,16 @@
   },
   {
     "ref": "U1",
+    "pin": "1",
+    "net": "LOG_RX"
+  },
+  {
+    "ref": "U1",
+    "pin": "20",
+    "net": "LOG_TX"
+  },
+  {
+    "ref": "U1",
     "pin": "18",
     "net": "SWDIO"
   },
@@ -355,22 +365,42 @@
     "net": "GND"
   },
   {
-    "ref": "J2",
+    "ref": "J_SWD",
     "pin": "1",
     "net": "+3V3"
   },
   {
-    "ref": "J2",
+    "ref": "J_SWD",
     "pin": "2",
     "net": "SWDIO"
   },
   {
-    "ref": "J2",
+    "ref": "J_SWD",
     "pin": "3",
     "net": "SWCLK"
   },
   {
-    "ref": "J2",
+    "ref": "J_SWD",
+    "pin": "4",
+    "net": "GND"
+  },
+  {
+    "ref": "J_LOG",
+    "pin": "1",
+    "net": "+3V3"
+  },
+  {
+    "ref": "J_LOG",
+    "pin": "2",
+    "net": "LOG_TX"
+  },
+  {
+    "ref": "J_LOG",
+    "pin": "3",
+    "net": "LOG_RX"
+  },
+  {
+    "ref": "J_LOG",
     "pin": "4",
     "net": "GND"
   },
@@ -475,22 +505,22 @@
     "net": "GND"
   },
   {
-    "ref": "RTERM",
+    "ref": "JTERM",
     "pin": "1",
     "net": "RS485_A_BUS"
   },
   {
-    "ref": "RTERM",
+    "ref": "JTERM",
     "pin": "2",
-    "net": "RS485_B_BUS"
+    "net": "RS485_TERM"
   },
   {
-    "ref": "JTERM",
+    "ref": "RTERM",
     "pin": "1",
-    "net": "RS485_A_BUS"
+    "net": "RS485_TERM"
   },
   {
-    "ref": "JTERM",
+    "ref": "RTERM",
     "pin": "2",
     "net": "RS485_B_BUS"
   },
@@ -993,6 +1023,56 @@
     "ref": "SW16",
     "pin": "2",
     "net": "KEY_K2"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "1",
+    "net": "KEY_K1"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "2",
+    "net": "KEY_K2"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "3",
+    "net": "SEG1"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "4",
+    "net": "SEG2"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "5",
+    "net": "SEG3"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "6",
+    "net": "SEG4"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "7",
+    "net": "SEG5"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "8",
+    "net": "SEG6"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "9",
+    "net": "SEG7"
+  },
+  {
+    "ref": "J_KEY",
+    "pin": "10",
+    "net": "SEG8"
   },
   {
     "ref": "D10",

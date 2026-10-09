@@ -46,12 +46,23 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     App/Src/app.c
-    App/Src/modbus_rtu.c
-    App/Src/modbus_slave.c
-    App/Src/panel.c
-    App/Src/panel_map.c
-    App/Src/regs.c
+    App/Src/buzzer.c
+    App/Src/cfg.c
+    App/Src/cfgsrv.c
+    App/Src/crc.c
+    App/Src/datafmt.c
+    App/Src/display.c
+    App/Src/engine.c
+    App/Src/hw_misc.c
+    App/Src/keys.c
+    App/Src/mb_master.c
+    App/Src/mb_slave.c
+    App/Src/menu.c
+    App/Src/rs485.c
+    App/Src/rtcfg.c
+    App/Src/storage.c
     App/Src/tm1638.c
+    App/Src/ui.c
 )
 
 # Add include paths
@@ -64,16 +75,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined symbols
 )
-
-# Cấu hình Modbus khi build, ví dụ: cmake --preset Release -DMODBUS_SLAVE_ID=3 -DMODBUS_BAUDRATE=19200 -DMODBUS_PARITY=EVEN
-foreach(opt MODBUS_SLAVE_ID MODBUS_BAUDRATE MODBUS_STOP_BITS)
-    if(DEFINED ${opt})
-        target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE ${opt}=${${opt}}u)
-    endif()
-endforeach()
-if(DEFINED MODBUS_PARITY)
-    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE MODBUS_PARITY=MB_PARITY_${MODBUS_PARITY})
-endif()
 
 # Remove wrong libob.a library dependency when using cpp files
 list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)

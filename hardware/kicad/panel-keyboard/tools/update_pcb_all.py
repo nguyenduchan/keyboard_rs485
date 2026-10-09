@@ -35,6 +35,7 @@ OBSOLETE = (
     "RPU",
     "CTM1",
     "CTM2",
+    "J2",
 )
 
 

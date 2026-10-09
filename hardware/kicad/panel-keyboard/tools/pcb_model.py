@@ -66,8 +66,9 @@ if __name__ == '__main__':
             print(p['ref'], p['num'], p['type'], p['shape'], p['w'], p['h'], p['drill'], p['layers'])
 
 
-def fp_copper(t):
-    """bounding boxes (cx, cy, hx, hy, layermask) of fp_poly / fp_rect on copper layers"""
+def fp_copper(t, layers=('F.Cu', 'B.Cu')):
+    """bounding boxes (cx, cy, hx, hy, layermask) of fp_poly / fp_rect on copper layers
+    (or on Edge.Cuts, for slots milled inside a footprint: layermask 3)"""
     out = []
     for fp in find(t, 'footprint'):
         at = find(fp, 'at')[0]
@@ -78,13 +79,13 @@ def fp_copper(t):
             if not isinstance(g, list) or not g or g[0] not in ('fp_poly', 'fp_rect'):
                 continue
             ly = find(g, 'layer')
-            if not ly or val(ly[0][1]) not in ('F.Cu', 'B.Cu'):
+            if not ly or val(ly[0][1]) not in layers:
                 continue
             pts = [(_f(e[1]), _f(e[2])) for k in ('start', 'end') for e in find(g, k)]
             for e in find(g, 'pts'):
                 pts += [(_f(xy[1]), _f(xy[2])) for xy in find(e, 'xy')]
             xs = [fx + x * ca + y * sa for x, y in pts]
             ys = [fy - x * sa + y * ca for x, y in pts]
-            lay = 1 if val(ly[0][1]) == 'F.Cu' else 2
+            lay = {'F.Cu': 1, 'B.Cu': 2}.get(val(ly[0][1]), 3)
             out.append(((min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2, (max(xs) - min(xs)) / 2, (max(ys) - min(ys)) / 2, lay))
     return out

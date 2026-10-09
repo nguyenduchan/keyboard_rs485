@@ -10,6 +10,8 @@ Mạch **STM32G030F6P6 + RS485 (SIT3485)**, rev C — linh kiện phổ biến. 
 | `docs/PCB_LAYOUT.md` | Tọa độ mm, mặt trên / mặt dưới, checklist |
 | `docs/CHONG_PHIM_MA.md` | Lọc ma trận, tách vùng nguồn |
 | `hardware/kicad/panel-keyboard/tools/front_layout_spec.py` | **Chuẩn tọa độ mặt trước** |
+| `docs/CONFIG_PROTOCOL.md`, `docs/RUNTIME_FORMAT.md` | giao thức cấu hình + bản đồ thanh ghi + khối cấu hình (cho PC app) |
+| `firmware/` | firmware STM32G030F6P6 (xem `firmware/README.md`) |
 | `hardware/bom.csv` | BOM |
 
 ## Đồng bộ schematic + PCB
@@ -31,13 +33,13 @@ KiCad vẽ trang với **Y tăng xuống dưới** (đỉnh hình = Y nhỏ). T�
 
 Hai module 4 số 0,56" (5641AS, thân 50,4 × 19,0 mm, bước digit 12,7 mm) đặt tâm **X=40** trùng tâm keypad. Hàng chân cách 15,24 mm. Khe giữa mép dưới thân 7-seg và mép trên thân phím là **8 mm**.
 
-| Y | 16 | 32 | 48 | 64 | | 79.5 |
+| Y | 16 | 32 | 48 | 64 | | 80 |
 |---:|:---:|:---:|:---:|:---:|:---|:---:|
 | 12 | | | | | | D10 |
-| 15.4 | DS1 module 4 số (digit 1–4, tâm X=40) | | | | | |
+| 15 | DS1 module 4 số (digit 1–4, tâm X=40) | | | | | |
 | 20 | | | | | | D11 |
 | 28 | | | | | | D12 |
-| 35.5 | DS2 module 4 số (digit 5–8, tâm X=40) | | | | | |
+| 35 | DS2 module 4 số (digit 5–8, tâm X=40) | | | | | |
 | 36 | | | | | | D13 |
 | 44 | | | | | | D14 |
 | 52 | | | | | | D15 |
@@ -50,7 +52,7 @@ Hai module 4 số 0,56" (5641AS, thân 50,4 × 19,0 mm, bước digit 12,7 mm) �
 
 ### Kiểm tra layout
 
-Script so PCB với `front_layout_spec.py` (dung sai **±1 mm**):
+Script so PCB với `front_layout_spec.py` (dung sai **0,01 mm** — lỗ phay mặt tủ tính từ tọa độ này):
 
 ```text
 python hardware/kicad/panel-keyboard/tools/verify_front_layout.py
@@ -72,7 +74,7 @@ Chuẩn hóa footprint trên PCB: `tools/fix_front_layout.py` (sau `update_pcb_a
 | Vùng | X (mm) | Y (mm) | Nội dung |
 |------|--------|--------|----------|
 | Dưới LED trạng thái | 70–90 | 74–99 | U6 TM1638, CLED1–3, RSTB/RCLK/RDIO |
-| MCU | 90–104 | 80–96 | U1, CVDD1, CNRST, J2 (SWD, không lắp) |
+| MCU | 90–104 | 80–96 | U1, CVDD1, CNRST, J_SWD và J_LOG (không lắp) |
 | Còi | 34–58 | 44–56 | BZ1, QBZ, RBZG |
 | **BUCK_5V** | 82–118 | 4–46 | J_PWR, U4 XL1509 (SOP-8), L1, D8, C2, C22 |
 | **24V_PROTECT** | 82–118 | 48–76 | C4, F1, FBIN, TVS1, DREV, U5 |
@@ -84,8 +86,7 @@ Chi tiết: `docs/PCB_LAYOUT.md`, `tools/zone_layout.py`.
 
 ## Cơ khí tủ
 
-- Khoét tủ **105 × 105 mm** — `hardware/mechanical/cabinet_cutout.svg`  
-- Decal **120 × 120 mm** — khe **8 mm** giữa 7-seg và phím, **8× Ø3 mm** LED. ⚠ Rev C đổi sang module 4 số (50,4 × 19 mm/hàng): cửa sổ hiển thị trên decal / khoét mặt tủ cần chỉnh lại theo module.  
+- Lỗ phay mặt tủ **theo biến thể** (số module 7 đoạn, số LED, số phím / bàn phím màng), mọi số đo nguyên mm, nhìn từ mặt tủ: `hardware/mechanical/cnc/` (DXF cho máy CNC, SVG, CSV, decal). Sinh và kiểm tra: `python hardware/kicad/panel-keyboard/tools/cnc_panel.py --check` — xem `docs/CNC_MAT_MAY.md`.  
 - Chip nằm **mặt trên**. Mặt dưới chỉ có phím và LED, hướng ra mặt máy  
 
 ## Mở thiết kế

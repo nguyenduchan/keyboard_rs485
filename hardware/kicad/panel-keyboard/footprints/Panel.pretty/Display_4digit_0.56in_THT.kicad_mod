@@ -31,4 +31,5 @@
   (pad "10" thru_hole circle (at -1.27 -7.62) (size 1.6 1.6) (drill 0.9) (layers "*.Cu" "*.Mask"))
   (pad "11" thru_hole circle (at -3.81 -7.62) (size 1.6 1.6) (drill 0.9) (layers "*.Cu" "*.Mask"))
   (pad "12" thru_hole circle (at -6.35 -7.62) (size 1.6 1.6) (drill 0.9) (layers "*.Cu" "*.Mask"))
+  (model "${KIPRJMOD}/3d/DS_5641AS.wrl" (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0)))
 )

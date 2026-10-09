@@ -10,6 +10,7 @@ PANEL_WIDTH_MM = 100.0
 PANEL_HEIGHT_MM = 150.0
 # Tâm keypad/7-seg. Cột phải của bo 120 mm dành cho nguồn và MCU.
 MAIN_AXIS_X = 40.0
+KEY_AXIS_X = 42.0      # keypad dịch phải 2 mm so với 7-seg để góc lỗ phím không sát lỗ vít M3
 
 KEY_COLS = 4
 KEY_ROWS = 4
@@ -18,27 +19,25 @@ DIGIT_ROWS = 2
 STATUS_COUNT = 8
 
 KEY_PITCH = 16.0
-# Module 4 số 0,56" (5641AS): thân 50,4 × 19,0 mm, bước digit 12,7 mm.
-# Hai hàng giữ khoảng cách cũ (khe 1 mm giữa hai thân).
+# Module 4 số 0,56" (5641AS): thân 50,4 × 19,05 mm, bước digit 12,7 mm.
+# Tâm hai hàng đặt trên số nguyên mm (Y 15 / 35, bước 20) để cửa sổ phay mặt máy có mép nguyên mm.
 DIGIT_MODULE_W_MM = 50.4
 DIGIT_BODY_W_MM = 12.70
 DIGIT_BODY_H_MM = 19.05
-DIGIT_GAP_MM = 1.0
-DIGIT_PITCH_TOP = DIGIT_BODY_W_MM + DIGIT_GAP_MM  # cả hai hàng
-DIGIT_ROW_PITCH_Y = DIGIT_BODY_H_MM + DIGIT_GAP_MM + 0.05  # 20,1
+DIGIT_ROW_PITCH_Y = 20.0
 SWITCH_HALF_MM = 6.0
 DIGIT_HALF_H_MM = DIGIT_BODY_H_MM / 2
 
 STATUS_PITCH_Y = 8.0
 STATUS_LED_HALF_MM = 1.5
-STATUS_GAP_MM = 8.0
-# Khe giữa thân 7-seg và thân phím, đủ cho lưỡi CNC ~3 mm và gân mặt máy.
+# Khe thân phím → tâm LED 10 mm: cột LED tại X = 80 (số nguyên, cho lỗ phay).
+STATUS_GAP_MM = 8.5
+# Khe giữa thân 7-seg và thân phím, đủ cho gân mặt máy giữa cửa sổ 7-seg và lỗ phím.
 MIN_GAP_KEYPAD_TO_DIGIT_MM = 8.0
 
-# Cả hai hàng sát nhau, tâm hàng = tâm keypad.
-# SW13 tại Y=59, mép thân phím Y=53. Mép dưới thân 7-seg = 45.
-DIGIT_ROW_BOT_Y = 35.475
-DIGIT_ROW_TOP_Y = round(DIGIT_ROW_BOT_Y - DIGIT_ROW_PITCH_Y, 3)  # 15.375
+# Hai hàng sát nhau (khe thân 0,95 mm, chung một cửa sổ phay). SW13 tại Y=59, mép thân phím Y=53.
+DIGIT_ROW_TOP_Y = 15.0
+DIGIT_ROW_BOT_Y = DIGIT_ROW_TOP_Y + DIGIT_ROW_PITCH_Y  # 35, mép dưới thân 44,525
 KEY_ROW0_Y = 107.0      # SW1; SW13 = 59. Mép dưới thân phím = 113.
 
 
@@ -79,7 +78,7 @@ def switch_centers() -> dict[str, tuple[float, float]]:
     for n in range(1, KEY_COLS * KEY_ROWS + 1):
         row, col = (n - 1) // KEY_COLS, (n - 1) % KEY_COLS
         out[f"SW{n}"] = (
-            _grid_x(col, KEY_COLS, KEY_PITCH),
+            _grid_x(col, KEY_COLS, KEY_PITCH, KEY_AXIS_X),
             KEY_ROW0_Y - row * KEY_PITCH,
         )
     return out
@@ -104,10 +103,10 @@ def digit_bottom_row_y_mm() -> float:
 
 
 def keypad_center_x_mm() -> float:
-    return MAIN_AXIS_X
+    return KEY_AXIS_X
 
 
 def digit_block_center_x_mm() -> float:
-    """Tâm hàng 7-seg trên (DS1–DS4)."""
-    xs = [digit_centers()[f"DS{i + 1}"][0] for i in range(DIGIT_COLS)]
-    return (xs[0] + xs[-1]) / 2
+    """Tâm ngang cụm module 7-seg."""
+    xs = [x for x, _ in digit_centers().values()]
+    return (min(xs) + max(xs)) / 2

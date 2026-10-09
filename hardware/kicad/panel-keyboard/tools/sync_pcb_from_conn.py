@@ -45,9 +45,9 @@ def sch_parts() -> dict[str, tuple[str, str]]:
 def remove() -> int:
     parts = sch_parts()
     board = pcbnew.LoadBoard(str(BOARD))
-    for t in list(board.GetTracks()):
-        board.Remove(t)
-    gone = []
+    # decide everything first: in KiCad 10 any SWIG access after board.Remove() breaks
+    tracks = list(board.GetTracks())
+    gone, objs = [], []
     for fp in list(board.GetFootprints()):
         ref = fp.GetReference()
         if ref in KEEP:
@@ -56,9 +56,11 @@ def remove() -> int:
         have = str(fp.GetFPID().GetLibItemName())
         if want is None or want[0].split(":", 1)[1] != have:
             gone.append(f"{ref}({have})")
-            board.Remove(fp)
+            objs.append(fp)
+    for o in tracks + objs:
+        board.Remove(o)
     pcbnew.SaveBoard(str(BOARD), board)
-    print("removed", len(gone), ":", " ".join(gone))
+    print("removed", len(gone), "footprints and", len(tracks), "tracks:", " ".join(gone))
     return 0
 
 

@@ -1,0 +1,23 @@
+{
+  "id": "mitsubishi_fx3g",
+  "name": "Mitsubishi FX3G/FX3GC (Modbus slave)",
+  "vendor": "Mitsubishi",
+  "verified": false,
+  "source": "MELSEC FX3S/FX3G/FX3GC/FX3U/FX3UC User's Manual - MODBUS Serial Communication Edition (JY997D26201G), mục 9.3 'Default Values' trang 94",
+  "notes": "Bảng gán MẶC ĐỊNH (chưa kiểm tra bằng PLC thật). X/Y cơ số 8 (Y0..Y177, X0..X177). Truy cập địa chỉ không dùng sẽ báo lỗi từ PLC. Phím F/ô nhập nên ghi coil M, tránh Dxxx.bit. CN200..255 là 32 bit: chưa hỗ trợ. Timeout ≥ 300 ms.",
+  "minTimeoutMs": 300,
+  "defaultWordOrder": "CDAB",
+  "areas": [
+    { "name": "M",  "kind": "Bit",  "table": "Coil",     "min": 0,    "max": 7679,  "modbusStart": 0,     "desc": "M0..M7679 (0x0000)" },
+    { "name": "M",  "kind": "Bit",  "table": "Coil",     "min": 8000, "max": 8511,  "modbusStart": 7680,  "desc": "M8000..M8511 (0x1E00)" },
+    { "name": "S",  "kind": "Bit",  "table": "Coil",     "min": 0,    "max": 4095,  "modbusStart": 8192,  "desc": "S0..S4095 (0x2000)" },
+    { "name": "TS", "kind": "Bit",  "table": "Coil",     "min": 0,    "max": 319,   "modbusStart": 12288, "desc": "Tiếp điểm timer TS0..TS319 (0x3000)" },
+    { "name": "CS", "kind": "Bit",  "table": "Coil",     "min": 0,    "max": 255,   "modbusStart": 12608, "desc": "Tiếp điểm counter CS0..CS255 (0x3140)" },
+    { "name": "Y",  "kind": "Bit",  "table": "Coil",     "radix": 8, "min": 0, "max": 127, "modbusStart": 12800, "desc": "Y0..Y177 bát phân (0x3200)" },
+    { "name": "X",  "kind": "Bit",  "table": "Discrete", "radix": 8, "min": 0, "max": 127, "modbusStart": 13056, "desc": "X0..X177 bát phân (0x3300, chỉ đọc)" },
+    { "name": "D",  "kind": "Word", "table": "Holding",  "min": 0,    "max": 8511,  "modbusStart": 0,     "desc": "D0..D7999 và D8000..D8511 (0x0000)" },
+    { "name": "R",  "kind": "Word", "table": "Holding",  "min": 0,    "max": 23999, "modbusStart": 8512,  "desc": "R0..R23999 (0x2140)" },
+    { "name": "TN", "kind": "Word", "table": "Holding",  "min": 0,    "max": 319,   "modbusStart": 41280, "desc": "Giá trị timer TN0..TN319 (0xA140)" },
+    { "name": "CN", "kind": "Word", "table": "Holding",  "min": 0,    "max": 199,   "modbusStart": 41792, "desc": "Giá trị counter 16 bit CN0..CN199 (0xA340)" }
+  ]
+}

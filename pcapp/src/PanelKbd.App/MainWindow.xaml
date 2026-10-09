@@ -1,0 +1,855 @@
+<Window x:Class="PanelKbd.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PanelKbd.App"
+        xmlns:core="clr-namespace:PanelKbd.Core;assembly=PanelKbd.Core"
+        Title="{Binding WindowTitle}" Width="1280" Height="800" MinWidth="1000" MinHeight="640"
+        WindowStartupLocation="CenterScreen" Background="#F3F4F6">
+    <Window.Resources>
+        <local:BoolToVisibility x:Key="B2V"/>
+        <local:NotConverter x:Key="Not"/>
+        <local:SeverityBrush x:Key="SevBrush"/>
+        <local:ErrorBrush x:Key="ErrBrush"/>
+
+        <Style x:Key="EnumCombo" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="SelectedValuePath" Value="Value"/>
+            <Setter Property="DisplayMemberPath" Value="Text"/>
+        </Style>
+        <Style x:Key="Flat" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#D8DBE0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Margin" Value="0,0,12,12"/>
+        </Style>
+        <Style x:Key="CardTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <!-- Hàng 7 đoạn trên hình bàn phím -->
+        <DataTemplate x:Key="CellView">
+            <local:SevenSegmentDisplay Text="{Binding Preview}" Digits="{Binding DigitCount}" DigitWidth="42"/>
+        </DataTemplate>
+
+        <!-- Phím cấu hình được -->
+        <DataTemplate x:Key="KeyView" DataType="{x:Type core:KeyConfig}">
+            <Border Width="62" Height="48" CornerRadius="6" BorderThickness="2" Margin="4">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="#3C4658"/>
+                        <Setter Property="BorderBrush" Value="#566176"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Present}" Value="False">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Button Style="{StaticResource Flat}"
+                        Command="{Binding DataContext.SelectCmd, RelativeSource={RelativeSource AncestorType=Window}}"
+                        CommandParameter="{Binding}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Action}" Foreground="#A9B4C6" FontSize="9.5" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+        </DataTemplate>
+
+        <!-- Phím cố định -->
+        <DataTemplate x:Key="FixedKeyView" DataType="{x:Type core:FixedKey}">
+            <Border Width="62" Height="48" CornerRadius="6" BorderThickness="2" Margin="4" Background="#2A313D" BorderBrush="#3A4352">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Present}" Value="False"><Setter Property="Visibility" Value="Hidden"/></DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock Text="{Binding Id}" Foreground="#C8D0DC" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </DataTemplate>
+        <local:KeySelector x:Key="KeySel" Fixed="{StaticResource FixedKeyView}" Config="{StaticResource KeyView}"/>
+
+        <!-- Phím mô phỏng / thử phần cứng -->
+        <DataTemplate x:Key="SimKeyView" DataType="{x:Type local:SimKey}">
+            <Border Width="62" Height="48" CornerRadius="6" BorderThickness="2" Margin="4" Background="#2A313D" BorderBrush="#3A4352">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Pressed}" Value="True"><Setter Property="Background" Value="#2563EB"/><Setter Property="BorderBrush" Value="DeepSkyBlue"/></DataTrigger>
+                            <DataTrigger Binding="{Binding Present}" Value="False"><Setter Property="Visibility" Value="Hidden"/></DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Button Style="{StaticResource Flat}" Tag="{Binding Id}"
+                        PreviewMouseLeftButtonDown="SimKey_Down" PreviewMouseLeftButtonUp="SimKey_Up" MouseLeave="SimKey_Up">
+                    <TextBlock Text="{Binding Title}" Foreground="#E5E9F0" FontSize="16" FontWeight="SemiBold"/>
+                </Button>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="HwKeyView" DataType="{x:Type local:SimKey}">
+            <Border Width="62" Height="48" CornerRadius="6" BorderThickness="2" Margin="4" Background="#2A313D" BorderBrush="#3A4352">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Pressed}" Value="True"><Setter Property="Background" Value="#16A34A"/><Setter Property="BorderBrush" Value="LimeGreen"/></DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock Text="{Binding Title}" Foreground="#E5E9F0" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="SimLedView" DataType="{x:Type local:SimLed}">
+            <StackPanel Orientation="Horizontal" Margin="0,3" Width="90">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel"><Style.Triggers>
+                        <DataTrigger Binding="{Binding Present}" Value="False"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                    </Style.Triggers></Style>
+                </StackPanel.Style>
+                <Ellipse Width="16" Height="16" Stroke="#222">
+                    <Ellipse.Style>
+                        <Style TargetType="Ellipse">
+                            <Setter Property="Fill" Value="#444"/>
+                            <Style.Triggers><DataTrigger Binding="{Binding Lit}" Value="True"><Setter Property="Fill" Value="LimeGreen"/></DataTrigger></Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+                <TextBlock Text="{Binding Title}" Foreground="#E5E9F0" FontSize="12" Margin="8,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- LED -->
+        <DataTemplate x:Key="LedView" DataType="{x:Type core:LedConfig}">
+            <Border BorderThickness="2" CornerRadius="5" Margin="0,2" Padding="6,2" Width="104">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="BorderBrush" Value="DeepSkyBlue"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Present}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Button Style="{StaticResource Flat}"
+                        Command="{Binding DataContext.SelectCmd, RelativeSource={RelativeSource AncestorType=Window}}"
+                        CommandParameter="{Binding}" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="16" Height="16" Stroke="#222" StrokeThickness="1">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Fill" Value="#555"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Mode}" Value="Steady"><Setter Property="Fill" Value="LimeGreen"/></DataTrigger>
+                                        <DataTrigger Binding="{Binding Mode}" Value="Blink"><Setter Property="Fill" Value="Orange"/></DataTrigger>
+                                        <DataTrigger Binding="{Binding Mode}" Value="Comm"><Setter Property="Fill" Value="DeepSkyBlue"/></DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                        <StackPanel Margin="8,0,0,0">
+                            <TextBlock Text="{Binding Title}" Foreground="#E5E9F0" FontSize="12"/>
+                            <TextBlock Text="{Binding Address}" Foreground="#8E99AB" FontSize="10"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+            </Border>
+        </DataTemplate>
+
+        <!-- Bảng thuộc tính: ô -->
+        <DataTemplate DataType="{x:Type core:Cell}">
+            <StackPanel>
+                <TextBlock Text="{Binding RowName}" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                <TextBlock Style="{StaticResource Cap}" Text="Loại đối tượng"/>
+                <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.CellTypeItems}" SelectedValue="{Binding Type}"/>
+
+                <StackPanel Visibility="{Binding HasAddress, Converter={StaticResource B2V}}">
+                    <TextBlock Style="{StaticResource Cap}" Text="① Ký hiệu ngắn (ví dụ D100, D100.3, M10)"/>
+                    <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,2"/>
+                    <TextBlock Style="{StaticResource Cap}" Text="② Modbus tuyệt đối (HR:4096 · C:16 · IR · DI, tính từ 0, nhận 0x…) — sửa ô nào, ô kia đổi theo"/>
+                    <TextBox Text="{Binding AbsoluteAddress, UpdateSourceTrigger=LostFocus}" FontFamily="Consolas" Margin="0,0,0,2"/>
+                    <TextBlock Text="{Binding ResolvedText}" TextWrapping="Wrap" FontSize="11.5" Margin="0,0,0,8"
+                               Foreground="{Binding ResolvedError, Converter={StaticResource ErrBrush}}"/>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding IsNumeric, Converter={StaticResource B2V}}">
+                    <TextBlock Style="{StaticResource Cap}" Text="Kiểu dữ liệu"/>
+                    <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.DataTypeItems}" SelectedValue="{Binding DataType}"/>
+                    <TextBlock Style="{StaticResource Cap}" Text="Số chữ số thập phân"/>
+                    <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.DecimalItems}" SelectedValue="{Binding Decimals}"/>
+                    <CheckBox Content="Ghép 8 số (chiếm cả hai hàng, chỉ hàng trên)" IsChecked="{Binding Span8}"
+                              Visibility="{Binding CanSpan8, Converter={StaticResource B2V}}"/>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding IsNumeric, Converter={StaticResource B2V}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                        <StackPanel><TextBlock Style="{StaticResource Cap}" Text="Min (giá trị hiện/nhập nhỏ nhất)"/><TextBox Text="{Binding Min, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                        <StackPanel Grid.Column="2"><TextBlock Style="{StaticResource Cap}" Text="Max"/><TextBox Text="{Binding Max, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Visibility="{Binding IsInput, Converter={StaticResource B2V}}">
+                    <TextBlock Style="{StaticResource Cap}" Text="Mật khẩu để nhập"/>
+                    <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.PasswordItems}" SelectedValue="{Binding PasswordLevel}"/>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding IsLabelType, Converter={StaticResource B2V}}">
+                    <TextBlock Style="{StaticResource Cap}" Text="Chữ hiện (tối đa 4 ký tự 7 đoạn)"/>
+                    <TextBox Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}" MaxLength="10"/>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding IsBitState, Converter={StaticResource B2V}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                        <StackPanel><TextBlock Style="{StaticResource Cap}" Text="Nhãn khi ON"/><TextBox Text="{Binding OnLabel, UpdateSourceTrigger=PropertyChanged}" MaxLength="10"/></StackPanel>
+                        <StackPanel Grid.Column="2"><TextBlock Style="{StaticResource Cap}" Text="Nhãn khi OFF"/><TextBox Text="{Binding OffLabel, UpdateSourceTrigger=PropertyChanged}" MaxLength="10"/></StackPanel>
+                    </Grid>
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource Cap}" Text="Ghi chú (chỉ lưu trên PC)"/>
+                <TextBox Text="{Binding Note, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- Bảng thuộc tính: phím -->
+        <DataTemplate DataType="{x:Type core:KeyConfig}">
+            <StackPanel>
+                <TextBlock FontSize="15" FontWeight="SemiBold" Margin="0,0,0,10">
+                    <Run Text="Phím "/><Run Text="{Binding Title, Mode=OneWay}"/>
+                </TextBlock>
+                <TextBlock Style="{StaticResource Cap}" Text="Chức năng"/>
+                <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.KeyActionItems}" SelectedValue="{Binding Action}"/>
+                <StackPanel Visibility="{Binding NeedsAddress, Converter={StaticResource B2V}}">
+                    <TextBlock Style="{StaticResource Cap}" Text="① Ký hiệu ngắn (bit: M10, D100.3 — hằng số: D100)"/>
+                    <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,2"/>
+                    <TextBlock Style="{StaticResource Cap}" Text="② Modbus tuyệt đối (HR:4096 · C:16 · IR · DI, tính từ 0, nhận 0x…) — sửa ô nào, ô kia đổi theo"/>
+                    <TextBox Text="{Binding AbsoluteAddress, UpdateSourceTrigger=LostFocus}" FontFamily="Consolas" Margin="0,0,0,2"/>
+                    <TextBlock Text="{Binding ResolvedText}" TextWrapping="Wrap" FontSize="11.5" Margin="0,0,0,8"
+                               Foreground="{Binding ResolvedError, Converter={StaticResource ErrBrush}}"/>
+                </StackPanel>
+                <StackPanel Visibility="{Binding NeedsConst, Converter={StaticResource B2V}}">
+                    <TextBlock Style="{StaticResource Cap}" Text="Hằng số ghi (16 bit)"/>
+                    <TextBox Text="{Binding Const, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Visibility="{Binding NeedsPage, Converter={StaticResource B2V}}">
+                    <TextBlock Style="{StaticResource Cap}" Text="Chuyển tới trang số"/>
+                    <TextBox Text="{Binding TargetPage, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <TextBlock Style="{StaticResource Cap}" Text="Ghi chú"/>
+                <TextBox Text="{Binding Note, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock TextWrapping="Wrap" Foreground="#9A3412" FontSize="11.5"
+                           Text="Không dùng phím F làm dừng khẩn cấp. Mạch an toàn phải đi dây cứng."/>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- Bảng thuộc tính: LED -->
+        <DataTemplate DataType="{x:Type core:LedConfig}">
+            <StackPanel>
+                <TextBlock Text="{Binding Title}" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                <TextBlock Style="{StaticResource Cap}" Text="Chế độ"/>
+                <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.LedModeItems}" SelectedValue="{Binding Mode}"/>
+                <StackPanel Visibility="{Binding NeedsAddress, Converter={StaticResource B2V}}">
+                    <TextBlock Style="{StaticResource Cap}" Text="① Ký hiệu ngắn của bit điều khiển LED (M20, Y3, D100.5)"/>
+                    <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,2"/>
+                    <TextBlock Style="{StaticResource Cap}" Text="② Modbus tuyệt đối (HR:4096 · C:16 · IR · DI, tính từ 0, nhận 0x…) — sửa ô nào, ô kia đổi theo"/>
+                    <TextBox Text="{Binding AbsoluteAddress, UpdateSourceTrigger=LostFocus}" FontFamily="Consolas" Margin="0,0,0,2"/>
+                    <TextBlock Text="{Binding ResolvedText}" TextWrapping="Wrap" FontSize="11.5" Margin="0,0,0,8"
+                               Foreground="{Binding ResolvedError, Converter={StaticResource ErrBrush}}"/>
+                    <CheckBox Content="Đảo mức (bit = 0 thì sáng)" IsChecked="{Binding Invert}"/>
+                </StackPanel>
+                <TextBlock Style="{StaticResource Cap}" Text="Ghi chú"/>
+                <TextBox Text="{Binding Note, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding NewCmd}"/>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenCmd}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCmd}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl+Shift" Command="{Binding SaveAsCmd}"/>
+    </Window.InputBindings>
+
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top" Background="White">
+            <ToolBar Band="0" Background="White">
+                <Button Style="{StaticResource Tool}" Content="Mới" Command="{Binding NewCmd}" ToolTip="Ctrl+N"/>
+                <Button Style="{StaticResource Tool}" Content="Mở…" Command="{Binding OpenCmd}" ToolTip="Ctrl+O"/>
+                <Button Style="{StaticResource Tool}" Content="Lưu" Command="{Binding SaveCmd}" ToolTip="Ctrl+S"/>
+                <Button Style="{StaticResource Tool}" Content="Lưu thành…" Command="{Binding SaveAsCmd}"/>
+                <Separator/>
+                <Button Style="{StaticResource Tool}" Content="Xuất file chạy .pkb" Command="{Binding ExportBinCmd}"/>
+                <Button Style="{StaticResource Tool}" Content="Xuất bảng địa chỉ CSV" Command="{Binding ExportCsvCmd}"/>
+            </ToolBar>
+        </ToolBarTray>
+
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem><TextBlock Text="{Binding CheckSummary}" FontWeight="SemiBold"/></StatusBarItem>
+            <Separator/>
+            <StatusBarItem><TextBlock Text="{Binding CapacityText, StringFormat=Dung lượng: {0}}"/></StatusBarItem>
+            <Separator/>
+            <StatusBarItem><TextBlock Text="{Binding CurrentProfile.Display, StringFormat=Hồ sơ: {0}}"/></StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right"><TextBlock Text="{Binding DeviceText}"/></StatusBarItem>
+        </StatusBar>
+
+        <TabControl SelectedIndex="{Binding SelectedTab}" Margin="8" Padding="0">
+            <!-- ============ THIẾT KẾ ============ -->
+            <TabItem Header="Thiết kế">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="210"/><ColumnDefinition Width="*"/><ColumnDefinition Width="330"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Margin="0,0,10,0">
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource CardTitle}" Text="Trang"/>
+                        <UniformGrid DockPanel.Dock="Bottom" Columns="2" Margin="0,8,0,0">
+                            <Button Content="Thêm" Command="{Binding AddPageCmd}" Margin="0,0,3,3"/>
+                            <Button Content="Nhân bản" Command="{Binding DuplicatePageCmd}" Margin="3,0,0,3"/>
+                            <Button Content="▲ Lên" Command="{Binding MovePageUpCmd}" Margin="0,0,3,0"/>
+                            <Button Content="▼ Xuống" Command="{Binding MovePageDownCmd}" Margin="3,0,0,0"/>
+                        </UniformGrid>
+                        <Button DockPanel.Dock="Bottom" Content="Xoá trang" Command="{Binding DeletePageCmd}" Margin="0,6,0,0"/>
+                        <ListBox ItemsSource="{Binding Project.Pages}" SelectedItem="{Binding SelectedPage}" DisplayMemberPath="Title"/>
+                    </DockPanel>
+
+                    <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <StackPanel Margin="0,0,10,0">
+                            <TextBlock Style="{StaticResource CardTitle}" Text="Bàn phím — bấm vào hàng số, phím hoặc LED để sửa"/>
+                            <Border Background="#1B1F27" CornerRadius="14" Padding="22" HorizontalAlignment="Left">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel>
+                                            <Border BorderThickness="2" CornerRadius="6" Padding="8" Background="#120805">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="BorderBrush" Value="#333"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Project.Layout.HasUpper}" Value="False"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                            <DataTrigger Binding="{Binding SelectedPage.Upper.IsSelected}" Value="True"><Setter Property="BorderBrush" Value="DeepSkyBlue"/></DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <Button Style="{StaticResource Flat}" Command="{Binding SelectCmd}" CommandParameter="{Binding SelectedPage.Upper}"
+                                                        Content="{Binding SelectedPage.Upper}" ContentTemplate="{StaticResource CellView}"/>
+                                            </Border>
+                                            <TextBlock Text="{Binding SelectedPage.Upper.Address}" Foreground="#8E99AB" FontSize="11" Margin="4,2,0,8"/>
+                                            <StackPanel>
+                                                <StackPanel.Style>
+                                                    <Style TargetType="StackPanel">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding SelectedPage.LowerVisible}" Value="False"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                            <DataTrigger Binding="{Binding Project.Layout.HasLower}" Value="False"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </StackPanel.Style>
+                                                <Border BorderThickness="2" CornerRadius="6" Padding="8" Background="#120805">
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="BorderBrush" Value="#333"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding SelectedPage.Lower.IsSelected}" Value="True"><Setter Property="BorderBrush" Value="DeepSkyBlue"/></DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                    <Button Style="{StaticResource Flat}" Command="{Binding SelectCmd}" CommandParameter="{Binding SelectedPage.Lower}"
+                                                            Content="{Binding SelectedPage.Lower}" ContentTemplate="{StaticResource CellView}"/>
+                                                </Border>
+                                                <TextBlock Text="{Binding SelectedPage.Lower.Address}" Foreground="#8E99AB" FontSize="11" Margin="4,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <ItemsControl ItemsSource="{Binding Project.Leds}" ItemTemplate="{StaticResource LedView}" Margin="18,0,0,0"/>
+                                    </StackPanel>
+
+                                    <ItemsControl ItemsSource="{Binding KeyboardKeys}" ItemTemplateSelector="{StaticResource KeySel}" Margin="0,18,0,0" HorizontalAlignment="Left">
+                                        <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="4"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                    <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                        <ContentControl Content="{Binding KeyK3}" ContentTemplate="{StaticResource KeyView}"/>
+                                        <TextBlock Text="K3: phím mở rộng (nếu lắp)" Foreground="#8E99AB" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="11"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <TextBlock Margin="0,10,0,0" Foreground="#555" TextWrapping="Wrap" MaxWidth="560"
+                                       Text="Phím số, ESC, ENT có chức năng cố định (gõ số, huỷ, ghi). ▲▼ F1 F2 K3 gán được. Ký tự hiện trên hình là mẫu giả định để xem số ô và dấu thập phân."/>
+                            <Expander Header="Bố cục phần cứng — bỏ chọn thành phần board không lắp" IsExpanded="True" Margin="0,12,0,0" MaxWidth="560">
+                                <StackPanel Margin="4,8,0,0">
+                                    <TextBlock Style="{StaticResource Cap}" Text="Hàng 7 đoạn"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                        <CheckBox Content="Hàng trên" IsChecked="{Binding Project.Layout.HasUpper}" Margin="0,0,16,0"/>
+                                        <CheckBox Content="Hàng dưới" IsChecked="{Binding Project.Layout.HasLower}"/>
+                                    </StackPanel>
+                                    <TextBlock Style="{StaticResource Cap}" Text="LED trạng thái"/>
+                                    <ItemsControl ItemsSource="{Binding Project.Leds}" Margin="0,0,0,6">
+                                        <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate><DataTemplate>
+                                            <CheckBox Content="{Binding Index}" IsChecked="{Binding Present}" Margin="0,0,14,0"/>
+                                        </DataTemplate></ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock Style="{StaticResource Cap}" Text="Phím"/>
+                                    <ItemsControl ItemsSource="{Binding KeyboardKeys}">
+                                        <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate><DataTemplate>
+                                            <CheckBox Content="{Binding Title}" IsChecked="{Binding Present}" Margin="0,0,14,0"/>
+                                        </DataTemplate></ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <CheckBox Content="K3 (phím mở rộng)" IsChecked="{Binding KeyK3.Present}" Margin="0,2,0,0"/>
+                                </StackPanel>
+                            </Expander>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <Border Grid.Column="2" Style="{StaticResource Card}" Margin="0">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <ContentControl Content="{Binding Selected}"/>
+                                <TextBlock Text="Chọn một hàng số, phím hoặc LED trên hình bàn phím." Foreground="#888" TextWrapping="Wrap">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Selected}" Value="{x:Null}"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- ============ KẾT NỐI PLC ============ -->
+            <TabItem Header="Kết nối PLC">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <WrapPanel Margin="14">
+                        <Border Style="{StaticResource Card}" Width="400">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource CardTitle}" Text="Hãng / dòng PLC (hồ sơ địa chỉ)"/>
+                                <ComboBox ItemsSource="{Binding Profiles}" SelectedItem="{Binding SelectedProfile}" DisplayMemberPath="Display"/>
+                                <TextBlock TextWrapping="Wrap" Margin="0,0,0,6">
+                                    <Run Text="Nguồn: " FontWeight="SemiBold"/><Run Text="{Binding CurrentProfile.Source, Mode=OneWay}"/>
+                                </TextBlock>
+                                <TextBlock TextWrapping="Wrap" Margin="0,0,0,6" Text="{Binding CurrentProfile.Notes}"/>
+                                <TextBlock Margin="0,0,0,8" FontWeight="SemiBold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="✖ Chưa kiểm tra bằng PLC thật"/>
+                                            <Setter Property="Foreground" Value="Firebrick"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentProfile.Verified}" Value="True">
+                                                    <Setter Property="Text" Value="✔ Đã kiểm tra"/><Setter Property="Foreground" Value="SeaGreen"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <StackPanel Visibility="{Binding CurrentProfile.NeedsUserOffset, Converter={StaticResource B2V}}">
+                                    <TextBlock Style="{StaticResource Cap}" Text="{Binding CurrentProfile.OffsetLabel}"/>
+                                    <TextBox Text="{Binding Project.Comm.UserOffset, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                                <StackPanel Visibility="{Binding CurrentProfile.IsGeneric, Converter={StaticResource B2V}}">
+                                    <TextBlock Style="{StaticResource Cap}" Text="Cách đánh địa chỉ"/>
+                                    <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.StyleItems}" SelectedValue="{Binding Project.Comm.AddressStyle}"/>
+                                    <TextBlock Style="{StaticResource Cap}" Text="Vùng: HR (holding), IR (input reg), C (coil), DI (discrete). Ví dụ HR100, C5, hoặc 40101."/>
+                                </StackPanel>
+                                <TextBlock Style="{StaticResource Cap}" Margin="0,8,0,2" Text="Thứ tự word của số 32 bit"/>
+                                <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.WordOrderItems}" SelectedValue="{Binding Project.Comm.WordOrder}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Width="360">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource CardTitle}" Text="Chế độ và đường truyền"/>
+                                <TextBlock Style="{StaticResource Cap}" Text="Chế độ làm việc"/>
+                                <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.ModeItems}" SelectedValue="{Binding Project.Comm.Mode}"/>
+                                <TextBlock Style="{StaticResource Cap}" Text="Số trạm PLC (1–247)"/>
+                                <TextBox Text="{Binding Project.Comm.PlcStation, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Style="{StaticResource Cap}" Text="Số trạm của bàn phím khi làm slave (1–247)"/>
+                                <TextBox Text="{Binding Project.Comm.KeyboardStation, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Style="{StaticResource Cap}" Text="Tốc độ (baud)"/>
+                                <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.BaudItems}" SelectedValue="{Binding Project.Comm.Baud}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                    <StackPanel><TextBlock Style="{StaticResource Cap}" Text="Parity"/>
+                                        <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.ParityItems}" SelectedValue="{Binding Project.Comm.Parity}"/></StackPanel>
+                                    <StackPanel Grid.Column="2"><TextBlock Style="{StaticResource Cap}" Text="Stop bit"/>
+                                        <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.StopItems}" SelectedValue="{Binding Project.Comm.StopBits}"/></StackPanel>
+                                </Grid>
+                                <TextBlock TextWrapping="Wrap" Foreground="#666" FontSize="11.5" Text="Khung dữ liệu 8 bit. Chế độ cấu hình qua PC luôn là 9600 8N1, trạm 247."/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Width="320">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource CardTitle}" Text="Hỏi vòng và an toàn ghi"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                    <StackPanel><TextBlock Style="{StaticResource Cap}" Text="Timeout (ms)"/><TextBox Text="{Binding Project.Comm.TimeoutMs, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                                    <StackPanel Grid.Column="2"><TextBlock Style="{StaticResource Cap}" Text="Thử lại (lần)"/><TextBox Text="{Binding Project.Comm.Retries, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                                </Grid>
+                                <TextBlock Style="{StaticResource Cap}" Text="Chu kỳ hỏi vòng (ms)"/>
+                                <TextBox Text="{Binding Project.Comm.PollMs, UpdateSourceTrigger=PropertyChanged}"/>
+                                <CheckBox Content="Đọc lại để xác nhận sau khi ghi" IsChecked="{Binding Project.Comm.ReadBackAfterWrite}"/>
+                                <TextBlock Style="{StaticResource Cap}" Text="Độ sáng LED/7 đoạn (0–7)"/>
+                                <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.BrightItems}" SelectedValue="{Binding Project.Comm.Brightness}"/>
+                                <CheckBox Content="Còi kêu khi bấm phím" IsChecked="{Binding Project.Comm.BuzzerClick}"/>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ============ BẢO MẬT & RUN ============ -->
+            <TabItem Header="Bảo mật &amp; RUN">
+                <WrapPanel Margin="14">
+                    <Border Style="{StaticResource Card}" Width="360">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource CardTitle}" Text="Màn RUN"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Trang RUN (trang chính)"/>
+                            <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{Binding PageItems}" SelectedValue="{Binding Project.Security.RunPage}"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Không bấm phím quá … giây thì về trang RUN (0 = tắt)"/>
+                            <TextBox Text="{Binding Project.Security.RunTimeoutSec, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}" Width="360">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource CardTitle}" Text="Mật khẩu (nhập bằng phím số)"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Cấp vận hành (1–4 chữ số, để trống = không đặt)"/>
+                            <TextBox Text="{Binding Project.Security.OperatorPassword, UpdateSourceTrigger=PropertyChanged}" MaxLength="4"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Cấp kỹ thuật"/>
+                            <TextBox Text="{Binding Project.Security.TechPassword, UpdateSourceTrigger=PropertyChanged}" MaxLength="4"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Tự đăng xuất sau … giây (0 = tắt)"/>
+                            <TextBox Text="{Binding Project.Security.AutoLogoutSec, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock TextWrapping="Wrap" Foreground="#9A3412" FontSize="11.5"
+                                       Text="Mật khẩu nằm trong file dự án và file chạy dạng không mã hoá — chỉ ngăn thao tác nhầm, không phải bảo mật thật sự."/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}" Width="360">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource CardTitle}" Text="Thông tin dự án"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Tên dự án"/>
+                            <TextBox Text="{Binding Project.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Model bàn phím"/>
+                            <TextBox Text="{Binding Project.Model, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Phiên bản firmware đích"/>
+                            <TextBox Text="{Binding Project.TargetFirmware, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="Ghi chú"/>
+                            <TextBox Text="{Binding Project.Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Height="90" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                    </Border>
+                </WrapPanel>
+            </TabItem>
+
+            <!-- ============ KIỂM TRA ============ -->
+            <TabItem Header="Kiểm tra">
+                <Grid Margin="12">
+                    <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                            <TextBlock Style="{StaticResource CardTitle}" Text="Lỗi và cảnh báo (bấm đúp để nhảy tới đối tượng)" Margin="0"/>
+                            <TextBlock Text="{Binding CheckSummary}" HorizontalAlignment="Right" FontWeight="SemiBold"/>
+                        </DockPanel>
+                        <ListView ItemsSource="{Binding Issues}" MouseDoubleClick="Issue_DoubleClick">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="34">
+                                        <GridViewColumn.CellTemplate><DataTemplate>
+                                            <TextBlock Text="{Binding Icon}" Foreground="{Binding Severity, Converter={StaticResource SevBrush}}" FontWeight="Bold"/>
+                                        </DataTemplate></GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Vị trí" Width="190" DisplayMemberBinding="{Binding Where}"/>
+                                    <GridViewColumn Header="Nội dung" Width="820" DisplayMemberBinding="{Binding Message}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                    <StackPanel Grid.Row="1" Margin="0,10">
+                        <TextBlock Text="{Binding CapacityText, StringFormat=Dung lượng file chạy: {0}}"/>
+                        <ProgressBar Height="12" Maximum="100" Value="{Binding CapacityPercent, Mode=OneWay}" Margin="0,3,0,3"/>
+                        <TextBlock Text="{Binding CrcText}" Foreground="#555"/>
+                    </StackPanel>
+                    <DockPanel Grid.Row="2">
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource CardTitle}" Text="Đối chiếu địa chỉ PLC ↔ Modbus"/>
+                        <DataGrid ItemsSource="{Binding AddressMap}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Vị trí" Binding="{Binding Where}" Width="170"/>
+                                <DataGridTextColumn Header="Vai trò" Binding="{Binding Role}" Width="110"/>
+                                <DataGridTextColumn Header="Địa chỉ PLC" Binding="{Binding Plc}" Width="100"/>
+                                <DataGridTextColumn Header="Bảng Modbus" Binding="{Binding Table}" Width="170"/>
+                                <DataGridTextColumn Header="Modbus (dec)" Binding="{Binding Modbus}" Width="95"/>
+                                <DataGridTextColumn Header="Hex" Binding="{Binding Hex}" Width="80"/>
+                                <DataGridTextColumn Header="Kiểu 4xxxx" Binding="{Binding Classic}" Width="90"/>
+                                <DataGridTextColumn Header="Kiểu dữ liệu" Binding="{Binding Type}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- ============ NẠP XUỐNG ============ -->
+            <TabItem Header="Gửi cấu hình">
+                <Grid Margin="12">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="360"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,14,0">
+                        <TextBlock Style="{StaticResource CardTitle}" Text="Cổng kết nối (USB–RS485)"/>
+                        <DockPanel>
+                            <Button DockPanel.Dock="Right" Content="Làm mới" Command="{Binding RefreshPortsCmd}" Margin="6,0,0,8" Padding="8,2"/>
+                            <ComboBox ItemsSource="{Binding Ports}" SelectedItem="{Binding SelectedPort}"/>
+                        </DockPanel>
+                        <TextBlock TextWrapping="Wrap" Foreground="#666" FontSize="11.5" Margin="0,0,0,10"
+                                   Text="Đưa bàn phím vào chế độ cấu hình: menu 'PC' trên máy, hoặc gửi yêu cầu trong 3 s đầu sau cấp nguồn (9600 8N1, trạm 247). 'Thiết bị ảo' dùng để thử khi chưa có phần cứng."/>
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <StackPanel><TextBlock Style="{StaticResource Cap}" Text="Số trạm bàn phím"/><TextBox Text="{Binding CfgStation, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                            <StackPanel Grid.Column="2"><TextBlock Style="{StaticResource Cap}" Text="Tốc độ"/>
+                                <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.BaudItems}" SelectedValue="{Binding CfgBaud}"/></StackPanel>
+                        </Grid>
+                        <StackPanel Margin="0,0,0,8" Width="120" HorizontalAlignment="Left"><TextBlock Style="{StaticResource Cap}" Text="Parity (chỉ khi ENTER_CONFIG)"/>
+                            <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.ParityItems}" SelectedValue="{Binding CfgParity}"/></StackPanel>
+                        <TextBlock TextWrapping="Wrap" Foreground="#666" FontSize="11.5" Margin="0,-4,0,8"
+                                   Text="Mặc định 247 / 9600 (cửa sổ 3 s sau cấp nguồn hoặc menu PC). Chỉ đổi khi dùng 'Vào chế độ cấu hình' trên bàn phím đang chạy slave."/>
+                        <Button Content="Bắt tay (cấp nguồn lại bàn phím, chờ tối đa 30 s)" Command="{Binding HandshakeCmd}" Margin="0,0,0,6" Padding="6" FontWeight="SemiBold"/>
+                        <Button Content="Vào chế độ cấu hình (lệnh ENTER CONFIG)" Command="{Binding EnterConfigCmd}" Margin="0,0,0,6" Padding="6"/>
+                        <Button Content="Tự tìm bàn phím" Command="{Binding DetectCmd}" Margin="0,0,0,6" Padding="6"/>
+                        <Button Content="Đọc thông tin thiết bị" Command="{Binding ReadInfoCmd}" Margin="0,0,0,6" Padding="6"/>
+                        <Button Content="Nhận diện (bíp + nháy)" Command="{Binding IdentifyCmd}" Margin="0,0,0,6" Padding="6"/>
+                        <Button Content="Sao lưu cấu hình đang chạy → .pkb" Command="{Binding BackupCmd}" Margin="0,0,0,6" Padding="6"/>
+                        <WrapPanel Margin="0,0,0,14">
+                            <Button Content="Đọc chẩn đoán" Command="{Binding DiagCmd}" Padding="8,5" Margin="0,0,6,0"/>
+                            <Button Content="Xoá chẩn đoán" Command="{Binding ClearDiagCmd}" Padding="8,5"/>
+                        </WrapPanel>
+                        <Button Content="GỬI CẤU HÌNH  (biên dịch → ghi → đọc lại → áp dụng)" Command="{Binding DownloadCmd}" Padding="8" FontWeight="Bold"
+                                Background="#2563EB" Foreground="White" Margin="0,0,0,6"/>
+                        <ProgressBar Height="14" Maximum="100" Value="{Binding Progress, Mode=OneWay}" Margin="0,0,0,14"/>
+                        <Button Content="Thoát chế độ cấu hình" Command="{Binding ExitConfigCmd}" Margin="0,0,0,6" Padding="6"/>
+                        <Button Content="Mặc định nhà máy…" Command="{Binding FactoryCmd}" Padding="6"/>
+                    </StackPanel>
+                    <DockPanel Grid.Column="1">
+                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                            <Button DockPanel.Dock="Right" Content="Xoá nhật ký" Command="{Binding ClearLogCmd}" Padding="8,2"/>
+                            <TextBlock Style="{StaticResource CardTitle}" Text="Nhật ký và khung hex (TX/RX)" Margin="0"/>
+                        </DockPanel>
+                        <TextBox Text="{Binding LogText, Mode=OneWay}" IsReadOnly="True" FontFamily="Consolas" FontSize="12"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" TextChanged="Log_TextChanged" Margin="0"/>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- ============ MÔ PHỎNG (không cần PLC) ============ -->
+            <TabItem Header="Mô phỏng">
+                <Grid Margin="12">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,16,0">
+                        <TextBlock Style="{StaticResource CardTitle}" Text="Bàn phím ảo — chạy đúng thiết kế hiện tại"/>
+                        <Border Background="#1B1F27" CornerRadius="14" Padding="22" HorizontalAlignment="Left">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel>
+                                        <Border CornerRadius="6" Padding="8" Background="#120805" Visibility="{Binding SimHasUpper, Converter={StaticResource B2V}}">
+                                            <local:SevenSegmentDisplay Masks="{Binding SimUpper}" Digits="{Binding SimUpperDigits}" DigitWidth="42"/>
+                                        </Border>
+                                        <Border CornerRadius="6" Padding="8" Background="#120805" Margin="0,10,0,0">
+                                            <Border.Style>
+                                                <Style TargetType="Border"><Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SimLowerVisible}" Value="False"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                    <DataTrigger Binding="{Binding SimHasLower}" Value="False"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+                                                </Style.Triggers></Style>
+                                            </Border.Style>
+                                            <local:SevenSegmentDisplay Masks="{Binding SimLower}" Digits="4" DigitWidth="42"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding SimLeds}" ItemTemplate="{StaticResource SimLedView}" Margin="18,0,0,0"/>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding SimKeys}" ItemTemplate="{StaticResource SimKeyView}" Margin="0,18,0,0" HorizontalAlignment="Left">
+                                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="4"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                                <ContentControl Content="{Binding SimK3}" ContentTemplate="{StaticResource SimKeyView}" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Border>
+                        <TextBlock Text="{Binding SimStatus}" Margin="0,8,0,0" FontWeight="SemiBold"/>
+                        <TextBlock Margin="0,6,0,0" Foreground="#555" TextWrapping="Wrap" MaxWidth="420"
+                                   Text="Bấm chuột vào phím, hoặc gõ trên bàn phím máy tính: 0–9, Esc, Enter (ENT), ↑ ↓, F1, F2, F3 (= K3). Không cần PLC hay bàn phím thật."/>
+                        <Button Content="Khởi động lại mô phỏng" Command="{Binding SimRestartCmd}" Margin="0,10,0,0" Padding="8,4" HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions><RowDefinition Height="2*"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top" Style="{StaticResource CardTitle}" Text="Bộ nhớ PLC ảo — sửa giá trị như đang chỉnh trên PLC"/>
+                            <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                                <Button Content="Thêm dòng" Command="{Binding SimAddWatchCmd}" Padding="8,3" Margin="0,0,6,0"/>
+                                <Button Content="Thêm các địa chỉ của dự án" Command="{Binding SimWatchFromProjectCmd}" Padding="8,3" Margin="0,0,6,0"/>
+                                <Button Content="Xoá toàn bộ bộ nhớ về 0" Command="{Binding SimClearMemCmd}" Padding="8,3"/>
+                            </WrapPanel>
+                            <DataGrid ItemsSource="{Binding Watch}" AutoGenerateColumns="False" CanUserAddRows="False" HeadersVisibility="Column" GridLinesVisibility="Horizontal" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Ký hiệu ngắn" Binding="{Binding Address, UpdateSourceTrigger=LostFocus}" Width="110"/>
+                                <DataGridTextColumn Header="Modbus tuyệt đối" Binding="{Binding AbsoluteAddress, UpdateSourceTrigger=LostFocus}" Width="120"/>
+                                <DataGridTextColumn Header="Giá trị (sửa để ghi)" Binding="{Binding Value, UpdateSourceTrigger=LostFocus}" Width="130"/>
+                                <DataGridCheckBoxColumn Header="32 bit" Binding="{Binding Is32}" Width="55"/>
+                                <DataGridTextColumn Header="Modbus" Binding="{Binding Info}" IsReadOnly="True" Width="*"/>
+                                <DataGridTemplateColumn Width="40">
+                                    <DataGridTemplateColumn.CellTemplate><DataTemplate>
+                                        <Button Content="✕" Command="{Binding DataContext.SimRemoveWatchCmd, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" ToolTip="Xoá dòng"/>
+                                    </DataTemplate></DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        </DockPanel>
+                        <TextBlock Grid.Row="1" Style="{StaticResource CardTitle}" Text="Nhật ký thao tác" Margin="0,10,0,4"/>
+                        <TextBox Grid.Row="2" Text="{Binding SimLogText, Mode=OneWay}" IsReadOnly="True" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" TextChanged="Log_TextChanged" Margin="0"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!-- ============ THỬ PHẦN CỨNG ============ -->
+            <TabItem Header="Thử phần cứng">
+                <Grid Margin="12">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                    <Border Style="{StaticResource Card}" Width="420" Margin="0,0,14,0">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource CardTitle}" Text="A. Thử bàn phím thật (PC làm master, không cần PLC)"/>
+                            <TextBlock TextWrapping="Wrap" Foreground="#666" FontSize="11.5" Margin="0,0,0,8"
+                                       Text="Dùng bản đồ thanh ghi firmware hiện tại: 40001 phím, 40002 bộ đếm, 40003–40004 hai hàng số, 40005 LED. Cắm bàn phím vào USB–RS485, chọn cổng rồi bấm phím thật — phím sáng lên ở đây."/>
+                            <DockPanel>
+                                <Button DockPanel.Dock="Right" Content="Làm mới" Click="RefreshHw_Click" Margin="6,0,0,8" Padding="8,2"/>
+                                <ComboBox ItemsSource="{Binding HwPorts}" SelectedItem="{Binding HwPort}"/>
+                            </DockPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <StackPanel><TextBlock Style="{StaticResource Cap}" Text="Số trạm bàn phím"/><TextBox Text="{Binding HwStation, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                                <StackPanel Grid.Column="2"><TextBlock Style="{StaticResource Cap}" Text="Tốc độ"/>
+                                    <ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.BaudItems}" SelectedValue="{Binding HwBaud}"/></StackPanel>
+                            </Grid>
+                            <Button Content="{Binding HwButtonText}" Command="{Binding HwToggleCmd}" Padding="8,5" FontWeight="Bold" Margin="0,0,0,8"/>
+                            <TextBlock Text="{Binding HwStatus}" FontWeight="SemiBold"/>
+                            <Border Background="#1B1F27" CornerRadius="10" Padding="10" Margin="0,8,0,8" HorizontalAlignment="Left">
+                                <ItemsControl ItemsSource="{Binding HwKeys}" ItemTemplate="{StaticResource HwKeyView}">
+                                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="4"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </Border>
+                            <TextBlock Text="{Binding HwCounter, StringFormat=Bộ đếm sự kiện phím: {0}}" Margin="0,0,0,8"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <StackPanel><TextBlock Style="{StaticResource Cap}" Text="Hàng trên (0–9999)"/><TextBox Text="{Binding HwRow1, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                                <StackPanel Grid.Column="2"><TextBlock Style="{StaticResource Cap}" Text="Hàng dưới (0–9999)"/><TextBox Text="{Binding HwRow2, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                            </Grid>
+                            <Button Content="Ghi lên màn 7 đoạn" Command="{Binding HwWriteDisplayCmd}" Padding="6,3" Margin="0,0,0,8"/>
+                            <TextBlock Style="{StaticResource Cap}" Text="LED (chọn rồi 'Ghi LED')"/>
+                            <ItemsControl ItemsSource="{Binding HwLeds}">
+                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate><DataTemplate>
+                                    <CheckBox Content="{Binding Index}" IsChecked="{Binding Lit}" Margin="0,0,12,4"/>
+                                </DataTemplate></ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <WrapPanel Margin="0,4,0,0">
+                                <Button Content="Ghi LED" Command="{Binding HwLedCmd}" Padding="8,3" Margin="0,0,6,0"/>
+                                <Button Content="Chạy thử tự động" Command="{Binding HwAutoTestCmd}" Padding="8,3"/>
+                            </WrapPanel>
+                            <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" Foreground="#555" FontSize="11.5"
+                                       Text="Chọn 'Firmware ảo' để thử giao diện này khi chưa có bàn phím: gõ phím máy tính (0–9, Esc, Enter, ↑ ↓, F1, F2) sẽ giả lập nhấn phím."/>
+                        </StackPanel>
+                    </Border>
+
+                    <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <Border Style="{StaticResource Card}" Margin="0,0,0,12">
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource CardTitle}" Text="B. PLC ảo trên cổng COM — thử bàn phím ở chế độ master khi không có PLC"/>
+                                    <TextBlock TextWrapping="Wrap" Foreground="#666" FontSize="11.5" Margin="0,0,0,8"
+                                               Text="Gửi cấu hình dự án cho bàn phím, cắm bàn phím vào USB–RS485 của PC rồi chạy PLC ảo: PC trả lời Modbus như một PLC (FC01–06, 15, 16) trên bộ nhớ ở tab Mô phỏng. Sửa giá trị ở bảng dưới, bàn phím sẽ hiện; gõ số + ENT trên bàn phím thì giá trị ở bảng đổi."/>
+                                    <WrapPanel>
+                                        <StackPanel Margin="0,0,10,0" Width="130"><TextBlock Style="{StaticResource Cap}" Text="Cổng COM"/><ComboBox ItemsSource="{Binding PlcPorts}" SelectedItem="{Binding PlcPort}"/></StackPanel>
+                                        <StackPanel Margin="0,0,10,0" Width="100"><TextBlock Style="{StaticResource Cap}" Text="Tốc độ"/><ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.BaudItems}" SelectedValue="{Binding PlcBaud}"/></StackPanel>
+                                        <StackPanel Margin="0,0,10,0" Width="90"><TextBlock Style="{StaticResource Cap}" Text="Parity"/><ComboBox Style="{StaticResource EnumCombo}" ItemsSource="{x:Static local:MainViewModel.ParityItems}" SelectedValue="{Binding PlcParity}"/></StackPanel>
+                                        <StackPanel Margin="0,0,10,0" Width="80"><TextBlock Style="{StaticResource Cap}" Text="Số trạm PLC"/><TextBox Text="{Binding PlcStation, UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+                                        <Button Content="{Binding PlcButtonText}" Command="{Binding PlcToggleCmd}" Padding="12,4" Height="28" VerticalAlignment="Bottom" Margin="0,0,0,8" FontWeight="Bold"/>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="0,0,0,6">
+                                        <CheckBox Content="PLC không trả lời (thử E-CO)" IsChecked="{Binding PlcSilent}" Margin="0,0,14,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Trễ trả lời (ms):" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                        <TextBox Text="{Binding PlcDelayMs, UpdateSourceTrigger=PropertyChanged}" Width="50" Margin="0,0,14,0"/>
+                                        <TextBlock Text="Luôn trả exception (0 = không, 1 Fn, 2 Addr, 3 Data):" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                        <TextBox Text="{Binding PlcForceException, UpdateSourceTrigger=PropertyChanged}" Width="30"/>
+                                    </WrapPanel>
+                                    <TextBlock><Run Text="{Binding PlcStatus, Mode=OneWay}" FontWeight="SemiBold"/><Run Text="  ·  khung đã trả lời: "/><Run Text="{Binding PlcFrames, Mode=OneWay}"/></TextBlock>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource Card}" Margin="0,0,0,12" Height="260">
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Top" Style="{StaticResource CardTitle}" Text="Bộ nhớ PLC ảo (dùng chung với tab Mô phỏng)"/>
+                                    <DataGrid ItemsSource="{Binding Watch}" AutoGenerateColumns="False" CanUserAddRows="False" HeadersVisibility="Column" GridLinesVisibility="Horizontal" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Ký hiệu ngắn" Binding="{Binding Address, UpdateSourceTrigger=LostFocus}" Width="110"/>
+                                <DataGridTextColumn Header="Modbus tuyệt đối" Binding="{Binding AbsoluteAddress, UpdateSourceTrigger=LostFocus}" Width="120"/>
+                                <DataGridTextColumn Header="Giá trị (sửa để ghi)" Binding="{Binding Value, UpdateSourceTrigger=LostFocus}" Width="130"/>
+                                <DataGridCheckBoxColumn Header="32 bit" Binding="{Binding Is32}" Width="55"/>
+                                <DataGridTextColumn Header="Modbus" Binding="{Binding Info}" IsReadOnly="True" Width="*"/>
+                                <DataGridTemplateColumn Width="40">
+                                    <DataGridTemplateColumn.CellTemplate><DataTemplate>
+                                        <Button Content="✕" Command="{Binding DataContext.SimRemoveWatchCmd, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" ToolTip="Xoá dòng"/>
+                                    </DataTemplate></DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                                </DockPanel>
+                            </Border>
+                            <Border Style="{StaticResource Card}" Margin="0,0,0,12" Height="220">
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Top" Style="{StaticResource CardTitle}" Text="Ghi từ bàn phím (người dùng bấm phím F / nhập số + ENT) — mới nhất ở trên"/>
+                                    <DataGrid ItemsSource="{Binding PlcWrites}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Giờ" Binding="{Binding Time}" Width="95"/>
+                                            <DataGridTextColumn Header="Vùng" Binding="{Binding Area}" Width="90"/>
+                                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="65"/>
+                                            <DataGridTextColumn Header="Giá trị" Binding="{Binding Value}" Width="120"/>
+                                            <DataGridTextColumn Header="Chi tiết" Binding="{Binding Detail}" Width="*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </DockPanel>
+                            </Border>
+                            <Border Style="{StaticResource Card}" Margin="0,0,0,12" Height="200">
+                                <DockPanel>
+                                    <DockPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                                        <Button DockPanel.Dock="Right" Content="Xoá" Command="{Binding PlcClearLogCmd}" Padding="8,2"/>
+                                        <TextBlock Style="{StaticResource CardTitle}" Text="Khung PLC ảo (RX = từ bàn phím, TX = PC trả lời)" Margin="0"/>
+                                    </DockPanel>
+                                    <TextBox Text="{Binding PlcLogText, Mode=OneWay}" IsReadOnly="True" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" TextChanged="Log_TextChanged" Margin="0"/>
+                                </DockPanel>
+                            </Border>
+                            <Border Style="{StaticResource Card}" Margin="0" Height="200">
+                                <DockPanel>
+                                    <DockPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                                        <Button DockPanel.Dock="Right" Content="Xoá" Command="{Binding HwClearLogCmd}" Padding="8,2"/>
+                                        <TextBlock Style="{StaticResource CardTitle}" Text="Nhật ký thử bàn phím (phần A)" Margin="0"/>
+                                    </DockPanel>
+                                    <TextBox Text="{Binding HwLogText, Mode=OneWay}" IsReadOnly="True" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" TextChanged="Log_TextChanged" Margin="0"/>
+                                </DockPanel>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
